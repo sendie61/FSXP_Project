@@ -14,7 +14,8 @@
  // Content added by BlueSideUpBob.
  
  #define XPLM200 = 1;  // This example requires SDK2.0
- 
+
+
  #include "XPLMPlugin.h"
  #include "XPLMDisplay.h"
  #include "XPLMGraphics.h"
@@ -54,7 +55,7 @@
  {
  
  // Plugin Info
-     strcpy(outName, "CustomCommandsAndDataRefs");
+     strcpy(outName, "FSXP_Plugin");
      strcpy(outSig, "BlueSideUpBob.Example.CustomCommandsAndDataRef");
      strcpy(outDesc, "This example illustrates creating and using custom commands to control a custom DataRef.");
  

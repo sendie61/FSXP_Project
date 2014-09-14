@@ -46,8 +46,6 @@ extern "C" {
  *
  */
 
-
-
 #ifdef __cplusplus
 	#if APL
         #if __GNUC__ >= 4
