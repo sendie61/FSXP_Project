@@ -55,7 +55,7 @@
  {
  
  // Plugin Info
-     strcpy(outName, "FSXP_Plugin");
+     strcpy(outName, "FSXP_Plugin.");
      strcpy(outSig, "BlueSideUpBob.Example.CustomCommandsAndDataRef");
      strcpy(outDesc, "This example illustrates creating and using custom commands to control a custom DataRef.");
  
