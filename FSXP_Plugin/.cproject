@@ -18,7 +18,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="xpl" artifactName="win" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.debug.402547255" name="Debug" parent="cdt.managedbuild.config.gnu.mingw.so.debug">
+				<configuration artifactExtension="xpl" artifactName="win" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.debug.402547255" name="Debug" parent="cdt.managedbuild.config.gnu.mingw.so.debug">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.so.debug.402547255." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.so.debug.1591010164" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.so.debug">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.so.debug.411044728" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.so.debug"/>
@@ -34,10 +34,13 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Widgets}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/XPLM}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1752136463" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="IBM=1"/>
+									<listOptionValue builtIn="false" value="PRIVATENAMESPACE=FSXP"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.other.other.294121954" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -fpermissive" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.825243253" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.debug.1563172544" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.debug">
@@ -47,6 +50,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/XPLM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Widgets}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1362472599" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="IBM=1"/>
@@ -61,6 +65,7 @@
 								<option id="gnu.cpp.link.option.paths.1686231409" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
 								<option id="gnu.cpp.link.option.libs.1571243234" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
 								<option id="gnu.cpp.link.option.userobjs.1629281931" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Debug/libPPL.a}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win/XPLM_64.lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win/XPWidgets_64.lib}&quot;"/>
 								</option>
@@ -73,7 +78,8 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="include|source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source"/>
 					</sourceEntries>
 				</configuration>
@@ -97,7 +103,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="dll" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832" name="Release" parent="cdt.managedbuild.config.gnu.mingw.so.release">
+				<configuration artifactExtension="dll" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832" name="Release" parent="cdt.managedbuild.config.gnu.mingw.so.release">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.so.release.1993633074" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.so.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.so.release.368795986" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.so.release"/>
@@ -142,7 +148,8 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="include|source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source"/>
 					</sourceEntries>
 				</configuration>
@@ -178,4 +185,5 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
