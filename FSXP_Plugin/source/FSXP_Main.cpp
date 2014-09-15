@@ -75,7 +75,7 @@ using namespace PPL;
                                              NULL, NULL);                                   // Refcons not used
 
  DataRef<float> ap_alt("sim/cockpit/autopilot/altitude", ReadWrite);
-// float ap_alt_meters = ap_alt * 12; // note that DataRef ap_alt is treated as a float !
+ // float ap_alt_meters = ap_alt * 12; // note that DataRef ap_alt is treated as a float !
  ap_alt = 5007*2.5 ; // note that you can write to ap_alt like you can write to float !
 
 
