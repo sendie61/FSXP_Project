@@ -30,7 +30,8 @@
  #include <stdio.h>
  #include <stdlib.h>
 
-#include "dataref.h"
+//#include "dataref.h"
+#include "owneddata.h"
 
 using namespace PPL;
 
@@ -50,6 +51,19 @@ using namespace PPL;
  int    CounterDownCommandHandler(XPLMCommandRef     inCommand,
                                  XPLMCommandPhase    inPhase,
                                  void *              inRefcon);
+
+ //input data
+ DataRef<int> inHasDME("sim/cockpit2/radios/indicators/nav1_has_dme");
+ DataRef<float> inDMEDist("sim/cockpit2/radios/indicators/nav1_dme_distance_nm");
+
+ //output data
+ /////////////////////////////////////////////////////////////////////////////////
+ OwnedData<float> DMENeedle("Dozer/AWA-VAN3-DME/needle");
+ //float DMENeedle = 0;
+ /////////////////////////////////////////////////////////////////////////////////
+ //OwnedData compiles with G++ but not MSVC. Replacing OwnedData with Float
+ //and leaving the PPL::DataRefs as DataRefs does compile with MSVC.
+
 
  PLUGIN_API int XPluginStart(
          char *        outName,
