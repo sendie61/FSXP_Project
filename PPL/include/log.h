@@ -64,7 +64,7 @@ struct LogEntry {
   * Specifying severity level and Log::endl are mandatory.
   * @code Log() << Log::Error << "This is an error" << Log::endl;
   * Log() << Log::Info << "This is an information about " << some_integer << Log::endl @endcode
-  * @author  (c) 2009-2011 by Philipp Münzel
+  * @author  (c) 2009-2011 by Philipp Muenzel
   * @version 1.4
   */
 class Log {

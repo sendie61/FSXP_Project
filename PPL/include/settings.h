@@ -37,7 +37,8 @@
 namespace PPLNAMESPACE {
 
 /**
-  * Convenient access to ini-Files.
+  * @brief Convenient access to ini-Files.
+  *
   * This is a small wrapper accessing the most frequently used basic functions of SimpleIni
   * @version 0.3
   * @author (c) 2009-2011 by Philipp Muenzel
@@ -62,7 +63,7 @@ public:
     ~Settings();
 
     /**
-      * load settings from the file an overwrite everything that was set before
+      * load settings from the file and overwrite everything that was set before
       */
     bool loadFromFile();
 
