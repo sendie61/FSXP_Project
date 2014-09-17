@@ -61,8 +61,10 @@ enum RWType {
             };
 
 /**
-  * A generic base exception that is thrown when anything
-  * with looking up an X-Plane dataref and binding it goes wrong
+  * @brief A generic base exception
+  *
+  * that is thrown when anything with looking up an X-Plane dataref
+  * and binding it goes wrong
   */
 class LookupException : public std::runtime_error {
 public:
@@ -83,8 +85,9 @@ public:
 };
 
 /**
-  * The requested data type does not match the type specified in the
-  * plugin system's table of datarefs
+  * @brief The requested data type does not match the type
+  *
+  * specified in the plugin system's table of datarefs
   */
 class IncompatibleTypeException : public LookupException {
 public:

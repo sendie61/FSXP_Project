@@ -46,7 +46,9 @@ class Settings : private CSimpleIniA
 {
 public:
     /**
-      * init with the path to an ini.-file. If the file does not exist, it is created
+      * @brief init with the path to an ini.-file.
+      *
+      * If the file does not exist, it is created
       * and everything set via setValue is stored
       * @param filename path to ini-file
       * @param create_if_not_exists whether to create a new .ini-file with default settings if it wasn't there before

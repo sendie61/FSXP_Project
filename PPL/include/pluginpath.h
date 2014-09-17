@@ -36,8 +36,9 @@
 namespace PPLNAMESPACE {
 
 /**
-  * PluginPath provides a platform-independant absolute path to directory
-  * the plugin currently runs in.
+  * @brief PluginPath provides a platform-independant absolute path
+  *
+  * to directory the plugin currently runs in.
   * @author (c) 2009-2011 by Philipp Muenzel
   * @version 0.3
   */

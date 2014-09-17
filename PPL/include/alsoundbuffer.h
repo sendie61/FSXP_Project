@@ -52,7 +52,9 @@
 namespace PPLNAMESPACE {
 
 /**
-  * This class encapsulates openALs buffers and sources, does the resource handling
+  * @brief This class encapsulates openALs buffers and sources
+  *
+  * does the resource handling
   * and provides the listener setup.
   * @version 0.5
   * @author (c) 2009-2011 by Philipp Muenzel

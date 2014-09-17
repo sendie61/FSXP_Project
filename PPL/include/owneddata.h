@@ -58,7 +58,8 @@ public:
 };
 
 /**
-  * Data owned by the plugin and published as a XPLM DataRef.
+  * @brief Data owned by the plugin and published as a XPLM DataRef.
+  *
   * create an instance and call a register function to make data accessible to other plugins
   * @author (c) 2009-2011 by Philipp Muenzel
   * @version 0.6
@@ -69,17 +70,17 @@ public:
 
     typedef void (*DataCallback_f)(const T&);
 
-  /**
-	* create owned date for sharing.
-	* the identifier provided is the string identifier later used for the dataref.
-	* the dataref is then registered in X-Plane's plugin system
-	* Please consult the XP SDK naming conventions on how to name things right.
-	* @param std::string& identifier
-	* @param RWType set the dataref writeable to OTHER plugins
-	* @param publish_in_dre by default, a message is sent to the DataRefEditor plugin that exposes the dataref
-	* @param callback optional callback function pointer to be called when other plugins write to the dataref
-	* @exception throws DataRefNotPublishedException if publishing in X-Plane fails
-	*/
+    /**
+      * create owned date for sharing.
+      * the identifier provided is the string identifier later used for the dataref.
+      * the dataref is then registered in X-Plane's plugin system
+      * Please consult the XP SDK naming conventions on how to name things right.
+      * @param std::string& identifier
+      * @param RWType set the dataref writeable to OTHER plugins
+      * @param publish_in_dre by default, a message is sent to the DataRefEditor plugin that exposes the dataref
+      * @param callback optional callback function pointer to be called when other plugins write to the dataref
+      * @exception throws DataRefNotPublishedException if publishing in X-Plane fails
+      */
     OwnedData(const std::string& identifier,
               RWType read_write = ReadOnly,
               bool publish_in_dre = false,
