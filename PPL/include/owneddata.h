@@ -58,7 +58,8 @@ public:
 };
 
 /**
-  * Data owned by the plugin and published as a XPLM DataRef.
+  * @brief Data owned by the plugin and published as a XPLM DataRef.
+  *
   * create an instance and call a register function to make data accessible to other plugins
   * @author (c) 2009-2011 by Philipp Muenzel
   * @version 0.6

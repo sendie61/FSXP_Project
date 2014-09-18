@@ -52,9 +52,11 @@
 namespace PPLNAMESPACE {
 
 /**
-  * Encapsulates all openAL and alut related stuff for looking up devices, handling different
-  * contexts etc. Stores SoundBuffer istances to keep track of the currently loaded sounds
-  * and provides convenient functions for standard operations like playing.
+ * @brief Encapsulates all openAL and alut related stuff for looking up devices.
+ *
+  * handling different contexts etc. Stores SoundBuffer istances to keep track
+  * of the currently loaded sounds and provides convenient functions for standard
+  * operations like playing.
   *
   * @version 0.5
   * @author (c) 2009-2011 by Philipp Muenzel

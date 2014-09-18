@@ -41,7 +41,8 @@
 namespace PPLNAMESPACE {
 
 /**
-  * A convenient way to display a message box with a title and a longer text message
+  * @brief A convenient way to display a message box with a title and a longer text message
+  *
   * that quits X-Plane when closed. This is a very good way to handle improper setups,
   * blame the user, and force quit afterwards
   * @version 1.0

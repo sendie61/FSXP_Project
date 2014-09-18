@@ -58,13 +58,13 @@ struct LogEntry {
 
 /**
   * @brief A stream-based logger using any LogWriter.
-  * A Log instance corresponds to ONE log entry.
   *
+  * A Log instance corresponds to ONE log entry.
   * Creating an instance provides the stream to which a log message is written.
   * Specifying severity level and Log::endl are mandatory.
   * @code Log() << Log::Error << "This is an error" << Log::endl;
   * Log() << Log::Info << "This is an information about " << some_integer << Log::endl @endcode
-  * @author  (c) 2009-2011 by Philipp Münzel
+  * @author  (c) 2009-2011 by Philipp Muenzel
   * @version 1.4
   */
 class Log {

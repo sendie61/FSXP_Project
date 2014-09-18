@@ -35,7 +35,8 @@
 namespace PPLNAMESPACE {
 
 /**
-  * abstract class for all kinds of processing that takes values from XP,
+  * @brief abstract class for all kinds of processing that takes values from XP
+  *
   * do calculations in the flightloop and publish the result in a custom Dataref
   * @author (c) 2009-2011 by Philipp Muenzel
   * @version 0.4

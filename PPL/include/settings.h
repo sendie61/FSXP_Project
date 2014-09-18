@@ -37,7 +37,8 @@
 namespace PPLNAMESPACE {
 
 /**
-  * Convenient access to ini-Files.
+  * @brief Convenient access to ini-Files.
+  *
   * This is a small wrapper accessing the most frequently used basic functions of SimpleIni
   * @version 0.3
   * @author (c) 2009-2011 by Philipp Muenzel
@@ -46,7 +47,9 @@ class Settings : private CSimpleIniA
 {
 public:
     /**
-      * init with the path to an ini.-file. If the file does not exist, it is created
+      * @brief init with the path to an ini.-file.
+      *
+      * If the file does not exist, it is created
       * and everything set via setValue is stored
       * @param filename path to ini-file
       * @param create_if_not_exists whether to create a new .ini-file with default settings if it wasn't there before
@@ -60,7 +63,7 @@ public:
     ~Settings();
 
     /**
-      * load settings from the file an overwrite everything that was set before
+      * load settings from the file and overwrite everything that was set before
       */
     bool loadFromFile();
 
