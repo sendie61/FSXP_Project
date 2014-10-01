@@ -74,7 +74,7 @@ using namespace PPL;
  // Plugin Info
      strcpy(outName, "FSXP_Plugin");
      strcpy(outSig, "BlueSideUpBob.Example.CustomCommandsAndDataRef");
-     strcpy(outDesc, "This example illustrates creating and using custom commands to control a custom DataRef.");
+     strcpy(outDesc, "This is the first try.");
 
  //  Create our custom integer dataref
  gCounterDataRef = XPLMRegisterDataAccessor("BSUB/CounterDataRef",
