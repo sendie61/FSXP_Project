@@ -6,7 +6,7 @@
 // Automated testing for SimpleIni streams
 
 #ifdef _WIN32
-# pragma warning(disable: 4786)
+//# pragma warning(disable: 4786)
 #endif
 
 #ifdef _WIN32

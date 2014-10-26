@@ -1,6 +1,6 @@
 #include "myHostInfo.h"
-#include "..\myLog\myLog.h"
-#include "..\myException\myException.h"
+#include "myLog.h"
+#include "myException.h"
 
 myHostInfo::myHostInfo()
 {
@@ -38,7 +38,7 @@ myHostInfo::myHostInfo()
 
 }
 
-myHostInfo::myHostInfo(string& hostName,hostType type)
+myHostInfo::myHostInfo(string hostName,hostType type)
 {
 	#ifdef UNIX
 		searchHostDB = 0;
@@ -71,7 +71,7 @@ myHostInfo::myHostInfo(string& hostName,hostType type)
 		{
 			// Retrieve host by address
 		    unsigned long netAddr = inet_addr(hostName.c_str());
-			if (netAddr == -1)
+			if (netAddr == INADDR_NONE)
 			{
 				myException inet_addrException(0,"Error calling inet_addr()");
 				throw inet_addrException;

@@ -17,7 +17,7 @@ class mySemaphore
 
 public:
 
-    mySemaphore(string& sName=string(""),
+    mySemaphore(string sName=string(""),
 		        long initialCount=0,long maxCount=1,
 				int accessMode=CREATE,BOOL canInherit=TRUE);
 

@@ -1,5 +1,5 @@
 #include "myThread.h"
-#include "..\myException\myException.h"
+#include "myException.h"
 
 myThread::myThread(LPTHREAD_START_ROUTINE pThreadFunc,
 				   LPVOID pThreadFuncParameter,DWORD exeFlags,
@@ -170,7 +170,7 @@ void myThread::setProcessorMask(DWORD mask)
 
 void myThread::setIdealProcessor(DWORD proc)
 {
-	if ( SetThreadIdealProcessor(thread,proc) == -1 )
+	if ( SetThreadIdealProcessor(thread,proc) ==  (DWORD)(-1) )
 	{
 		int errCode = 0;
 		string header = "SetThreadIdealProcessor failed";

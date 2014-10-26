@@ -1,7 +1,7 @@
 #ifndef mySocket_H
 #define mySocket_H
 
-#include "../myHostInfo/myHostInfo.h"
+#include "myHostInfo.h"
 
 #ifdef UNIX
     #include <sys/socket.h>

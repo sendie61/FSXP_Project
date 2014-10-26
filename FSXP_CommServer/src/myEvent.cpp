@@ -1,5 +1,5 @@
 #include "myEvent.h"
-#include "..\myException\myException.h"
+#include "myException.h"
 
 myEvent::myEvent(string eventName,PAPCFUNC _pfnAPC,BOOL _queueUserAPC)
 {
@@ -149,7 +149,7 @@ DWORD WINAPI myEvent::ThreadProc(LPVOID lpData)
 			cout << "schedule the callback..." << endl;
 			// winLog << "[THREAD] calling QueueUserAPC() to schedule the callback ... " << endl;
 
-			if ( !QueueUserAPC(pEvent->getAPCFunc(),GetCurrentThread(),(DWORD)lpData))
+			if ( !QueueUserAPC(pEvent->getAPCFunc(),GetCurrentThread(),(ULONG_PTR)lpData))
 			{
 				int errCode = 0;
 				string header = "QueueUserAPC() in myEvent::ThreadProc() failed";

@@ -1,4 +1,4 @@
-#include "..\myEvent\myEvent.h"
+#include "myEvent.h"
 #include "myThreadArgument.h"
 
 myThreadArgument::myThreadArgument(myTcpSocket* client,mySemaphore* coutSem,string& cName)

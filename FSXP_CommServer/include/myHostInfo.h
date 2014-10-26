@@ -65,7 +65,7 @@ public:
     myHostInfo();
 
     // Retrieves the host entry based on the host name or address
-    myHostInfo(string& hostName, hostType type);
+    myHostInfo(string hostName, hostType type);
  
     // Destructor.  Closes the host entry database.
     ~myHostInfo()

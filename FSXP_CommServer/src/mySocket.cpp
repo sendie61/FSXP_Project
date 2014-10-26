@@ -1,6 +1,6 @@
 #include "mySocket.h"
-#include "..\myException\myException.h"
-#include "..\myLog\myLog.h"
+#include "myException.h"
+#include "myLog.h"
 
 const int MSG_HEADER_LEN = 6;
 
@@ -1188,14 +1188,14 @@ int myTcpSocket::sendMessage(string& message)
 	*/
 
 	char msgLength[MSG_HEADER_LEN+1];
-    sprintf(msgLength,"%6d",message.size());
+    sprintf(msgLength,"%6d",(int)message.size());
 	string sendMsg = string(msgLength);
     sendMsg += message;
 
 	// Sends the message to the connected host
 	try 
 	{
-		if (numBytes = send(socketId,sendMsg.c_str(),sendMsg.size(),0) == -1)
+		if ((numBytes = send(socketId,sendMsg.c_str(),sendMsg.size(),0)) == -1)
 		{
 			#ifdef WINDOWS_XP
 				int errorCode = 0;
@@ -1307,7 +1307,6 @@ int myTcpSocket::XPrecieveMessage(string& message)
 	int received = 0;                 // The number of bytes received
     int msgSize = MAX_RECV_LEN;       // The number of bytes wanted to receive
     int numBytes = 0;                 // The number of bytes currently recieved
-	int totalRecvNum = 0;
 	bool headerFinished = false;
 
 	char charMsg[MAX_RECV_LEN+1];

@@ -6,7 +6,7 @@
 // Demo of usage
 
 #ifdef _WIN32
-# pragma warning(disable: 4786)
+//# pragma warning(disable: 4786)
 #endif
 
 #include <locale.h>

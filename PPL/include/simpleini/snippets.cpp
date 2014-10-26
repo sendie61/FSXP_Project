@@ -6,7 +6,7 @@
 // Snippets that are used on the website
 
 #ifdef _WIN32
-# pragma warning(disable: 4786)
+//# pragma warning(disable: 4786)
 #endif
 
 #ifndef _WIN32

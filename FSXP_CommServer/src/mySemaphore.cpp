@@ -1,7 +1,7 @@
 #include "mySemaphore.h"
-#include "..\myException\myException.h"
+#include "myException.h"
 
-mySemaphore::mySemaphore(string& sName,long initialCount,long maximumCount,int accessMode,BOOL canInherit)
+mySemaphore::mySemaphore(string sName,long initialCount,long maximumCount,int accessMode,BOOL canInherit)
 {
 	// initialization
 	sa = NULL;
