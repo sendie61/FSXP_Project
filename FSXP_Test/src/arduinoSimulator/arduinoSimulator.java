@@ -10,7 +10,7 @@ public class arduinoSimulator {
 	/**
 	 * Launch the application.
 	 * @param args
-	 */
+	 */ 
 	public static void main(String[] args) {
 		try {
 			arduinoSimulator window = new arduinoSimulator();
