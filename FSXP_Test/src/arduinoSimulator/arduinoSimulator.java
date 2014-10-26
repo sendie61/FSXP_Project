@@ -33,7 +33,7 @@ public class arduinoSimulator {
 				display.sleep();
 			}
 		}
-	}
+	} 
 
 	/**
 	 * Create contents of the window.
