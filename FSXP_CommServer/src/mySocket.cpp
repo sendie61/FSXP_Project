@@ -4,10 +4,12 @@
 
 const int MSG_HEADER_LEN = 6;
 
-mySocket::mySocket(int pNumber)
+mySocket::mySocket(int pNumber) :
+		portNumber(pNumber),
+		socketId(0),
+		blocking(1),
+		bindFlag(0)
 {
-    portNumber = pNumber;
-    blocking = 1;
 
     try
     {
