@@ -41,14 +41,7 @@
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1090057868" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1709360364" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.base">
-								<option id="gnu.c.compiler.option.include.paths.564672733" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Plugin/XPSDK-2.1.3/CHeaders/Widgets}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Plugin/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Plugin/XPSDK-2.1.3/CHeaders/XPLM}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Plugin/PPL/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
-								</option>
+								<option id="gnu.c.compiler.option.include.paths.564672733" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1334062878" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="IBM=1"/>
 									<listOptionValue builtIn="false" value="PRIVATENAMESPACE=FSXP"/>
@@ -62,15 +55,18 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.528939188" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base">
 								<option id="gnu.cpp.link.option.libs.687203133" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPLM_64"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPWidgets_64"/>
+									<listOptionValue builtIn="false" value="PPL"/>
+									<listOptionValue builtIn="false" value="XPLM_64"/>
+									<listOptionValue builtIn="false" value="XPWidgets_64"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.912818548" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Debug/libPPL.a}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_TCPComm/Debug/libFSXP_TCPComm.a}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win/XPLM_64.lib}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win/XPWidgets_64.lib}&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1852753141" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\win_builds\lib&quot;"/>
 								</option>
@@ -97,7 +93,7 @@
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/FSXP_Plugin"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/FSXP_Plugin/Release"/>
-						<entry flags="RESOLVED" kind="libraryFile" name="FSXP_Plugin" srcPrefixMapping="" srcRootPath=""/>
+						<entry flags="RESOLVED" kind="libraryFile" name="win" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>
 				<extensions>
@@ -108,13 +104,14 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="dll" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832" name="Release" parent="cdt.managedbuild.config.gnu.mingw.so.release">
+				<configuration artifactExtension=".xpl" artifactName="win" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832" name="Release" parent="cdt.managedbuild.config.gnu.mingw.so.release">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.so.release.1993633074" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.so.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.so.release.368795986" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.so.release"/>
 							<builder buildPath="${workspace_loc:/FSXP_Plugin}/Release" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1545607234" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.so.release.1722417459" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.so.release">
 								<option id="gnu.both.asm.option.include.paths.1075568618" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
 								</option>
@@ -129,6 +126,7 @@
 									<listOptionValue builtIn="false" value="PRIVATENAMESPACE=FSXP"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.221060779" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/XPLM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Widgets}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
@@ -144,8 +142,7 @@
 									<listOptionValue builtIn="false" value="PRIVATENAMESPACE=FSXP"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.812851334" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1862131517" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -155,10 +152,12 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.1943306778" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release">
 								<option defaultValue="true" id="gnu.cpp.link.mingw.so.release.option.shared.1112349982" name="Shared (-shared)" superClass="gnu.cpp.link.mingw.so.release.option.shared" valueType="boolean"/>
 								<option id="gnu.cpp.link.option.libs.460981750" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="PPL"/>
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPLM_64"/>
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPWidgets_64"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1009432325" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\win_builds\lib&quot;"/>
 								</option>
@@ -166,6 +165,7 @@
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
+								<outputType id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output.355642248" outputPrefix="" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output"/>
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -176,7 +176,13 @@
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
-				<externalSettings containerId="PPL;cdt.managedbuild.config.gnu.mingw.exe.release.276175287" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+				<externalSettings containerId="PPL;cdt.managedbuild.config.gnu.mingw.exe.release.276175287" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/PPL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/PPL/Release"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="PPL" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
 				<externalSettings containerId="XPSDK-2.1.3;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
 			</storageModule>
 		</cconfiguration>

@@ -3,7 +3,9 @@
 
 myThread::myThread(LPTHREAD_START_ROUTINE pThreadFunc,
 				   LPVOID pThreadFuncParameter,DWORD exeFlags,
-				   DWORD sSize,BOOL inheritable)
+				   DWORD sSize,BOOL inheritable) :
+				   thread(NULL),
+				   threadId(0)
 {
 	sa = (LPSECURITY_ATTRIBUTES)HeapAlloc(GetProcessHeap(),0,sizeof(SECURITY_ATTRIBUTES));
 	sa->nLength = sizeof(SECURITY_ATTRIBUTES);

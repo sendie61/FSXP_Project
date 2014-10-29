@@ -31,7 +31,7 @@ protected:
 	   only used when the socket is used for client communication
 	   once this is done, the next necessary call is setSocketId(int)
 	*/
-	mySocket() {}
+	mySocket();
 	void setSocketId(int socketFd) { socketId = socketFd; }
 
 protected:

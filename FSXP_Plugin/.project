@@ -3,6 +3,8 @@
 	<name>FSXP_Plugin</name>
 	<comment></comment>
 	<projects>
+		<project>PPL</project>
+		<project>XPSDK-2.1.3</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

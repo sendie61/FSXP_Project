@@ -12,7 +12,7 @@ public:
 
     // int: error code, string is the concrete error message
 	myException(int,const string&);   
-	~myException() {};
+	virtual ~myException() {};
 
 	/*
 	   how to handle the exception is done here, so 
