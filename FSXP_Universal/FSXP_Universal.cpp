@@ -9,14 +9,14 @@
 
 TCPComm TCPclient;
 
-// Little test task
-defineTask(alifeTask)
-void alifeTask::setup() {
+// Flasing LED task
+defineTask(flashTask)
+void flashTask::setup() {
 	trace("task2setup");
 	pinMode(led1, OUTPUT);
 }
 
-void alifeTask::loop() {
+void flashTask::loop() {
 	digitalWrite(led1, HIGH);
 	sleepSync(50);
 	digitalWrite(led1, LOW);
@@ -39,9 +39,9 @@ defineTimerRun(Timer1,100) {
 		Serial.print(c);
 		Serial.println(" key pressed");
 		if (c == 'a')
-			alifeTask.pause();
+			flashTask.pause();
 		if (c == 'b')
-			alifeTask.resume();
+			flashTask.resume();
 	}
 }
 
