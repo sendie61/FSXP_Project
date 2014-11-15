@@ -2,4 +2,4 @@ Install Arduino in:
  	C:\Users\F\Applications\Arduino
 
 install win_builds in:
-	C:\win_builds
+	C:\win_builds 

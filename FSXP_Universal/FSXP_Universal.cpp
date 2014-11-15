@@ -6,11 +6,8 @@
 void setup() {
 // Add your initialization code here
 	// Open serial communications and wait for port to open:
-	Serial.begin(9600);
-	while (!Serial) {
-		; // wait for serial port to connect. Needed for Leonardo only
-	}
 	char tmp[8];
+	Serial.begin(115200);
 	Serial.println("Starting...");
 	storage mac(0x0ff0, 6);
 	mac.retrieve(tmp);
