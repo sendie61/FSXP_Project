@@ -27,6 +27,16 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Libraries/EEPROM</name>
+			<type>2</type>
+			<locationURI>ArduinoHardwareLibPath/EEPROM</locationURI>
+		</link>
+		<link>
+			<name>Libraries/Storage</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/Storage</locationURI>
+		</link>
+		<link>
 			<name>arduino/core</name>
 			<type>2</type>
 			<locationURI>ArduinoPlatformPath/cores/arduino</locationURI>
