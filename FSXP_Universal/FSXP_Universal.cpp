@@ -1,31 +1,80 @@
 // Do not remove the include below
 #include "FSXP_Universal.h"
-#include "storage.h"
+#include <SCoop.h>
+#include <storage.h>
+#include "TCPComm.h"
+#include "FSXP_constants.h"
+
+#define led1 LED_BUILTIN
+
+TCPComm TCPclient;
+
+// Little test task
+defineTask(alifeTask)
+void alifeTask::setup() {
+	trace("task2setup");
+	pinMode(led1, OUTPUT);
+}
+
+void alifeTask::loop() {
+	digitalWrite(led1, HIGH);
+	sleepSync(50);
+	digitalWrite(led1, LOW);
+	sleepSync(1000);
+}
+
+defineTask(tcpTask)
+void tcpTask::setup() {
+	TCPclient.setup();
+}
+
+void tcpTask::loop() {
+	TCPclient.loop();
+	mySCoop.yield();
+}
+
+defineTimerRun(Timer1,100) {
+	if (Serial.available()) {
+		char c = Serial.read();
+		Serial.print(c);
+		Serial.println(" key pressed");
+		if (c == 'a')
+			alifeTask.pause();
+		if (c == 'b')
+			alifeTask.resume();
+	}
+}
 
 //The setup function is called once at startup of the sketch
 void setup() {
 // Add your initialization code here
 	// Open serial communications and wait for port to open:
-	char tmp[8];
+	byte tmp[8];
 	Serial.begin(115200);
 	Serial.println("Starting...");
-	storage mac(0x0ff0, 6);
-	mac.retrieve(tmp);
-	for (int i = 0; i < 6; i++) {
-		Serial.print((char)tmp[i], HEX);
-		Serial.print(' ');
-	}
-	Serial.println();
-	tmp[0]= 0x12; tmp[1]=0x34; tmp[2]=0x56; tmp[3]=0x78; tmp[4]=0x9a; tmp[5]=0xbc;
-	mac.store(tmp,6);
-	mac.retrieve(tmp);
-	for (int i = 0; i < 6; i++) {
-		Serial.print((char)tmp[i], HEX);
-		Serial.print(' ');
-	}
+
+	storage mac(MAC_ADDRESS, 6);
+	tmp[0] = 0xde;
+	tmp[1] = 0xad;
+	tmp[2] = 0xbe;
+	tmp[3] = 0xef;
+	tmp[4] = 0xfe;
+	tmp[5] = 0xed;
+	mac.store(tmp, 6);
+
+	storage ip(FSXP_SERVER, 4);
+	tmp[0] = 192;
+	tmp[1] = 168;
+	tmp[2] = 2;
+//	tmp[3] = 21;
+	tmp[3] = 5;
+	ip.store(tmp, 4);
+
+	mySCoop.start();
 }
 
 // The loop function is called in an endless loop
 void loop() {
 //Add your repeated code here
+	mySCoop.sleep(500);
 }

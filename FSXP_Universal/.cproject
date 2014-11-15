@@ -23,6 +23,10 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/EEPROM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Storage}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Scoop}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/SPI}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.821010862" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
@@ -32,6 +36,10 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/EEPROM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Storage}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Scoop}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/SPI}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.2007421423" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>
