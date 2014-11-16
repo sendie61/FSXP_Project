@@ -9,10 +9,11 @@
 
 TCPComm TCPclient;
 
+
 // Flasing LED task
 defineTask(flashTask)
 void flashTask::setup() {
-	trace("task2setup");
+//	trace("flashTask");
 	pinMode(led1, OUTPUT);
 }
 
@@ -23,9 +24,12 @@ void flashTask::loop() {
 	sleepSync(1000);
 }
 
-defineTask(tcpTask)
+
+defineTask(tcpTask,300)
+
 void tcpTask::setup() {
-	TCPclient.setup();
+//	trace("tcpTask");
+	TCPclient.setup(mySCoop);
 }
 
 void tcpTask::loop() {
@@ -33,17 +37,21 @@ void tcpTask::loop() {
 	mySCoop.yield();
 }
 
+
 defineTimerRun(Timer1,100) {
 	if (Serial.available()) {
 		char c = Serial.read();
-		Serial.print(c);
-		Serial.println(" key pressed");
 		if (c == 'a')
 			flashTask.pause();
 		if (c == 'b')
 			flashTask.resume();
+		if (c == 'l'){		// Stack left info
+			Serial.print("tcpTask-stackleft: ");
+			Serial.println(tcpTask.stackLeft());
+		}
 	}
 }
+
 
 //The setup function is called once at startup of the sketch
 void setup() {
@@ -51,8 +59,9 @@ void setup() {
 	// Open serial communications and wait for port to open:
 	byte tmp[8];
 	Serial.begin(115200);
-	Serial.println("Starting...");
+	Serial.println("[Main thread started]");
 
+/*
 	storage mac(MAC_ADDRESS, 6);
 	tmp[0] = 0xde;
 	tmp[1] = 0xad;
@@ -79,6 +88,7 @@ void setup() {
 
 	storage port(FSXP_PORT);
 	port.store(1201);
+*/
 
 	mySCoop.start();
 }
@@ -87,4 +97,5 @@ void setup() {
 void loop() {
 //Add your repeated code here
 	mySCoop.sleep(500);
+
 }

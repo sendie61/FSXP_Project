@@ -14,8 +14,8 @@ TCPComm::TCPComm() {
 
 }
 
-void TCPComm::setup() {
-
+void TCPComm::setup(SCoop sced) {
+	sceduler = sced;
 	// get MAC from EEPROM
 	storage MACaddress(MAC_ADDRESS, 6);
 	MACaddress.retrieve(mac);
@@ -27,34 +27,77 @@ void TCPComm::setup() {
 	// get server port from EEPROM
 	storage Port(FSXP_PORT);
 	Port.retrieve(port);
+	state = INIT;
+//	Ethernet.begin(mac); // get ip from DHCP
 
-	Ethernet.begin(mac); // get ip from DHCP
-	delay(1000);
-
-	Serial.println("connecting...");
-
-	if (client.connect(server, port) == SUCCESS) {
-		Serial.println("connected");
-		client.println("GET /search?q=arduino HTTP/1.0");
-		client.println();
-	} else {
-		Serial.println("connection failed");
-	}
 }
 
 void TCPComm::loop() {
+	checkState();
+}
 
-	if (client.available()) {
-		char c = client.read();
-		Serial.print(c);
+void TCPComm::checkState() {
+	Serial.print("TCP_State changed to ");
+	Serial.println(tcpstate[state]);
+	switch (state) {
+
+	case INIT:
+		if (GetIP() == SUCCESS) {
+			state = CONNECTING;
+		}
+		state = CONNECTING;
+		break;
+
+	case CONNECTING:
+		if (client.connect(server, port) == SUCCESS) {
+			Serial.println("connected");
+			client.println("GET /search?q=arduino HTTP/1.0");
+			client.println();
+			state = CONNECTED;
+		} else {
+			Serial.println("connection failed");
+			state = INIT;
+		}
+		break;
+
+	case CONNECTED:
+		if (client.available()) {
+			char c = client.read();
+			Serial.print(c);
+		}
+
+		if (!client.connected()) {
+			//	    Serial.println();
+			//	    Serial.println("disconnecting.");
+			client.stop();
+			state = CONNECTING;
+		}
+		break;
+	default:
+		;
+	};
+}
+
+int8_t TCPComm::GetIP() {
+	Serial.print("My MAC = ");
+	for (int i = 0; i < 6; i++) {
+		Serial.print(mac[i], HEX);
+		Serial.print('.');
 	}
-
-	if (!client.connected()) {
-//	    Serial.println();
-//	    Serial.println("disconnecting.");
-		client.stop();
-
-	}
+	Serial.println();
+	Serial.println("DHCP request...");
+	int8_t rv = Ethernet.begin(mac); // get ip from DHCP
+//	sceduler.delay(1000);
+	Serial.print("My IP = ");
+	Serial.println(Ethernet.localIP());
+	Serial.print("gateway = ");
+	Serial.println(Ethernet.gatewayIP());
+	Serial.print("connecting to ");
+	Serial.print(IPAddress(server));
+	Serial.print(":");
+	Serial.print(port);
+	Serial.println("...");
+	return rv;
 }
 
 TCPComm::~TCPComm() {
