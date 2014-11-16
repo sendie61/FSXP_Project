@@ -70,6 +70,9 @@ void setup() {
 	tmp[3] = 5;
 	ip.store(tmp, 4);
 
+	storage port(FSXP_PORT);
+	port.store(80);
+
 	mySCoop.start();
 }
 

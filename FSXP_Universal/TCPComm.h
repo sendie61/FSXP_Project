@@ -21,9 +21,10 @@ public:
 
 	EthernetClient client;
 
-	byte mac[6];
-	byte ip[4];
-	byte server[4]; // Google
+	byte mac[6];	// our mac address
+	byte ip[4];		// our IP
+	byte server[4]; // server's
+	uint16_t port;	// port
 };
 
 #endif /* TCPCOMM_H_ */

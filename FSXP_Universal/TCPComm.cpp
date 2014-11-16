@@ -16,19 +16,24 @@ TCPComm::TCPComm() {
 
 void TCPComm::setup() {
 
+	// get MAC from EEPROM
 	storage MACaddress(MAC_ADDRESS, 6);
 	MACaddress.retrieve(mac);
 
+	// get server IP from EEPROM
 	storage IPaddress(FSXP_SERVER, 4);
 	IPaddress.retrieve(server);
 
-	Ethernet.begin(mac); // get ip from DHCP
+	// get server port from EEPROM
+	storage Port(FSXP_PORT);
+	Port.retrieve(port);
 
+	Ethernet.begin(mac); // get ip from DHCP
 	delay(1000);
 
 	Serial.println("connecting...");
 
-	if (client.connect(server, 80)) {
+	if (client.connect(server, port)) {
 		Serial.println("connected");
 		client.println("GET /search?q=arduino HTTP/1.0");
 		client.println();
