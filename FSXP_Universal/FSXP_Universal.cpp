@@ -66,12 +66,19 @@ void setup() {
 	tmp[0] = 192;
 	tmp[1] = 168;
 	tmp[2] = 2;
-//	tmp[3] = 21;
-	tmp[3] = 5;
+	tmp[3] = 21;
+//	tmp[3] = 5;
 	ip.store(tmp, 4);
 
+	storage ourip(OUR_DEFAULT_IP, 4);
+	tmp[0] = 192;
+	tmp[1] = 168;
+	tmp[2] = 2;
+	tmp[3] = 200;
+	ourip.store(tmp, 4);
+
 	storage port(FSXP_PORT);
-	port.store(80);
+	port.store(1201);
 
 	mySCoop.start();
 }

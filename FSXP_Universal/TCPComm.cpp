@@ -33,7 +33,7 @@ void TCPComm::setup() {
 
 	Serial.println("connecting...");
 
-	if (client.connect(server, port)) {
+	if (client.connect(server, port) == SUCCESS) {
 		Serial.println("connected");
 		client.println("GET /search?q=arduino HTTP/1.0");
 		client.println();
