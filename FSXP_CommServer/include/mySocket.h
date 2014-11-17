@@ -117,7 +117,7 @@ private:
 
 	#ifdef WINDOWS_XP
 		// Windows version of the MSG_WAITALL option
-		int XPrecieveMessage(string&);
+		int XPreceiveMessage(string&);
 	#endif
 
 public:
@@ -151,7 +151,7 @@ public:
 	/*
 	   receive messages and stores the message in a buffer
 	*/
-	int recieveMessage(string&);
+	int receiveMessage(string&);
 
 	/*
 	   Binds the socket to an address and port number

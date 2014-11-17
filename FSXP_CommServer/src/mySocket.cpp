@@ -1231,7 +1231,7 @@ int myTcpSocket::sendMessage(string& message)
 
 #ifdef WINDOWS_XP
 /*
-int myTcpSocket::XPrecieveMessage(string& message)
+int myTcpSocket::XPreceiveMessage(string& message)
 {
 	int numBytes = 0;                 // The number of bytes received
     int currentSize = MSG_HEADER_LEN; // The number of bytes wanted to receive
@@ -1311,7 +1311,7 @@ int myTcpSocket::XPrecieveMessage(string& message)
 */
 
 
-int myTcpSocket::XPrecieveMessage(string& message)
+int myTcpSocket::XPreceiveMessage(string& message)
 {
 	int received = 0;                 // The number of bytes received
     int msgSize = MAX_RECV_LEN;       // The number of bytes wanted to receive
@@ -1372,12 +1372,12 @@ int myTcpSocket::XPrecieveMessage(string& message)
 
 #endif
 
-int myTcpSocket::recieveMessage(string& message)
+int myTcpSocket::receiveMessage(string& message)
 {
 	int numBytes;  // The number of bytes recieved
 
 	#ifdef WINDOWS_XP
-		return XPrecieveMessage(message);
+		return XPreceiveMessage(message);
 	#endif
 
 	// retrieve the length of the message received
