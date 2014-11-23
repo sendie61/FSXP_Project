@@ -10,7 +10,7 @@ myThreadArgument::myThreadArgument(myTcpSocket* client,mySemaphore* coutSem,stri
 	signalToEnd = false;
 
 	for ( int i = 0; i < MAX_NUM_CLIENTS; i ++ ) clientArgument[i] = NULL;
-    numOfConnectedClients = 0;
+    numOfConnectedClients =0;
 }
 
 myThreadArgument::~myThreadArgument() 
@@ -20,7 +20,7 @@ myThreadArgument::~myThreadArgument()
 
 void myThreadArgument::addClientArgument(myThreadArgument* argument)
 {
-	if ( argument )
+	if ( argument)
 		clientArgument[numOfConnectedClients++] = argument;
 }
 

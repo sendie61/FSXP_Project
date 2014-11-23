@@ -12,15 +12,18 @@
 #include <EthernetClient.h>
 #include <SCoop.h>
 
+#define MSG_HEADER_LEN 6
+
 const char tcpstate[3][11]={"INIT      ","CONNECTING","CONNECTED "};
 
 class TCPComm: public EthernetClient {
 public:
 	TCPComm();
-	void setup(SCoop sced);
+	void setup();
 	void loop();
 	void checkState();
 	int8_t GetIP();
+	uint16_t sendMessage( char *message);
 	virtual ~TCPComm();
 
 	EthernetClient client;
@@ -31,7 +34,8 @@ public:
 	uint16_t port;	// port
 
 	enum e_connectResult {SUCCESS=1, TIMED_OUT=-1, INVALID_SERVER=-2, TRUNCATED=-3, INVALID_RESPONSE=-4};
-	enum e_tcpState {INIT=0, CONNECTING, CONNECTED} state;
+	typedef enum e_tcpState {INIT=0, CONNECTING, CONNECTED};
+	e_tcpState state, oldState;
 	SCoop sceduler;
 };
 

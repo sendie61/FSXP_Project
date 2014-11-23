@@ -14,8 +14,7 @@ TCPComm::TCPComm() {
 
 }
 
-void TCPComm::setup(SCoop sced) {
-	sceduler = sced;
+void TCPComm::setup() {
 	// get MAC from EEPROM
 	storage MACaddress(MAC_ADDRESS, 6);
 	MACaddress.retrieve(mac);
@@ -28,6 +27,7 @@ void TCPComm::setup(SCoop sced) {
 	storage Port(FSXP_PORT);
 	Port.retrieve(port);
 	state = INIT;
+	oldState = CONNECTED;
 //	Ethernet.begin(mac); // get ip from DHCP
 
 }
@@ -37,8 +37,6 @@ void TCPComm::loop() {
 }
 
 void TCPComm::checkState() {
-	Serial.print("TCP_State changed to ");
-	Serial.println(tcpstate[state]);
 	switch (state) {
 
 	case INIT:
@@ -76,6 +74,12 @@ void TCPComm::checkState() {
 	default:
 		;
 	};
+	if (state != oldState){
+		Serial.print("TCP_State changed to ");
+		Serial.println(tcpstate[state]);
+		oldState= state;
+	}
+
 }
 
 int8_t TCPComm::GetIP() {
@@ -87,7 +91,6 @@ int8_t TCPComm::GetIP() {
 	Serial.println();
 	Serial.println("DHCP request...");
 	int8_t rv = Ethernet.begin(mac); // get ip from DHCP
-//	sceduler.delay(1000);
 	Serial.print("My IP = ");
 	Serial.println(Ethernet.localIP());
 	Serial.print("gateway = ");
@@ -99,6 +102,14 @@ int8_t TCPComm::GetIP() {
 	Serial.println("...");
 	return rv;
 }
+
+uint16_t TCPComm::sendMessage( char *message){
+	char msgLength[MSG_HEADER_LEN+1];
+    sprintf(msgLength,"%6d",strlen(message));
+//    client.print(msgLength);
+	return client.print(message)+MSG_HEADER_LEN;
+}
+
 
 TCPComm::~TCPComm() {
 	// TODO Auto-generated destructor stub

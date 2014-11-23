@@ -29,7 +29,7 @@ defineTask(tcpTask,300)
 
 void tcpTask::setup() {
 //	trace("tcpTask");
-	TCPclient.setup(mySCoop);
+	TCPclient.setup();
 }
 
 void tcpTask::loop() {
@@ -41,15 +41,26 @@ void tcpTask::loop() {
 defineTimerRun(Timer1,100) {
 	if (Serial.available()) {
 		char c = Serial.read();
-		if (c == 'a')
+		if (c == 'a'){
 			flashTask.pause();
-		if (c == 'b')
+			TCPclient.sendMessage("     5Pause");
+		}
+		if (c == 'b'){
 			flashTask.resume();
+			TCPclient.sendMessage("     6Resume");
+		}
 		if (c == 'l'){		// Stack left info
 			Serial.print("tcpTask-stackleft: ");
 			Serial.println(tcpTask.stackLeft());
 		}
+		if (c == 't'){
+			TCPclient.sendMessage("\x1     4Test");
+		}
 	}
+}
+
+defineTimerRun(Timer2,3000) {
+//			TCPclient.sendMessage("     4TEsT");
 }
 
 

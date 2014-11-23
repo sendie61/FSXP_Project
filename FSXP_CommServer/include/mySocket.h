@@ -17,7 +17,6 @@
 #endif
 
 // so far we only consider the TCP socket, UDP will be added in later release
-//const int MAX_RECV_LEN = 1048576;
 const int MAX_RECV_LEN = 8096;
 const int MAX_MSG_LEN = 1024;
 const int PORTNUM = 1200;
@@ -146,7 +145,7 @@ public:
 	   Sends a message to a connected host. The number of bytes sent is returned
 	   can be either server call or client call
 	*/
-	int sendMessage(string&);
+	int sendMessage(string);
 
 	/*
 	   receive messages and stores the message in a buffer
