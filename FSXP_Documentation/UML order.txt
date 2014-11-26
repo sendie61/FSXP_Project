@@ -1,0 +1,19 @@
+Although I would agree that there is no hard and fast rule, I have come up with a rough outline of steps after reading Martin Fowler's book on UML.
+
+1) Analyse the actors first ( a uml diagram on the actors and how they interact with the system )
+
+2) Use-Case Diagrams
+
+3) Analyzing external factors that would impact a system ( not really a diagram just including for information sake )
+
+4) Analyzing risks in the systems and estimating their impact ( again not really a diagram )
+
+5) Sequence Diagrams ( with data-flow in them )
+
+6) Class Diagrams
+
+From the book: "with a big system...It is easier ...to arrive at the list of actors first, and then ...the use cases for each actor."~Martin Fowler - UML Distilled
+
+Recommend that book as a nice introduction to diagrams.
+
+One more advice from the book: its better to have a few diagrams that you keep updated rather than having lots of diagrams that are least updated

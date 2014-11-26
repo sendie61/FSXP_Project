@@ -1,0 +1,70 @@
+
+FSXP system
+
+
+General:
+- The systems' goal is to connect physical cockpit-hardware (lights and switches) to X-Plane.
+- Every physical switch, light, ADC, PWM or display is linked to a dataref in X-plane.
+- When a dataref changes, the value is sent to the corresponding output/display.
+- When a switch is toggled, its value is sent to its corresponding dataref in X-Plane.
+
+
+Constists off:
+- X-Plane 10 FSXP-plugin.
+- X-Plane 10 systems plugins.
+- FSXP Protocol.
+- Arduino (DUE) Universal application.
+- Arduino (PRO mini) IO firmware.
+- Other hardware IO extenders.
+
+
+X-Plane 10 FSXP-plugin:
+- So called 'FAT' plugin.
+- Only Windows 64 bit.
+- Performs like a 'smart' gateway between X-Plane datarefs and a number of Arduino DUE's.
+- All configuration is done by the plugin from a config file.
+- The config file is read at startup of the plugin.
+- Functions as a TCP/IP server on fixed port
+- Maximum number of TCP/IP clients is 10.
+
+
+X-Plane 10 systems plugins:
+- Simulates a certain airplane system.
+- Has its own set of datarefs, that can attach to hardware.
+
+
+FSXP Protocol:
+- Text based communication.
+- Uses a SOH pre-emptive character to sync the clients buffers.
+- Data is packet in JSON.
+- Asynchronous communication.
+
+
+Arduino (DUE) Universal application:
+- Functions as a TCP/IP client via 10Mbit ethernet.
+- Use a preferably predefined ipaddres from a DHCP server.
+- Connects to a predefined TCP/IP server (on SD card) using hostname.
+- Uses a SD micro flash card as mass data storage for the web site and ethernet configuration.
+- Has a filesystem on the SD card.
+- SD card can be updated in a PC.
+- Has a webserver for configuration purposes.
+- Ethernet configuration is editable (hostname, macaddress, servername/ipaddress).
+- Has a serial monitor port (USB) for debugging purposes (simple commands and logging).
+- Uses the I2C bus to communicate with IO-extenders (I2C_IO).
+- Uses the I2C bus to communicate to Arduino PRO mini's.
+- Uses the SPI bus to communicatio to Display controllers (SPI_LDISP).
+- Has ..? analoge inputs (10 bit ADC).
+- Has ..? analoge outputs (01 bit PWM).
+- Has a flashing LED to indicate a running-application.
+
+
+Arduino (PRO mini) IO firmware:
+- 
+
+
+Other hardware IO extenders:
+-
+
+
+
+
