@@ -27,14 +27,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>Libraries/EEPROM</name>
-			<type>2</type>
-			<locationURI>ArduinoHardwareLibPath/EEPROM</locationURI>
-		</link>
-		<link>
 			<name>Libraries/Ethernet</name>
 			<type>2</type>
 			<locationURI>ArduinoLibPath/Ethernet</locationURI>
+		</link>
+		<link>
+			<name>Libraries/SD</name>
+			<type>2</type>
+			<locationURI>ArduinoLibPath/SD</locationURI>
 		</link>
 		<link>
 			<name>Libraries/SPI</name>
@@ -47,9 +47,9 @@
 			<locationURI>ArduinoPivateLibPath/Scoop</locationURI>
 		</link>
 		<link>
-			<name>Libraries/Storage</name>
+			<name>Libraries/aJson-master</name>
 			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/Storage</locationURI>
+			<locationURI>ArduinoPivateLibPath/aJson-master</locationURI>
 		</link>
 		<link>
 			<name>arduino/core</name>
@@ -59,21 +59,21 @@
 		<link>
 			<name>arduino/variant</name>
 			<type>2</type>
-			<locationURI>ArduinoPinPath/mega</locationURI>
+			<locationURI>ArduinoPinPath/arduino_due_x</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
 			<name>ArduinoHardwareLibPath</name>
-			<value>file:/C:/Users/F/Applications/Arduino/hardware/arduino/avr/libraries</value>
+			<value>file:/C:/Users/F/Applications/Arduino/hardware/arduino/sam/libraries</value>
 		</variable>
 		<variable>
 			<name>ArduinoPinPath</name>
-			<value>file:/C:/Users/F/Applications/Arduino/hardware/arduino/avr/variants</value>
+			<value>file:/C:/Users/F/Applications/Arduino/hardware/arduino/sam/variants</value>
 		</variable>
 		<variable>
 			<name>ArduinoPlatformPath</name>
-			<value>file:/C:/Users/F/Applications/Arduino/hardware/arduino/avr</value>
+			<value>file:/C:/Users/F/Applications/Arduino/hardware/arduino/sam</value>
 		</variable>
 	</variableList>
 </projectDescription>

@@ -7,28 +7,17 @@
 
 #include "TCPComm.h"
 #include "FSXP_constants.h"
-#include <storage.h>
 
 TCPComm::TCPComm() {
 	// TODO Auto-generated constructor stub
-
 }
 
-void TCPComm::setup() {
-	// get MAC from EEPROM
-	storage MACaddress(MAC_ADDRESS, 6);
-	MACaddress.retrieve(mac);
+void TCPComm::setup(clientSettings cs) {
+	// get info from SD card
+	settings= cs;
 
-	// get server IP from EEPROM
-	storage IPaddress(FSXP_SERVER, 4);
-	IPaddress.retrieve(server);
-
-	// get server port from EEPROM
-	storage Port(FSXP_PORT);
-	Port.retrieve(port);
 	state = INIT;
 	oldState = CONNECTED;
-//	Ethernet.begin(mac); // get ip from DHCP
 
 }
 
@@ -40,14 +29,14 @@ void TCPComm::checkState() {
 	switch (state) {
 
 	case INIT:
-		if (GetIP() == SUCCESS) {
+		if (start() == SUCCESS) {
 			state = CONNECTING;
 		}
 		state = CONNECTING;
 		break;
 
 	case CONNECTING:
-		if (client.connect(server, port) == SUCCESS) {
+		if (client.connect(settings.server, settings.port) == SUCCESS) {
 			Serial.println("connected");
 			client.println("GET /search?q=arduino HTTP/1.0");
 			client.println();
@@ -74,42 +63,49 @@ void TCPComm::checkState() {
 	default:
 		;
 	};
-	if (state != oldState){
+	if (state != oldState) {
 		Serial.print("TCP_State changed to ");
 		Serial.println(tcpstate[state]);
-		oldState= state;
+		oldState = state;
 	}
 
 }
 
-int8_t TCPComm::GetIP() {
+int8_t TCPComm::start() {
 	Serial.print("My MAC = ");
 	for (int i = 0; i < 6; i++) {
-		Serial.print(mac[i], HEX);
+		Serial.print(settings.mac[i], HEX);
 		Serial.print('.');
 	}
 	Serial.println();
 	Serial.println("DHCP request...");
-	int8_t rv = Ethernet.begin(mac); // get ip from DHCP
+	int8_t rv = 0;
+	//rv = Ethernet.begin(mac); // get ip from DHCP
+	//Ethernet.begin(mac,ip,);
+	Ethernet.begin(settings.mac, settings.ip, settings.DNS, settings.gateway, settings.subnet);
 	Serial.print("My IP = ");
-	Serial.println(Ethernet.localIP());
+	//Serial.println(Ethernet.localIP());
+	Serial.print(settings.ip);
 	Serial.print("gateway = ");
-	Serial.println(Ethernet.gatewayIP());
+	//Serial.println(Ethernet.gatewayIP());
+	Serial.print(settings.gateway);
 	Serial.print("connecting to ");
-	Serial.print(IPAddress(server));
+	Serial.print(settings.server);
 	Serial.print(":");
-	Serial.print(port);
+	Serial.print(settings.port);
 	Serial.println("...");
 	return rv;
 }
 
-uint16_t TCPComm::sendMessage( char *message){
-	char msgLength[MSG_HEADER_LEN+1];
-    sprintf(msgLength,"%6d",strlen(message));
-//    client.print(msgLength);
-	return client.print(message)+MSG_HEADER_LEN;
+uint16_t TCPComm::sendMessage(String message) {
+	// TODO auto add HEADER
+	msg2Send.soh = MSG_SOH;
+	sprintf(msg2Send.msgLength, "%6d", message.length());
+	msg2Send.msg = (char*) message.c_str();
+	Serial.println(msg2Send.msg);
+	Serial.println(static_cast<char*>(static_cast<void*> (& msg2Send)));
+	return client.print((char *) (&msg2Send)) + MSG_HEADER_LEN;
 }
-
 
 TCPComm::~TCPComm() {
 	// TODO Auto-generated destructor stub
