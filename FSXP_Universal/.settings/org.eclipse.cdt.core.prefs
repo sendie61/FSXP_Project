@@ -290,6 +290,9 @@ environment/project/it.baeyens.arduino.core.toolChain.release.280917899/JANTJE.T
 environment/project/it.baeyens.arduino.core.toolChain.release.280917899/JANTJE.TEMPLATE_USE_DEFAULT/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.280917899/JANTJE.TEMPLATE_USE_DEFAULT/operation=replace
 environment/project/it.baeyens.arduino.core.toolChain.release.280917899/JANTJE.TEMPLATE_USE_DEFAULT/value=true
+environment/project/it.baeyens.arduino.core.toolChain.release.280917899/JANTJE.WARNING_LEVEL/delimiter=;
+environment/project/it.baeyens.arduino.core.toolChain.release.280917899/JANTJE.WARNING_LEVEL/operation=replace
+environment/project/it.baeyens.arduino.core.toolChain.release.280917899/JANTJE.WARNING_LEVEL/value=\ -Wall 
 environment/project/it.baeyens.arduino.core.toolChain.release.280917899/PATH/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.280917899/PATH/operation=replace
 environment/project/it.baeyens.arduino.core.toolChain.release.280917899/PATH/value=${A.COMPILER.PATH}${PathDelimiter}${A.BUILD.GENERIC.PATH}${PathDelimiter}${A.RUNTIME.IDE.PATH}/hardware/tools/avr/utils/bin${PathDelimiter}${PATH}

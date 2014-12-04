@@ -14,7 +14,7 @@ TCPComm::TCPComm() {
 
 void TCPComm::setup(clientSettings cs) {
 	// get info from SD card
-	settings= cs;
+	settings = cs;
 
 	state = INIT;
 	oldState = CONNECTED;
@@ -82,7 +82,8 @@ int8_t TCPComm::start() {
 	int8_t rv = 0;
 	//rv = Ethernet.begin(mac); // get ip from DHCP
 	//Ethernet.begin(mac,ip,);
-	Ethernet.begin(settings.mac, settings.ip, settings.DNS, settings.gateway, settings.subnet);
+	Ethernet.begin(settings.mac, settings.ip, settings.DNS, settings.gateway,
+			settings.subnet);
 	Serial.print("My IP = ");
 	//Serial.println(Ethernet.localIP());
 	Serial.print(settings.ip);
@@ -103,7 +104,7 @@ uint16_t TCPComm::sendMessage(String message) {
 	sprintf(msg2Send.msgLength, "%6d", message.length());
 	msg2Send.msg = (char*) message.c_str();
 	Serial.println(msg2Send.msg);
-	Serial.println(static_cast<char*>(static_cast<void*> (& msg2Send)));
+	Serial.println(static_cast<char*>(static_cast<void*>(&msg2Send)));
 	return client.print((char *) (&msg2Send)) + MSG_HEADER_LEN;
 }
 

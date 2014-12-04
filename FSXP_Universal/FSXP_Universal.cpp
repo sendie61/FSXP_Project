@@ -6,7 +6,6 @@
 #include "TCPComm.h"
 #include "FSXP_constants.h"
 
-
 #define led1 LED_BUILTIN
 
 TCPComm TCPclient;
@@ -24,7 +23,6 @@ void flashTask::loop() {
 	digitalWrite(led1, LOW);
 	sleepSync(1000);
 }
-
 
 defineTask(tcpTask, 1024)
 
@@ -50,7 +48,7 @@ bool parseJson(char *jsonString, clientSettings& cs) {
 			for (int c = 0; c < aJson.getArraySize(dns); c++) {
 				dnsBytes[c] = (uint8_t) aJson.getArrayItem(dns, c)->valueint;
 			}
-			dnsBytes[4]='\0';
+			dnsBytes[4] = '\0';
 			cs.gateway = (const uint8_t *) dnsBytes;
 			Serial.println("Parsed successfully 2 ");
 		}
@@ -58,7 +56,6 @@ bool parseJson(char *jsonString, clientSettings& cs) {
 	cs.server = (const uint8_t *) "ABCD";
 	return rc;
 }
-
 
 void tcpTask::setup() {
 //	trace("tcpTask");
@@ -90,15 +87,15 @@ void tcpTask::setup() {
 
 	clientSettings cs;
 
-	bool value = parseJson((char *)jsonString.c_str(), cs);
+	bool value = parseJson((char *) jsonString.c_str(), cs);
 
-	    if (value) {
-	        Serial.print(F("Successfully Parsed: "));
-	        Serial.println(value);
-	    } else {
-	        Serial.print(F("There was some problem in parsing the JSON"));
-	    }
-	    cs.ip=(const uint8_t *)"1234";
+	if (value) {
+		Serial.print(F("Successfully Parsed: "));
+		Serial.println(value);
+	} else {
+		Serial.print(F("There was some problem in parsing the JSON"));
+	}
+	cs.ip = (const uint8_t *) "1234";
 
 	TCPclient.setup(cs);
 }
@@ -107,7 +104,6 @@ void tcpTask::loop() {
 	TCPclient.loop();
 	mySCoop.yield();
 }
-
 
 defineTimerRun(Timer1,100) {
 	if (Serial.available()) {

@@ -9,7 +9,6 @@
 #include "Arduino.h"
 //add your includes for the project FSXP_Universal here
 
-
 //end of add your includes here
 #ifdef __cplusplus
 extern "C" {
@@ -21,9 +20,6 @@ void setup();
 #endif
 
 //add your function definitions for the project FSXP_Universal here
-
-
-
 
 //Do not add code below this line
 #endif /* _FSXP_Universal_H_ */

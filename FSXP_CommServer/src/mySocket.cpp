@@ -1186,7 +1186,7 @@ int myTcpSocket::sendMessage(string& message)
 	return numBytes;
 }
 */
-int myTcpSocket::sendMessage(string& message)
+int myTcpSocket::sendMessage(string message)
 {
 	int numBytes;  // the number of bytes sent
 

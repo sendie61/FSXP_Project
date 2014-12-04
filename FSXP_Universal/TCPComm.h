@@ -15,18 +15,17 @@
 #define MSG_HEADER_LEN 	7
 
 const char tcpstate[3][11] PROGMEM
-		= { "INIT      ", "CONNECTING", "CONNECTED " };
+= { "INIT      ", "CONNECTING", "CONNECTED " };
 
-typedef struct{
-byte mac[6];		// our mac address
-IPAddress ip;		// our IP
-IPAddress server; 	// server's IP
-IPAddress DNS; 		// DNS server IP
-IPAddress gateway; 	// gateway IP
-IPAddress subnet; 	// subnet
-uint16_t port;		// server's port
+typedef struct {
+	byte mac[6];		// our mac address
+	IPAddress ip;		// our IP
+	IPAddress server; 	// server's IP
+	IPAddress DNS; 		// DNS server IP
+	IPAddress gateway; 	// gateway IP
+	IPAddress subnet; 	// subnet
+	uint16_t port;		// server's port
 } clientSettings;
-
 
 class TCPComm: public EthernetClient {
 public:

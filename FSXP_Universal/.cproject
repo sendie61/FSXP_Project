@@ -21,7 +21,6 @@
 								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.507517373" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/arduino/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/EEPROM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Scoop}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet/src}&quot;"/>
@@ -37,7 +36,6 @@
 								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.747205470" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/arduino/variant}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/EEPROM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Scoop}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Universal/Libraries/Ethernet/src}&quot;"/>
