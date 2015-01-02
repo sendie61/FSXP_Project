@@ -9,7 +9,6 @@
 #include "Arduino.h"
 //add your includes for the project FSXP_Proxy here
 
-
 //end of add your includes here
 #ifdef __cplusplus
 extern "C" {
