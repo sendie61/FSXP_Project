@@ -9,7 +9,7 @@
 #define led1 LED_BUILTIN
 
 TCPComm TCPclient;
-
+int a=0;
 // Flasing LED task
 defineTask(flashTask)
 void flashTask::setup() {
@@ -42,15 +42,20 @@ bool parseJson(char *jsonString, clientSettings& cs) {
 		if (settings != NULL) {
 			Serial.println("Parsed successfully 1 ");
 			aJsonObject* dns = aJson.getObjectItem(settings, "gateway");
+
+			aJson.print(dns);
+
 			uint8_t dnsBytes[5];
 			Serial.print("Array Size DNS: ");
-			Serial.println(aJson.getArraySize(dns));
-			for (int c = 0; c < aJson.getArraySize(dns); c++) {
+			uint8_t arraySize = aJson.getArraySize(dns);
+			Serial.println(arraySize);
+			Serial.println("Parsed successfully 2 ");
+			for (int c = 0; c < arraySize; c++) {
 				dnsBytes[c] = (uint8_t) aJson.getArrayItem(dns, c)->valueint;
 			}
 			dnsBytes[4] = '\0';
 			cs.gateway = (const uint8_t *) dnsBytes;
-			Serial.println("Parsed successfully 2 ");
+			Serial.println("Parsed successfully 3 ");
 		}
 	}
 	cs.server = (const uint8_t *) "ABCD";
@@ -145,5 +150,5 @@ void setup() {
 void loop() {
 //Add your repeated code here
 	mySCoop.sleep(500);
-
+	a++;
 }
