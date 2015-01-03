@@ -7,6 +7,7 @@
 #include "FSXP_constants.h"
 
 #define led1 LED_BUILTIN
+#define BUFFER_SIZE 200
 
 TCPComm TCPclient;
 int a=0;
@@ -34,28 +35,21 @@ defineTask(tcpTask, 1024)
 bool parseJson(char *jsonString, clientSettings& cs) {
 	bool rc = true;
 
+
+
 	aJsonObject* root = aJson.parse(jsonString);
 
 	if (root != NULL) {
 		aJsonObject* settings = aJson.getObjectItem(root, "settings");
 
 		if (settings != NULL) {
-			Serial.println("Parsed successfully 1 ");
 			aJsonObject* dns = aJson.getObjectItem(settings, "gateway");
-
-			aJson.print(dns);
-
 			uint8_t dnsBytes[5];
-			Serial.print("Array Size DNS: ");
-			uint8_t arraySize = aJson.getArraySize(dns);
-			Serial.println(arraySize);
-			Serial.println("Parsed successfully 2 ");
-			for (int c = 0; c < arraySize; c++) {
+			for (int c = 0; c < aJson.getArraySize(dns); c++) {
 				dnsBytes[c] = (uint8_t) aJson.getArrayItem(dns, c)->valueint;
 			}
 			dnsBytes[4] = '\0';
 			cs.gateway = (const uint8_t *) dnsBytes;
-			Serial.println("Parsed successfully 3 ");
 		}
 	}
 	cs.server = (const uint8_t *) "ABCD";
@@ -74,6 +68,7 @@ void tcpTask::setup() {
 	}
 	Serial.println(F("initialization done."));
 
+	//delete this
 	File dataFile = SD.open("/network/ifaces.jsn");
 	String jsonString = "";
 
@@ -101,8 +96,10 @@ void tcpTask::setup() {
 		Serial.print(F("There was some problem in parsing the JSON"));
 	}
 	cs.ip = (const uint8_t *) "1234";
+	//to here
 
-	TCPclient.setup(cs);
+	//from here
+	TCPclient.setup("/network/ifaces.jsn");
 }
 
 void tcpTask::loop() {
