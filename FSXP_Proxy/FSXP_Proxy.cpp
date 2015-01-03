@@ -7,6 +7,7 @@
 #include "FSXP_constants.h"
 
 #define led1 LED_BUILTIN
+#define BUFFER_SIZE 200
 
 TCPComm TCPclient;
 int a=0;
@@ -33,6 +34,8 @@ defineTask(tcpTask, 1024)
  */
 bool parseJson(char *jsonString, clientSettings& cs) {
 	bool rc = true;
+
+
 
 	aJsonObject* root = aJson.parse(jsonString);
 
