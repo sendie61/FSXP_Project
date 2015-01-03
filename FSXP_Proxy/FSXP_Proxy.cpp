@@ -32,19 +32,17 @@ defineTask(tcpTask, 1024)
  *
  * Refer to http://hardwarefun.com/tutorials/parsing-json-in-arduino
  */
-bool parseJson(char *jsonString, clientSettings& cs) {
+bool parseJson(aJsonStream *jsonFile, clientSettings& cs) {
 	bool rc = true;
 
-
-
-	aJsonObject* root = aJson.parse(jsonString);
+	aJsonObject* root = aJson.parse(jsonFile);
 
 	if (root != NULL) {
 		aJsonObject* settings = aJson.getObjectItem(root, "settings");
 
 		if (settings != NULL) {
 			Serial.println("Parsed successfully 1 ");
-			aJsonObject* dns = aJson.getObjectItem(settings, "gateway");
+			aJsonObject* dns = aJson.getObjectItem(settings, "dns");
 
 			aJson.print(dns);
 
@@ -78,24 +76,19 @@ void tcpTask::setup() {
 	Serial.println(F("initialization done."));
 
 	File dataFile = SD.open("/network/ifaces.jsn");
-	String jsonString = "";
-
-	// if the file is available, read it:
+	// if the file is available, read&parse it:
+	clientSettings cs;
+	bool value=  false;
 	if (dataFile) {
-		while (dataFile.available()) {
-			jsonString += (char) dataFile.read();
-		}
+		value = parseJson( (aJsonStream *) &dataFile, cs);
 		dataFile.close();
 	}
 	// if the file isn't open, pop up an error:
 	else {
 		Serial.println(F("error opening datalog.txt"));
 	}
-	Serial.println(jsonString); //test it
 
-	clientSettings cs;
 
-	bool value = parseJson((char *) jsonString.c_str(), cs);
 
 	if (value) {
 		Serial.print(F("Successfully Parsed: "));
