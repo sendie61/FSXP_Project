@@ -1,8 +1,7 @@
 // Do not remove the include below
-#include "FSXP_Proxy.h"
 #include <SCoop.h>
-#include <SD.h>
-#include <aJSON.h>
+
+#include "FSXP_Proxy.h"
 #include "TCPComm.h"
 #include "FSXP_constants.h"
 
@@ -10,112 +9,48 @@
 #define BUFFER_SIZE 200
 
 TCPComm TCPclient;
-int a=0;
+
 // Flasing LED task
-defineTask(flashTask)
-void flashTask::setup() {
+//defineTask(flashTask)
+//
+//void flashTask::setup() {
 //	trace("flashTask");
-	pinMode(led1, OUTPUT);
-}
+//	pinMode(led1, OUTPUT);
+//}
+//
+//void flashTask::loop() {
+//	digitalWrite(led1, HIGH);
+//	sleepSync(50);
+//	digitalWrite(led1, LOW);
+//	sleepSync(1000);
+//}
 
-void flashTask::loop() {
-	digitalWrite(led1, HIGH);
-	sleepSync(50);
-	digitalWrite(led1, LOW);
-	sleepSync(1000);
-}
+defineTask(tcpTask, 2024)
 
-defineTask(tcpTask, 1024)
-
-/**
- * Parse the JSON String. Uses aJson library
- *
- * Refer to http://hardwarefun.com/tutorials/parsing-json-in-arduino
- */
-bool parseJson(char *jsonString, clientSettings& cs) {
-	bool rc = true;
-
-
-
-	aJsonObject* root = aJson.parse(jsonString);
-
-	if (root != NULL) {
-		aJsonObject* settings = aJson.getObjectItem(root, "settings");
-
-		if (settings != NULL) {
-			aJsonObject* dns = aJson.getObjectItem(settings, "gateway");
-			uint8_t dnsBytes[5];
-			for (int c = 0; c < aJson.getArraySize(dns); c++) {
-				dnsBytes[c] = (uint8_t) aJson.getArrayItem(dns, c)->valueint;
-			}
-			dnsBytes[4] = '\0';
-			cs.gateway = (const uint8_t *) dnsBytes;
-		}
-	}
-	cs.server = (const uint8_t *) "ABCD";
-	return rc;
-}
 
 void tcpTask::setup() {
 //	trace("tcpTask");
-	const int CS = 4;
-	const int SS = 10;
-
-	pinMode(SS, OUTPUT);
-	if (!SD.begin(CS)) {
-		Serial.println(F("initialization failed!"));
-		return;
-	}
-	Serial.println(F("initialization done."));
-
-	//delete this
-	File dataFile = SD.open("/network/ifaces.jsn");
-	String jsonString = "";
-
-	// if the file is available, read it:
-	if (dataFile) {
-		while (dataFile.available()) {
-			jsonString += (char) dataFile.read();
-		}
-		dataFile.close();
-	}
-	// if the file isn't open, pop up an error:
-	else {
-		Serial.println(F("error opening datalog.txt"));
-	}
-	Serial.println(jsonString); //test it
-
-	clientSettings cs;
-
-	bool value = parseJson((char *) jsonString.c_str(), cs);
-
-	if (value) {
-		Serial.print(F("Successfully Parsed: "));
-		Serial.println(value);
-	} else {
-		Serial.print(F("There was some problem in parsing the JSON"));
-	}
-	cs.ip = (const uint8_t *) "1234";
-	//to here
-
-	//from here
+	Serial.println(F("SD/Ethernet-HW initialization done."));
+	mySCoop.Atomic++;
 	TCPclient.setup("/network/ifaces.jsn");
+	mySCoop.Atomic++;
 }
 
 void tcpTask::loop() {
+	mySCoop.Atomic++;
 	TCPclient.loop();
-	mySCoop.yield();
+	mySCoop.Atomic++;
 }
 
 defineTimerRun(Timer1,100) {
 	if (Serial.available()) {
 		char c = Serial.read();
 		if (c == 'a') {
-			flashTask.pause();
+	//		flashTask.pause();
 			TCPclient.sendMessage("Pause");
 		}
 		if (c == 'b') {
-			flashTask.resume();
+	//		flashTask.resume();
 			TCPclient.sendMessage("Resume");
 		}
 		if (c == 'l') {		// Stack left info
@@ -128,9 +63,9 @@ defineTimerRun(Timer1,100) {
 	}
 }
 
-defineTimerRun(Timer2,3000) {
+//defineTimerRun(Timer2,3000) {
 //			TCPclient.sendMessage("     4TEsT");
-}
+//}
 
 //The setup function is called once at startup of the sketch
 void setup() {
@@ -147,5 +82,5 @@ void setup() {
 void loop() {
 //Add your repeated code here
 	mySCoop.sleep(500);
-	a++;
+
 }

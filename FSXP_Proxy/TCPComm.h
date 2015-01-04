@@ -11,6 +11,8 @@
 #include <Ethernet.h>
 #include <EthernetClient.h>
 
+#include "JsonParser.h"
+
 #define MSG_SOH	0x01
 #define MSG_HEADER_LEN 	7
 
@@ -18,7 +20,7 @@ const char tcpstate[3][11] PROGMEM
 = { "INIT      ", "CONNECTING", "CONNECTED " };
 
 typedef struct {
-	byte mac[6];		// our mac address
+	uint8_t mac[6];		// our mac address
 	IPAddress ip;		// our IP
 	IPAddress server; 	// server's IP
 	IPAddress DNS; 		// DNS server IP
@@ -30,7 +32,7 @@ typedef struct {
 class TCPComm: public EthernetClient {
 public:
 	TCPComm();
-	void setup(clientSettings cs);
+	void setup(char * iniFilename);
 	void loop();
 	void checkState();
 	int8_t start();
@@ -41,6 +43,7 @@ public:
 
 private:
 	clientSettings settings;
+	JsonParser Parser;
 
 	enum e_connectResult {
 		SUCCESS = 1,
