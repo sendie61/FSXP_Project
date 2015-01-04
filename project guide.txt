@@ -3,3 +3,6 @@ Install Arduino in:
 
 install win_builds in:
 	C:\win_builds 
+
+To debug DUE:
+	use arm-none-eabi-gdb and SEGGER gdb-server

@@ -1,8 +1,7 @@
 // Do not remove the include below
-#include "FSXP_Proxy.h"
 #include <SCoop.h>
-#include <SD.h>
-#include <aJSON.h>
+
+#include "FSXP_Proxy.h"
 #include "TCPComm.h"
 #include "FSXP_constants.h"
 
@@ -10,22 +9,24 @@
 #define BUFFER_SIZE 200
 
 TCPComm TCPclient;
-int a=0;
+
 // Flasing LED task
-defineTask(flashTask)
-void flashTask::setup() {
+//defineTask(flashTask)
+//
+//void flashTask::setup() {
 //	trace("flashTask");
-	pinMode(led1, OUTPUT);
-}
+//	pinMode(led1, OUTPUT);
+//}
+//
+//void flashTask::loop() {
+//	digitalWrite(led1, HIGH);
+//	sleepSync(50);
+//	digitalWrite(led1, LOW);
+//	sleepSync(1000);
+//}
 
-void flashTask::loop() {
-	digitalWrite(led1, HIGH);
-	sleepSync(50);
-	digitalWrite(led1, LOW);
-	sleepSync(1000);
-}
+defineTask(tcpTask, 2024)
 
-defineTask(tcpTask, 1024)
 
 /**
  * Parse the JSON String. Uses aJson library
@@ -63,8 +64,10 @@ bool parseJson(aJsonStream *jsonFile, clientSettings& cs) {
 	return rc;
 }
 
+
 void tcpTask::setup() {
 //	trace("tcpTask");
+
 	const int CS = 4;
 	const int SS = 10;
 
@@ -99,22 +102,29 @@ void tcpTask::setup() {
 	cs.ip = (const uint8_t *) "1234";
 
 	TCPclient.setup(cs);
+
+	Serial.println(F("SD/Ethernet-HW initialization done."));
+	mySCoop.Atomic++;
+	TCPclient.setup("/network/ifaces.jsn");
+	mySCoop.Atomic++;
+
 }
 
 void tcpTask::loop() {
+	mySCoop.Atomic++;
 	TCPclient.loop();
-	mySCoop.yield();
+	mySCoop.Atomic++;
 }
 
 defineTimerRun(Timer1,100) {
 	if (Serial.available()) {
 		char c = Serial.read();
 		if (c == 'a') {
-			flashTask.pause();
+	//		flashTask.pause();
 			TCPclient.sendMessage("Pause");
 		}
 		if (c == 'b') {
-			flashTask.resume();
+	//		flashTask.resume();
 			TCPclient.sendMessage("Resume");
 		}
 		if (c == 'l') {		// Stack left info
@@ -127,9 +137,9 @@ defineTimerRun(Timer1,100) {
 	}
 }
 
-defineTimerRun(Timer2,3000) {
+//defineTimerRun(Timer2,3000) {
 //			TCPclient.sendMessage("     4TEsT");
-}
+//}
 
 //The setup function is called once at startup of the sketch
 void setup() {
@@ -146,5 +156,5 @@ void setup() {
 void loop() {
 //Add your repeated code here
 	mySCoop.sleep(500);
-	a++;
+
 }
