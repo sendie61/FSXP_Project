@@ -16,8 +16,8 @@
 #define MSG_SOH	0x01
 #define MSG_HEADER_LEN 	7
 
-const char tcpstate[3][11] PROGMEM
-= { "INIT      ", "CONNECTING", "CONNECTED " };
+const char tcpstate[4][11] PROGMEM
+= { "INIT      ", "CONNECTING", "CONNECTED ", "UNKNOWN   " };
 
 typedef struct {
 	uint8_t mac[6];		// our mac address
@@ -57,7 +57,7 @@ private:
 		INVALID_RESPONSE = -4
 	};
 	typedef enum e_tcpState {
-		INIT = 0, CONNECTING, CONNECTED
+		INIT = 0, CONNECTING, CONNECTED, UNKNOWN
 	};
 	e_tcpState state, oldState;
 
