@@ -17,7 +17,6 @@
 	  * used for initializing TCPcommunication
 	  * and parsing FSXP-protocol messages.
 	  */
-
 class JsonParser {
 public:
 	JsonParser();

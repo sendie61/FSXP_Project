@@ -32,6 +32,10 @@ typedef struct {
 class TCPComm: public EthernetClient {
 public:
 	TCPComm();
+	/**
+	  * @brief setup() initialize TCPCommunication
+	  * reads settings from ini- (json) file on SD-card
+	  */
 	void setup(char * iniFilename);
 	void loop();
 	void checkState();

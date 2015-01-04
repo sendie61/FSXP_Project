@@ -4,7 +4,7 @@
  *  Created on: Nov 15, 2014
  *      Author: F
  */
-#include <SCoop.h>
+
 #include "TCPComm.h"
 #include "FSXP_constants.h"
 
@@ -29,13 +29,10 @@ void TCPComm::setup(char * iniFilename) {
 			Parser.Json2IP(settings.subnet, aJson.getObjectItem(settingsObj, "subnet"));
 			Parser.Json2MAC(settings.mac, aJson.getObjectItem(settingsObj, "mac"));
 			settings.port= aJson.getObjectItem(settingsObj, "port")->valueint;
-
 		}
 	}
-
 	state = INIT;
 	oldState = CONNECTED;
-
 }
 
 void TCPComm::loop() {

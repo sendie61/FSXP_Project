@@ -44,12 +44,9 @@ bool JsonParser::readFile2String(String& aStr, char* filename) {
 	bool rc = false;
 
 	const int SS_SD_CARD = 4;
-	const int SS_ETHERNET = 10;
 
 	pinMode(SS_SD_CARD, OUTPUT);
 	digitalWrite(SS_SD_CARD, HIGH);  // SD Card not active
-	pinMode(SS_ETHERNET, OUTPUT);
-	digitalWrite(SS_ETHERNET, HIGH);  // Ethernet Card not active
 
 	if (!SD.begin(SS_SD_CARD)) {
 		Serial.println(F("SD CARD initialization failed!"));
