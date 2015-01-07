@@ -12,6 +12,7 @@
 #include <EthernetClient.h>
 
 #include "JsonParser.h"
+#include "Timer.h"
 
 #define MSG_SOH	0x01
 #define MSG_HEADER_LEN 	7
@@ -39,6 +40,7 @@ public:
 	void setup(char * iniFilename);
 	void loop();
 	void checkState();
+	void checkForData();
 	int8_t start();
 	uint16_t sendMessage(String message);
 	virtual ~TCPComm();
@@ -66,6 +68,8 @@ private:
 		char msgLength[6];
 		char *msg;  // <-DIT IS NIET GOED!!!
 	} msg2Send;
+
+	Timer checkStateTimer;
 };
 
 #endif /* TCPCOMM_H_ */

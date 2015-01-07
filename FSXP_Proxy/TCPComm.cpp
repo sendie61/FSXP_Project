@@ -8,8 +8,16 @@
 #include "TCPComm.h"
 #include "FSXP_constants.h"
 
+// some tricks to be able to callback a member function
+TCPComm* ptTCPComm;
+
+static void checkState_wrapper() {
+	ptTCPComm->checkState();
+}
+
 TCPComm::TCPComm() {
 	// TODO Auto-generated constructor stub
+	ptTCPComm = this;
 }
 
 void TCPComm::setup(char * iniFilename) {
@@ -22,25 +30,41 @@ void TCPComm::setup(char * iniFilename) {
 		aJsonObject* settingsObj = aJson.getObjectItem(root, "settings");
 
 		if (settingsObj != NULL) {
-			Parser.Json2IP(settings.DNS, aJson.getObjectItem(settingsObj, "dns"));
-			Parser.Json2IP(settings.gateway, aJson.getObjectItem(settingsObj, "gateway"));
+			Parser.Json2IP(settings.DNS,
+					aJson.getObjectItem(settingsObj, "dns"));
+			Parser.Json2IP(settings.gateway,
+					aJson.getObjectItem(settingsObj, "gateway"));
 			Parser.Json2IP(settings.ip, aJson.getObjectItem(settingsObj, "ip"));
-			Parser.Json2IP(settings.server, aJson.getObjectItem(settingsObj, "server"));
-			Parser.Json2IP(settings.subnet, aJson.getObjectItem(settingsObj, "subnet"));
-			Parser.Json2MAC(settings.mac, aJson.getObjectItem(settingsObj, "mac"));
-			settings.port= aJson.getObjectItem(settingsObj, "port")->valueint;
+			Parser.Json2IP(settings.server,
+					aJson.getObjectItem(settingsObj, "server"));
+			Parser.Json2IP(settings.subnet,
+					aJson.getObjectItem(settingsObj, "subnet"));
+			Parser.Json2MAC(settings.mac,
+					aJson.getObjectItem(settingsObj, "mac"));
+			settings.port = aJson.getObjectItem(settingsObj, "port")->valueint;
 		}
 	}
 	state = INIT;
 	oldState = UNKNOWN;
+	checkStateTimer.every(1000L, checkState_wrapper);
 }
 
 void TCPComm::loop() {
-	checkState();
+	checkStateTimer.update();
+	checkForData();
+}
+
+void TCPComm::checkForData() {
+	if (state == CONNECTED) {
+		while (client.available()) {
+			char c = client.read();
+			Serial.print(c);
+		}
+	}
 }
 
 void TCPComm::checkState() {
-	 switch (state) {
+	switch (state) {
 
 	case INIT:
 		if (start() == SUCCESS) {
@@ -62,11 +86,6 @@ void TCPComm::checkState() {
 		break;
 
 	case CONNECTED:
-		if (client.available()) {
-			char c = client.read();
-
-			Serial.print(c);
-		}
 		if (!client.connected()) {
 			client.stop();
 			state = CONNECTING;
@@ -89,7 +108,8 @@ int8_t TCPComm::start() {
 
 	//Ethernet.begin(settings.mac); // get ip from DHCP
 	//Ethernet.begin(settings.mac, settings.ip);
-	Ethernet.begin(settings.mac, settings.ip, settings.DNS, settings.gateway, settings.subnet);
+	Ethernet.begin(settings.mac, settings.ip, settings.DNS, settings.gateway,
+			settings.subnet);
 
 	return rv;
 }
