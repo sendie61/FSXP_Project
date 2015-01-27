@@ -42,11 +42,6 @@
 			<locationURI>ArduinoHardwareLibPath/SPI</locationURI>
 		</link>
 		<link>
-			<name>Libraries/Scoop</name>
-			<type>2</type>
-			<locationURI>ArduinoPivateLibPath/Scoop</locationURI>
-		</link>
-		<link>
 			<name>Libraries/Timer-master</name>
 			<type>2</type>
 			<locationURI>ArduinoPivateLibPath/Timer-master</locationURI>
