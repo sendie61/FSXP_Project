@@ -3,7 +3,7 @@
 #include "TCPComm.h"
 #include "FSXP_constants.h"
 #include "Timer.h"
-
+#include "IntelHex.h"
 #define led1 LED_BUILTIN
 #define BUFFER_SIZE 200
 
@@ -21,6 +21,11 @@ void setup() {
 	TCPclient.setup("/network/ifaces.jsn");
 	pinMode(LED_BUILTIN, OUTPUT);
 	tim100ms.oscillate(LED_BUILTIN, 500L, HIGH);
+
+	String hex=":0F810000E47F00EFF4F5907E50DEFEDFF680FEA8";
+	IntelHex line;
+	line.setDataArray(hex);
+	bool a=line.isValid();
 }
 
 // The loop function is called in an endless loop
