@@ -15,7 +15,8 @@ static void checkState_wrapper() {
 	ptTCPComm->checkState();
 }
 
-TCPComm::TCPComm() {
+TCPComm::TCPComm():
+	state(UNKNOWN), oldState(UNKNOWN){
 	// TODO Auto-generated constructor stub
 	ptTCPComm = this;
 }

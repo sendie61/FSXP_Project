@@ -85,5 +85,6 @@ uint8_t IntelHex::hex2dec(unsigned char c) {
 	} else if (c >= 'a' && c <= 'f') {
 		return c - 32 - 'A' + 10;
 	}
+	return 0;
 }
 
