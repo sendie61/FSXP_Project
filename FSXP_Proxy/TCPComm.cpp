@@ -24,9 +24,23 @@ TCPComm::TCPComm():
 void TCPComm::setup(char * iniFilename) {
 	// get info from SD card
 
+	aJsonObject* root;
+
+	String iHexString;
+	Parser.readFile2String(iHexString, "/network/testinit.jsn");
+	root = aJson.parse((char *) iHexString.c_str());
+	if (root != NULL) {
+		aJsonObject* i2cObj = aJson.getObjectItem(root, "I2C_IO");
+		uint8_t subaddr = aJson.getObjectItem(i2cObj, "-subaddr")->valueint;
+		aJsonObject* initObj = aJson.getObjectItem(i2cObj, "INIT");
+		uint16_t arraylen = aJson.getArraySize(initObj);
+		for (uint8_t i=0; i< arraylen; i++)
+			iHexString= aJson.getArrayItem(initObj, i)->valuestring;
+	}
+
 	String settingString;
 	Parser.readFile2String(settingString, iniFilename);
-	aJsonObject* root = aJson.parse((char *) settingString.c_str());
+	root = aJson.parse((char *) settingString.c_str());
 	if (root != NULL) {
 		aJsonObject* settingsObj = aJson.getObjectItem(root, "settings");
 
@@ -46,8 +60,8 @@ void TCPComm::setup(char * iniFilename) {
 		}
 	}
 	state = INIT;
-	oldState = UNKNOWN;
 	checkStateTimer.every(1000L, checkState_wrapper);
+
 }
 
 void TCPComm::loop() {
