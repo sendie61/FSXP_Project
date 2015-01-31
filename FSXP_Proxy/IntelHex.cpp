@@ -8,12 +8,12 @@
 #include "IntelHex.h"
 
 IntelHex::IntelHex() :
-		valid(false), type(0), length(0), address(0) {
+		valid(false), type(DAT), length(0), address(0) {
 	// TODO Auto-generated constructor stub
 }
 
 IntelHex::IntelHex(String& aStr) :
-		valid(false), type(0), length(0), address(0) {
+		valid(false), type(DAT), length(0), address(0) {
 	setDataArray(aStr);
 }
 
@@ -35,7 +35,7 @@ uint8_t IntelHex::getLength() {
 	return length;
 }
 
-uint8_t IntelHex::getType() {
+recordTypes IntelHex::getType() {
 	return type;
 }
 
@@ -52,7 +52,7 @@ bool IntelHex::validate(String& aStr) {
 	uint8_t tot = 0, i, len = aStr.length();
 	if ((len >= 11) && (len < 44)) {		// must be  11 < n < 44
 		if (aStr[0] == ':') {				// first char must be ':'
-			type = hex2dec(aStr[7]) * 16 + hex2dec(aStr[8]); // save 'type'
+			type = recordTypes(hex2dec(aStr[7]) * 16 + hex2dec(aStr[8])); // save 'type'
 			if ((type == 1 && len == 11) || type == 0) {	// if EOF -> NO DATA
 				for (i = 1; i < len; i += 2) {	// itterate through string
 					tot += (hex2dec(aStr[i]) * 16 + hex2dec(aStr[i + 1]));
@@ -70,7 +70,7 @@ void IntelHex::parse(String& aStr) {
 	length = hex2dec(aStr[1] * 16 + hex2dec(aStr[2]));
 	address = (hex2dec(aStr[3]) * 16 + hex2dec(aStr[4])) * 256L
 			+ hex2dec(aStr[5]) * 16 + hex2dec(aStr[6]);
-	type = hex2dec(aStr[7] * 16 + hex2dec(aStr[8]));
+	type = recordTypes(hex2dec(aStr[7] * 16 + hex2dec(aStr[8])));
 
 	for (i = 0; i < length; i++) {		// itterate through string
 		dataArray[i] = hex2dec(aStr[j++]) * 16 + hex2dec(aStr[j++]);

@@ -136,8 +136,9 @@ uint16_t TCPComm::sendMessage(String message) {
 	return TCPclient.print((char *) (&msg2Send)) + MSG_HEADER_LEN;
 }
 
-void TCPComm::processMessage(aJsonObject* root) {
+bool TCPComm::processMessage(aJsonObject* root) {
 	String iHexString;
+	bool rv=false;
 	if (root != NULL) {
 		aJsonObject* i2cObj = aJson.getObjectItem(root, "I2C_IO");
 		if (i2cObj != NULL) {
@@ -147,9 +148,11 @@ void TCPComm::processMessage(aJsonObject* root) {
 				uint16_t arraylen = aJson.getArraySize(initObj);
 				for (uint8_t i = 0; i < arraylen; i++)
 					iHexString = aJson.getArrayItem(initObj, i)->valuestring;
+				rv=true;
 			}
 		}
 	}
+	return rv;
 }
 
 TCPComm::~TCPComm() {

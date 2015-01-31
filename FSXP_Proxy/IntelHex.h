@@ -11,6 +11,8 @@
 #include <stdint.h>
 #include <WString.h>
 
+//enum recordTypes {DAT=0, EOF, ESA, SSA, ELA, SLA};
+enum recordTypes {DAT=0};
 	/**
 	  * @brief Convert INTELhex string to char array
 	  * used for parsing json hex arrays
@@ -23,9 +25,10 @@ public:
 	void setDataArray(String& aStr);
 	uint8_t *getDataArray();
 	uint8_t getLength();
-	uint8_t getType();
+	recordTypes getType();
 	bool isValid();
 	uint16_t getAddress() const;
+
 
 private:
 	/**
@@ -48,7 +51,7 @@ private:
 	uint8_t hex2dec(unsigned char c);
 	uint8_t dataArray[16];
 	bool valid;
-	uint8_t type;
+	recordTypes type;
 	uint8_t length;
 	uint16_t address;
 };
