@@ -40,32 +40,21 @@ bool JsonParser::Json2MAC(uint8_t* MACAddr, aJsonObject* aJsonObj) {
 	return rc;
 }
 
-bool JsonParser::readFile2String(String& aStr, char* filename) {
-	bool rc = false;
-
-	const int SS_SD_CARD = 4;
-
-	pinMode(SS_SD_CARD, OUTPUT);
-	digitalWrite(SS_SD_CARD, HIGH);  // SD Card not active
-
-	if (!SD.begin(SS_SD_CARD)) {
-		Serial.println(F("SD CARD initialization failed!"));
-		return rc;
-	}
+aJsonObject* JsonParser::parseFile(char* filename) {
+	aJsonObject* root = NULL;
 
 	File dataFile = SD.open(filename);
 	if (dataFile) {	// if the file is available, read it:
-		while (dataFile.available()) {
-			aStr += (char) dataFile.read();
-		}
+		aJsonStream file_stream(&dataFile);
+		root = aJson.parse(&file_stream);
 		dataFile.close();
-		rc = true;
 	}
-	// if the file isn't open, pop up an error:
+	// if the file can't be opened, pop up an error:
 	else {
 		Serial.print(F("error opening "));
 		Serial.println(filename);
 	}
-	digitalWrite(SS_SD_CARD, HIGH);  // SD Card not active
-	return rc;
+
+	return root;
 }
+

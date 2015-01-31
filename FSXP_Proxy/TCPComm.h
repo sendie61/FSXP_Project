@@ -41,11 +41,11 @@ public:
 	void loop();
 	void checkState();
 	void checkForData();
+	void processMessage(aJsonObject *root);
 	int8_t start();
 	uint16_t sendMessage(String message);
 	virtual ~TCPComm();
 
-	EthernetClient client;
 
 private:
 	clientSettings settings;

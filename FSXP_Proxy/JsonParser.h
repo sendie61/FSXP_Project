@@ -35,7 +35,11 @@ public:
 	  */
 	bool Json2MAC(uint8_t* MACAddr, aJsonObject* aJsonObj);
 
-	bool readFile2String(String& aStr, char * filename);
+	/**
+	  * @brief parse file into a json root
+	  * make sure the SD object is already opened!
+	  */
+	aJsonObject* parseFile(char* filename);
 };
 
 #endif /* JSONPARSER_H_ */

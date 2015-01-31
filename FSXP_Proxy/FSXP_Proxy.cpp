@@ -7,7 +7,7 @@
 #define led1 LED_BUILTIN
 #define BUFFER_SIZE 200
 
-TCPComm TCPclient;
+TCPComm TCPCommClient;
 Timer tim100ms;
 
 //The setup function is called once at startup of the sketch
@@ -18,15 +18,15 @@ void setup() {
 	Serial.begin(115200);
 	Serial.println("[Main thread started]");
 
-	TCPclient.setup("/network/ifaces.jsn");
+	TCPCommClient.setup("/network/ifaces.jsn");
 	pinMode(LED_BUILTIN, OUTPUT);
 	tim100ms.oscillate(LED_BUILTIN, 500L, HIGH);
+
 }
 
 // The loop function is called in an endless loop
 void loop() {
 //Add your repeated code here
-	TCPclient.loop();
+	TCPCommClient.loop();
 	tim100ms.update();
-
 }
