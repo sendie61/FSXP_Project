@@ -11,11 +11,13 @@
 #include <stdint.h>
 #include <WString.h>
 
-enum recordTypes {DAT=0, END, EXTSS, STRSA, EXTLA, STRLA, EXE};
-	/**
-	  * @brief Convert INTELhex string to char array
-	  * used for parsing json hex arrays
-	  */
+enum recordTypes {
+	DAT = 0, END, EXTSS, STRSA, EXTLA, STRLA, EXE
+};
+/**
+ * @brief Convert INTELhex string to char array
+ * used for parsing json hex arrays
+ */
 class IntelHex {
 public:
 	IntelHex();
@@ -28,25 +30,24 @@ public:
 	bool isValid();
 	uint16_t getAddress() const;
 
-
 private:
 	/**
-	  * @brief Validates INTELhex string
-	  * checks syntax, length and type
-	  */
+	 * @brief Validates INTELhex string
+	 * checks syntax, length and type
+	 */
 	bool validate(String& aStr);
 
 	/**
-	  * @brief parse INTELhex string
-	  * converts the ASCII value's to hex array
-	  */
+	 * @brief parse INTELhex string
+	 * converts the ASCII value's to hex array
+	 */
 	void parse(String& aStr);
 
 	/**
-	  * @brief hex to decimal converter
-	  * converts the ASCII value's to hex array
-	  * for 1 BYTE
-	  */
+	 * @brief hex to decimal converter
+	 * converts the ASCII value's to hex array
+	 * for 1 BYTE
+	 */
 	uint8_t hex2dec(unsigned char c);
 	uint8_t dataArray[16];
 	bool valid;

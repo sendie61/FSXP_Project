@@ -49,7 +49,7 @@ uint8_t DueProxyModule::writeModule(String iHexString) {
 				iHex.getLength());  //copy in memoryMap
 		wrote = iHex.getLength();
 		if (iHex.getType()==EXE){	//execute the dirty ones
-
+			executeDirty();
 		}
 		else if (iHex.getType()==EOF){	//clean dirtyFlags
 			cleanAll();
@@ -73,6 +73,30 @@ void DueProxyModule::setClean(uint16_t start, uint8_t length) {
 			bitClear(dirtyFlags[adr / 16], adr % 16);
 		}
 	}
+}
+
+void DueProxyModule::executeDirty() {
+	for (uint8_t i = 0; i < DUEPROXYMEMSIZE / 16; i++) {
+		if (dirtyFlags[i] != 0) {
+			for (uint8_t b = 0; b < 16; b++){
+				if (bitRead(dirtyFlags[i], b)) {
+					execute(i * 16 + b);
+				}
+			}
+		}
+	}
+}
+
+bool DueProxyModule::execute(uint8_t RegAddress) {
+	bool rv=false;
+	switch (RegAddress){
+	case IODIRA:
+
+		break;
+	default:
+		break;
+	}
+	return rv;
 }
 
 void DueProxyModule::cleanAll() {
