@@ -18,17 +18,13 @@ public:
 
 	virtual ~ModuleBase();
 
-	const modules_t getModuleId() const {
-		return moduleId;
-	}
-
 	/**
 	  * @brief process the json message
 	  */
 	virtual bool processMessage(aJsonObject* msg);
 
 	/**
-	  * @brief Creates the communication memoryblock
+	  * @brief set the communication memoryblock size
 	  */
 	void setMemorySize(uint8_t memorySize);
 
@@ -39,15 +35,13 @@ public:
 		return memorySize;
 	};
 
-	uint8_t writeMemory( String iHexString);
+	virtual uint8_t writeModule( String iHexString);
 
 	uint8_t	subaddress;
 
-	uint8_t* memoryMap;				// startaddress of communication memory
 
 private:
 	uint8_t	memorySize;
-	const modules_t	moduleId;		// the moduleId << 8 + subaddress, should be unique
 };
 
 #endif /* MODULEBASE_H_ */

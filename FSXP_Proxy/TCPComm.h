@@ -46,7 +46,6 @@ public:
 	uint16_t sendMessage(String message);
 	virtual ~TCPComm();
 
-
 private:
 	clientSettings settings;
 	JsonParser Parser;

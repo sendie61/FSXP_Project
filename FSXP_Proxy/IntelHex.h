@@ -11,8 +11,7 @@
 #include <stdint.h>
 #include <WString.h>
 
-//enum recordTypes {DAT=0, EOF, ESA, SSA, ELA, SLA};
-enum recordTypes {DAT=0};
+enum recordTypes {DAT=0, END, EXTSS, STRSA, EXTLA, STRLA, EXE};
 	/**
 	  * @brief Convert INTELhex string to char array
 	  * used for parsing json hex arrays
