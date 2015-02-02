@@ -20,7 +20,8 @@ public:
 	void setMemorySize(uint8_t memorySize);
 	uint8_t writeModule(String iHexString);
 	void executeDirty();
-	bool execute( uint8_t RegAddress);
+	bool execute(uint8_t RegAddress);
+
 private:
 	void setDirty(uint16_t start, uint8_t length = 1);
 	void setClean(uint16_t start, uint8_t length = 1);
@@ -55,7 +56,7 @@ private:
 		GPIOD,
 		OLATA,
 		OLATB,
-		OLATV,
+		OLATC,
 		OLATD,
 		SPAREA,
 		SPAREB,

@@ -89,9 +89,27 @@ void DueProxyModule::executeDirty() {
 
 bool DueProxyModule::execute(uint8_t RegAddress) {
 	bool rv=false;
+	uint8_t b=0;
 	switch (RegAddress){
 	case IODIRA:
-
+	case IODIRB:
+	case IODIRC:
+	case IODIRD:
+		for (b=0; b<7; b++){
+			pinMode(22 + RegAddress * 8 + b,
+					bitRead(*(memoryMap+RegAddress) , b) ? INPUT : OUTPUT);
+		}
+		setClean(RegAddress,1);
+		break;
+	case OLATA:
+	case OLATB:
+	case OLATC:
+	case OLATD:
+		for (b=0; b<7; b++){
+			digitalWrite(22 + RegAddress * 8 + b,
+					bitRead(*(memoryMap+RegAddress) , b) ? HIGH : LOW);
+		}
+		setClean(RegAddress,1);
 		break;
 	default:
 		break;
