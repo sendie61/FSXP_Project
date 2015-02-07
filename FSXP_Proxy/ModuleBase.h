@@ -37,8 +37,19 @@ public:
 
 	virtual uint8_t writeModule( String iHexString);
 
-	uint8_t	subaddress;
+	bool isAddressed(uint8_t type, uint8_t subAddr);
 
+	modules_type getModuleType() const {
+		return moduleType;
+	}
+
+	uint8_t getSubaddress() const {
+		return subaddress;
+	}
+
+protected:
+	uint8_t	subaddress;
+	modules_type moduleType;
 
 private:
 	uint8_t	memorySize;

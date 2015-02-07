@@ -8,9 +8,9 @@
 #include "DueProxyModule.h"
 
 DueProxyModule::DueProxyModule(uint8_t subaddr) :
-		memoryMap(NULL) {
-
-	this->subaddress = subaddr;
+		memoryMap(NULL)  {
+	moduleType=DUEPROXY;
+	subaddress= subaddr;
 	setMemorySize(DUEPROXYMEMSIZE);
 	cleanAll();
 }
