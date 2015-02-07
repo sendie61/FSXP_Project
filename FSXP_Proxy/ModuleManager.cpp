@@ -29,11 +29,3 @@ moduleItem* ModuleManager::addModule(ModuleBase* newModule) {
 	return newItem;
 }
 
-void ModuleManager::emptyList(void) {
-	moduleItem* current= moduleList;
-	moduleItem* next= moduleList;
-
-	while (next->nextItem){
-
-	}
-}

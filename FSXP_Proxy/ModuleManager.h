@@ -21,7 +21,6 @@ public:
 	virtual ~ModuleManager();
 
 	moduleItem* addModule(ModuleBase* newModule);
-	void emptyList(void);
 private:
 	moduleItem* moduleList;
 	moduleItem* lastModule;
