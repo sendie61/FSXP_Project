@@ -90,13 +90,15 @@ void DueProxyModule::executeDirty() {
 bool DueProxyModule::execute(uint8_t RegAddress) {
 	bool rv=false;
 	uint8_t b=0;
+	Serial.print("RegAddress=");
+	Serial.println(RegAddress);
 	switch (RegAddress){
 	case IODIRA:
 	case IODIRB:
 	case IODIRC:
 	case IODIRD:
-		for (b=0; b<7; b++){
-			pinMode(22 + RegAddress * 8 + b,
+		for (b=0; b<8; b++){
+			pinMode(22 + (RegAddress-IODIRA) * 8 + b,
 					bitRead(*(memoryMap+RegAddress) , b) ? INPUT : OUTPUT);
 		}
 		setClean(RegAddress,1);
@@ -105,13 +107,17 @@ bool DueProxyModule::execute(uint8_t RegAddress) {
 	case OLATB:
 	case OLATC:
 	case OLATD:
-		for (b=0; b<7; b++){
-			digitalWrite(22 + RegAddress * 8 + b,
-					bitRead(*(memoryMap+RegAddress) , b) ? HIGH : LOW);
+		for (b=0; b<8; b++){
+			int adr= 22 + (RegAddress-OLATA) * 8 + b;
+			bool dat= bitRead(*(memoryMap+RegAddress) , b);
+			Serial.print(dat ? 1 : 0);Serial.print(", ");
+			digitalWrite(adr,dat ? HIGH : LOW);
 		}
+		Serial.println("");
 		setClean(RegAddress,1);
 		break;
 	default:
+		setClean(RegAddress,1);
 		break;
 	}
 	return rv;

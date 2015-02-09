@@ -10,11 +10,7 @@
 
 #include "ModuleBase.h"
 #include "DueProxyModule.h"
-
-typedef struct moduleItem {
-	ModuleBase* module;
-	moduleItem* nextItem;
-};
+#include "vector.h"
 
 class ModuleManager {
 public:
@@ -22,10 +18,9 @@ public:
 	virtual ~ModuleManager();
 	bool processMessage(aJsonObject* msg);
 	ModuleBase* getModule(uint8_t moduleType, uint8_t subAddr);
-	moduleItem* addModule(ModuleBase* newModule);
+	void addModule(ModuleBase* newModule);
 private:
-	moduleItem* moduleList;
-	moduleItem* lastModule;
+	Vector<ModuleBase*> moduleList;
 };
 
 #endif /* MODULEMANAGER_H_ */

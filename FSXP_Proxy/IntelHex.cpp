@@ -49,15 +49,15 @@ uint16_t IntelHex::getAddress() const {
 
 bool IntelHex::validate(String& aStr) {
 	valid = false;
-	uint8_t tot = 0, i, len = aStr.length();
+	uint8_t checksum = 0, i, len = aStr.length();
 	if ((len >= 11) && (len < 44)) {		// must be  11 < n < 44
 		if (aStr[0] == ':') {				// first char must be ':'
 			type = recordTypes(hex2dec(aStr[7]) * 16 + hex2dec(aStr[8])); // save 'type'
-			if ((type == 1 && len == 11) || type == 0) {	// if EOF -> NO DATA
+			if ((type == END && len == 11) || (type == EXE && len == 11) || type == DAT) {	// if EOF -> NO DATA
 				for (i = 1; i < len; i += 2) {	// itterate through string
-					tot += (hex2dec(aStr[i]) * 16 + hex2dec(aStr[i + 1]));
+					checksum += (hex2dec(aStr[i]) * 16 + hex2dec(aStr[i + 1]));
 				}
-				if (tot == 0)
+				if (checksum == 0)
 					valid = true;
 			}
 		}
@@ -67,7 +67,7 @@ bool IntelHex::validate(String& aStr) {
 
 void IntelHex::parse(String& aStr) {
 	uint8_t i, j = 9, len = aStr.length();
-	length = hex2dec(aStr[1] * 16 + hex2dec(aStr[2]));
+	length = hex2dec(aStr[1]) * 16 + hex2dec(aStr[2]);
 	address = (hex2dec(aStr[3]) * 16 + hex2dec(aStr[4])) * 256L
 			+ hex2dec(aStr[5]) * 16 + hex2dec(aStr[6]);
 	type = recordTypes(hex2dec(aStr[7] * 16 + hex2dec(aStr[8])));

@@ -13,6 +13,7 @@
 
 #include "JsonParser.h"
 #include "Timer.h"
+#include "ModuleManager.h"
 
 #define MSG_SOH	0x01
 #define MSG_HEADER_LEN 	7
@@ -45,6 +46,7 @@ public:
 	int8_t start();
 	uint16_t sendMessage(String message);
 	virtual ~TCPComm();
+	ModuleManager ModuleMgr;
 
 private:
 	clientSettings settings;

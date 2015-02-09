@@ -69,7 +69,10 @@ void TCPComm::checkForData() {
 	if (state == CONNECTED) {
 		if (tcp_stream.available()) {
 			aJsonObject *msg = aJson.parse(&tcp_stream);
-		    processMessage(msg);
+			//aJsonObject *msg = aJson.parse("{ \"DUEPROXY\": { \"-subaddr\": 1, \"IHEX\": [ \":10000000FFFFFFF00000000000000000FFFFFFFF06\", \":10001000FFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFFF0\", \":10002000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDF\", \":10003000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCF\", \":10004000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF\", \":00000006FA\" ]}}");
+			//aJsonObject *msg = aJson.parse("{ \"DUEPROXY\": { \"-subaddr\": 1}}");
+			ModuleMgr.processMessage(msg);
+		    //processMessage(msg);
 		    aJson.deleteItem(msg);
 		}
 	}
@@ -137,22 +140,7 @@ uint16_t TCPComm::sendMessage(String message) {
 }
 
 bool TCPComm::processMessage(aJsonObject* root) {
-	String iHexString;
-	bool rv=false;
-	if (root != NULL) {
-		aJsonObject* i2cObj = aJson.getObjectItem(root, "I2C_IO");
-		if (i2cObj != NULL) {
-			uint8_t subaddr = aJson.getObjectItem(i2cObj, "-subaddr")->valueint;
-			aJsonObject* initObj = aJson.getObjectItem(i2cObj, "INIT");
-			if (initObj != NULL) {
-				uint16_t arraylen = aJson.getArraySize(initObj);
-				for (uint8_t i = 0; i < arraylen; i++)
-					iHexString = aJson.getArrayItem(initObj, i)->valuestring;
-				rv=true;
-			}
-		}
-	}
-	return rv;
+	return ModuleMgr.processMessage(root);
 }
 
 TCPComm::~TCPComm() {
