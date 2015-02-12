@@ -56,7 +56,7 @@ void TCPComm::setup(char * iniFilename) {
 			}
 		}
 		state = INIT;
-		checkStateTimer.every(1000L, checkState_wrapper);
+		checkStateTimer.every(5000L, checkState_wrapper);
 	}
 }
 
@@ -91,8 +91,7 @@ void TCPComm::checkState() {
 	case CONNECTING:
 		if (TCPclient.connect(settings.server, settings.port) == SUCCESS) {
 			Serial.println("connected");
-			TCPclient.println("GET /search?q=arduino HTTP/1.0");
-			TCPclient.println();
+			//			TCPclient.println("GET /search?q=arduino HTTP/1.0\r\n");
 			state = CONNECTED;
 		} else {
 			Serial.println("connection failed");
@@ -101,6 +100,7 @@ void TCPComm::checkState() {
 		break;
 
 	case CONNECTED:
+			TCPclient.print("Hello\004");
 		if (!TCPclient.connected()) {
 			TCPclient.stop();
 			state = CONNECTING;

@@ -1316,18 +1316,19 @@ int myTcpSocket::XPreceiveMessage(string& message)
 	int received = 0;                 // The number of bytes received
     int msgSize = MAX_RECV_LEN;       // The number of bytes wanted to receive
     int numBytes = 0;                 // The number of bytes currently recieved
-	bool headerFinished = false;
+//	bool headerFinished = false;
 
-	char charMsg[MAX_RECV_LEN+1];
-	char msgLength[MSG_HEADER_LEN+1];
+	char c=0, charMsg[MAX_RECV_LEN+1];
+//	char msgLength[MSG_HEADER_LEN+1];
 	memset(charMsg,0,sizeof(charMsg));
-	memset(msgLength,0,sizeof(msgLength));
+//	memset(msgLength,0,sizeof(msgLength));
 
 	try
 	{
-		while ( received < msgSize )
+		while ( received < msgSize && c!='\004' )
 		{
-			numBytes = recv(socketId,charMsg+received,1,0);
+			numBytes = recv(socketId,charMsg+received,1,0);	// receive 1 character at a time
+			c= *(charMsg+received);
 			if (numBytes == -1)
 			{
 				int errorCode = 0;
@@ -1337,6 +1338,7 @@ int myTcpSocket::XPreceiveMessage(string& message)
 				throw socketRecvException;
 			}
 
+/*
 			if ( !headerFinished )
 			{
 				msgLength[received] = *(charMsg+received);
@@ -1351,7 +1353,8 @@ int myTcpSocket::XPreceiveMessage(string& message)
 				}
 			}
 			else 
-				received ++;
+*/
+			received ++;
 		}
 	}
 	catch(myException& excp)
