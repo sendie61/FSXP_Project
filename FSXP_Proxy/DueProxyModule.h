@@ -20,6 +20,9 @@
  */
 class DueProxyModule: public ModuleBase {
 public:
+	/**
+	 * @brief constructor
+	 */
 	DueProxyModule(uint8_t subaddr = 0);
 	virtual ~DueProxyModule();
 

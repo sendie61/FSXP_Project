@@ -22,6 +22,9 @@ class Vector {
 		: d_size(0), d_capacity(0), d_data(0) {
 	}; // Default constructor
 
+	/**
+	 * @brief Constructor
+	 */
     Vector(Vector const &other)
 		: d_size(other.d_size), d_capacity(other.d_capacity), d_data(0) {
 		d_data = (Data *)malloc(d_capacity*sizeof(Data));
@@ -32,6 +35,9 @@ class Vector {
 		free(d_data);
 	}; // Destructor
 
+	/**
+	 * @brief overruled operator '='
+	 */
     Vector &operator=(Vector const &other) {
 		free(d_data);
 		d_size = other.d_size;
@@ -41,19 +47,31 @@ class Vector {
 		return *this;
 	}; // Needed for memory management
 
+	/**
+	 * @brief push_back implementation
+	 */
     void push_back(Data const &x) {
 		if (d_capacity == d_size) resize();
 		d_data[d_size++] = x;
 	}; // Adds new value. If needed, allocates more space
 
+	/**
+	 * @brief size implementation
+	 */
     size_t size() const {
 		return d_size;
 	}; // Size getter
 
+	/**
+	 * @brief overruled operator const '[]'
+	 */
     Data const &operator[](size_t idx) const {
 		return d_data[idx];
 	}; // Const getter
 
+	/**
+	 * @brief overruled operator '[]'
+	 */
     Data &operator[](size_t idx) {
 		return d_data[idx];
 	}; // Changeable getter

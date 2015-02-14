@@ -23,16 +23,29 @@
 const char tcpstate[4][11] PROGMEM
 = { "INIT      ", "CONNECTING", "CONNECTED ", "UNKNOWN   " };
 
+/**
+ * @brief clientSettings structure
+ */
 typedef struct {
-	uint8_t mac[6];		// our mac address
-	IPAddress ip;		// our IP
-	IPAddress server; 	// server's IP
-	IPAddress DNS; 		// DNS server IP
-	IPAddress gateway; 	// gateway IP
-	IPAddress subnet; 	// subnet
-	uint16_t port;		// server's port
+	/** our mac address */
+	uint8_t mac[6];
+	/** our IP */
+	IPAddress ip;
+	/** server's IP */
+	IPAddress server;
+	/** DNS server IP */
+	IPAddress DNS;
+	/** gateway IP */
+	IPAddress gateway;
+	/** subnet */
+	IPAddress subnet;
+	/** server's port */
+	uint16_t port;
 } clientSettings;
 
+/**
+ * @brief EthernetClient handles the reception of FSXP-plugin data
+ */
 class TCPComm: public EthernetClient {
 public:
 	TCPComm();
@@ -71,6 +84,9 @@ public:
 	  */
 	uint16_t sendMessage(String message);
 	virtual ~TCPComm();
+	/**
+	  * @brief the instance of the moduleManager class
+	  */
 	ModuleManager ModuleMgr;
 
 private:

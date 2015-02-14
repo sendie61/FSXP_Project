@@ -27,7 +27,14 @@ enum recordTypes {
  */
 class IntelHex {
 public:
+	/**
+	 * @brief default constructor
+	 */
 	IntelHex();
+
+	/**
+	 * @brief constructor also does setDataArray()
+	 */
 	IntelHex(String& aStr);
 	virtual ~IntelHex();
 
