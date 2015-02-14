@@ -1111,7 +1111,8 @@ myTcpSocket* myTcpSocket::acceptClient(string& clientHost)
 	// Get the host name given the address
     char *sAddress = inet_ntoa((struct in_addr)clientAddress.sin_addr);
 	myHostInfo clientInfo(string(sAddress),ADDRESS);
-	char* hostName = clientInfo.getHostName();
+//	char* hostName = clientInfo.getHostName();
+	char* hostName = clientInfo.getHostIPAddress();
     clientHost += string(hostName);
 	
     // Create and return the new myTcpSocket object
@@ -1316,12 +1317,9 @@ int myTcpSocket::XPreceiveMessage(string& message)
 	int received = 0;                 // The number of bytes received
     int msgSize = MAX_RECV_LEN;       // The number of bytes wanted to receive
     int numBytes = 0;                 // The number of bytes currently recieved
-//	bool headerFinished = false;
 
 	char c=0, charMsg[MAX_RECV_LEN+1];
-//	char msgLength[MSG_HEADER_LEN+1];
 	memset(charMsg,0,sizeof(charMsg));
-//	memset(msgLength,0,sizeof(msgLength));
 
 	try
 	{
@@ -1338,22 +1336,6 @@ int myTcpSocket::XPreceiveMessage(string& message)
 				throw socketRecvException;
 			}
 
-/*
-			if ( !headerFinished )
-			{
-				msgLength[received] = *(charMsg+received);
-				received ++;
-
-				if ( received == MSG_HEADER_LEN )
-				{
-					headerFinished = true;
-					received = 0;
-					memset(charMsg,0,sizeof(charMsg));
-					msgSize = atoi(msgLength);
-				}
-			}
-			else 
-*/
 			received ++;
 		}
 	}
