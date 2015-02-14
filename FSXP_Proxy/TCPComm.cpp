@@ -87,17 +87,17 @@ void TCPComm::checkState() {
 
 	case CONNECTING:
 		if (TCPclient.connect(settings.server, settings.port) == SUCCESS) {
-			Serial.println("connected");
+			Serial.println(F("connected"));
 			//			TCPclient.println("GET /search?q=arduino HTTP/1.0\r\n");
 			state = CONNECTED;
 		} else {
-			Serial.println("connection failed");
+			Serial.println(F("connection failed"));
 			state = INIT;
 		}
 		break;
 
 	case CONNECTED:
-			TCPclient.print("Hello\004");
+			TCPclient.print(F("Hello\004"));
 		if (!TCPclient.connected()) {
 			TCPclient.stop();
 			state = CONNECTING;
@@ -109,7 +109,7 @@ void TCPComm::checkState() {
 		;
 	};
 	if (state != oldState) {
-		Serial.print("TCP_State changed to ");
+		Serial.print(F("TCP_State changed to "));
 		Serial.println(tcpstate[state]);
 		oldState = state;
 	}
@@ -128,12 +128,7 @@ int8_t TCPComm::start() {
 
 uint16_t TCPComm::sendMessage(String message) {
 	// TODO auto add HEADER
-	msg2Send.soh = MSG_SOH;
-	sprintf(msg2Send.msgLength, "%6d", message.length());
-	msg2Send.msg = (char*) message.c_str();
-	Serial.println(msg2Send.msg);
-	Serial.println(static_cast<char*>(static_cast<void*>(&msg2Send)));
-	return TCPclient.print((char *) (&msg2Send)) + MSG_HEADER_LEN;
+	return 0;
 }
 
 TCPComm::~TCPComm() {

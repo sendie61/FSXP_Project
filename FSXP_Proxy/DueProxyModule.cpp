@@ -89,8 +89,6 @@ void DueProxyModule::executeDirty() {
 bool DueProxyModule::execute(uint8_t RegAddress) {
 	bool rv = false;
 	uint8_t b = 0;
-	Serial.print("RegAddress=");
-	Serial.println(RegAddress);
 	switch (RegAddress) {
 	case IODIRA:
 	case IODIRB:
@@ -109,11 +107,8 @@ bool DueProxyModule::execute(uint8_t RegAddress) {
 		for (b = 0; b < 8; b++) {
 			int adr = 22 + (RegAddress - OLATA) * 8 + b;
 			bool dat = bitRead(*(memoryMap + RegAddress), b);
-			Serial.print(dat ? 1 : 0);
-			Serial.print(", ");
 			digitalWrite(adr, dat ? HIGH : LOW);
 		}
-		Serial.println("");
 		setClean(RegAddress, 1);
 		break;
 	default:

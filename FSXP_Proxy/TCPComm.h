@@ -89,12 +89,6 @@ private:
 	};
 	e_tcpState state, oldState;
 
-	struct {
-		byte soh;
-		char msgLength[6];
-		char *msg;  // <-DIT IS NIET GOED!!!
-	} msg2Send;
-
 	Timer checkStateTimer;
 };
 

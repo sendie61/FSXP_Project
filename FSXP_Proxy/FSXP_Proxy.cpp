@@ -18,7 +18,7 @@ void setup() {
 	// Open serial communications and wait for port to open:
 	byte tmp[8];
 	Serial.begin(115200);
-	Serial.println("[Main thread started]");
+	Serial.println(F("[Main thread started]"));
 
 	TCPCommClient.setup("/network/ifaces.jsn");
 	pinMode(LED_BUILTIN, OUTPUT);
