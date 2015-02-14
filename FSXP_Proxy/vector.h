@@ -9,6 +9,9 @@
 #define VECTOR_H_
 
 // Minimal class to replace std::vector
+	/**
+	 * @brief Implementation of vector class
+	 */
 template<typename Data>
 class Vector {
    size_t d_size; // Stores no. of actually stored objects

@@ -8,6 +8,13 @@
 #ifndef FSXP_CONSTANTS_H_
 #define FSXP_CONSTANTS_H_
 
-enum modules_type {UNKNOWN=0, DUEPROXY, I2C_IO, SPI_LDISP, I2C_ARD};
-const char modType[5][11] PROGMEM ={ "UNKNOWN\0  ", "DUEPROXY\0 ", "I2C_IO\0   ", "SPI_LDISP\0","I2C_ARD\0  " };
-#endif /* FSXP_CONSTANTS_H_ */
+/**
+ * @brief modules_type enum.
+ * all supported hardware modules
+ */
+enum modules_type {
+	UNKNOWN = 0, DUEPROXY, I2C_IO, SPI_LDISP, I2C_ARD
+};
+const char modType[5][11] PROGMEM = {"UNKNOWN\0  ", "DUEPROXY\0 ", "I2C_IO\0   ", "SPI_LDISP\0","I2C_ARD\0  "};
+
+#endif /* FSXP_CONSTANTS_H_ */

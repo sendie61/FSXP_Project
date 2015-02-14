@@ -18,6 +18,8 @@
 #define MSG_SOH	0x01
 #define MSG_HEADER_LEN 	7
 
+#define CHECKSTATEPERIOD 5000L	// every 5 seconds a state-check
+
 const char tcpstate[4][11] PROGMEM
 = { "INIT      ", "CONNECTING", "CONNECTED ", "UNKNOWN   " };
 
@@ -39,11 +41,34 @@ public:
 	  * reads settings from ini- (json) file on SD-card
 	  */
 	void setup(char * iniFilename);
+
+	/**
+	  * @brief loop() main loop
+	  * check for received data and
+	  * update checkstate timer
+	  */
 	void loop();
+
+	/**
+	  * @brief check TCP/IP state
+	  * automatic mechanism to try establish a connection, when lost
+	  */
 	void checkState();
+
+	/**
+	  * @brief check for received data
+	  * and hand it to the moduleManager
+	  */
 	void checkForData();
-	bool processMessage(aJsonObject *root);
+
+	/**
+	  * @brief setup the TCP/IP connection
+	  */
 	int8_t start();
+
+	/**
+	  * @brief send message to plugin
+	  */
 	uint16_t sendMessage(String message);
 	virtual ~TCPComm();
 	ModuleManager ModuleMgr;

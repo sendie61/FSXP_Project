@@ -8,9 +8,9 @@
 #include "DueProxyModule.h"
 
 DueProxyModule::DueProxyModule(uint8_t subaddr) :
-		memoryMap(NULL)  {
-	moduleType=DUEPROXY;
-	subaddress= subaddr;
+		memoryMap(NULL) {
+	moduleType = DUEPROXY;
+	subaddress = subaddr;
 	setMemorySize(DUEPROXYMEMSIZE);
 	cleanAll();
 }
@@ -37,7 +37,7 @@ bool DueProxyModule::processMessage(aJsonObject* msg) {
 void DueProxyModule::setMemorySize(uint8_t memorySize) {
 	ModuleBase::setMemorySize(memorySize);
 	this->memoryMap = new uint8_t(getMemorySize());
-	memset(this->memoryMap,0,getMemorySize());
+	memset(this->memoryMap, 0, getMemorySize());
 }
 
 uint8_t DueProxyModule::writeModule(String iHexString) {
@@ -48,10 +48,9 @@ uint8_t DueProxyModule::writeModule(String iHexString) {
 		memcpy(this->memoryMap + iHex.getAddress(), iHex.getDataArray(),
 				iHex.getLength());  //copy in memoryMap
 		wrote = iHex.getLength();
-		if (iHex.getType()==EXE){	//execute the dirty ones
+		if (iHex.getType() == EXE) {	//execute the dirty ones
 			executeDirty();
-		}
-		else if (iHex.getType()==EOF){	//clean dirtyFlags
+		} else if (iHex.getType() == EOF) {	//clean dirtyFlags
 			cleanAll();
 		}
 
@@ -78,7 +77,7 @@ void DueProxyModule::setClean(uint16_t start, uint8_t length) {
 void DueProxyModule::executeDirty() {
 	for (uint8_t i = 0; i < DUEPROXYMEMSIZE / 16; i++) {
 		if (dirtyFlags[i] != 0) {
-			for (uint8_t b = 0; b < 16; b++){
+			for (uint8_t b = 0; b < 16; b++) {
 				if (bitRead(dirtyFlags[i], b)) {
 					execute(i * 16 + b);
 				}
@@ -88,36 +87,37 @@ void DueProxyModule::executeDirty() {
 }
 
 bool DueProxyModule::execute(uint8_t RegAddress) {
-	bool rv=false;
-	uint8_t b=0;
+	bool rv = false;
+	uint8_t b = 0;
 	Serial.print("RegAddress=");
 	Serial.println(RegAddress);
-	switch (RegAddress){
+	switch (RegAddress) {
 	case IODIRA:
 	case IODIRB:
 	case IODIRC:
 	case IODIRD:
-		for (b=0; b<8; b++){
-			pinMode(22 + (RegAddress-IODIRA) * 8 + b,
-					bitRead(*(memoryMap+RegAddress) , b) ? INPUT : OUTPUT);
+		for (b = 0; b < 8; b++) {
+			pinMode(22 + (RegAddress - IODIRA) * 8 + b,
+			bitRead(*(memoryMap+RegAddress) , b) ? INPUT : OUTPUT);
 		}
-		setClean(RegAddress,1);
+		setClean(RegAddress, 1);
 		break;
 	case OLATA:
 	case OLATB:
 	case OLATC:
 	case OLATD:
-		for (b=0; b<8; b++){
-			int adr= 22 + (RegAddress-OLATA) * 8 + b;
-			bool dat= bitRead(*(memoryMap+RegAddress) , b);
-			Serial.print(dat ? 1 : 0);Serial.print(", ");
-			digitalWrite(adr,dat ? HIGH : LOW);
+		for (b = 0; b < 8; b++) {
+			int adr = 22 + (RegAddress - OLATA) * 8 + b;
+			bool dat = bitRead(*(memoryMap + RegAddress), b);
+			Serial.print(dat ? 1 : 0);
+			Serial.print(", ");
+			digitalWrite(adr, dat ? HIGH : LOW);
 		}
 		Serial.println("");
-		setClean(RegAddress,1);
+		setClean(RegAddress, 1);
 		break;
 	default:
-		setClean(RegAddress,1);
+		setClean(RegAddress, 1);
 		break;
 	}
 	return rv;

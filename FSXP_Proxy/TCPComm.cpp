@@ -16,7 +16,7 @@ TCPComm* ptTCPComm;
 static void checkState_wrapper() {
 	ptTCPComm->checkState();
 }
-// end of tricks
+// end of tricks...
 
 TCPComm::TCPComm():
 	state(UNKNOWN), oldState(UNKNOWN){
@@ -56,7 +56,7 @@ void TCPComm::setup(char * iniFilename) {
 			}
 		}
 		state = INIT;
-		checkStateTimer.every(5000L, checkState_wrapper);
+		checkStateTimer.every(CHECKSTATEPERIOD, checkState_wrapper);
 	}
 }
 
@@ -69,10 +69,7 @@ void TCPComm::checkForData() {
 	if (state == CONNECTED) {
 		if (tcp_stream.available()) {
 			aJsonObject *msg = aJson.parse(&tcp_stream);
-			//aJsonObject *msg = aJson.parse("{ \"DUEPROXY\": { \"-subaddr\": 1, \"IHEX\": [ \":10000000FFFFFFF00000000000000000FFFFFFFF06\", \":10001000FFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFFF0\", \":10002000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDF\", \":10003000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCF\", \":10004000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBF\", \":00000006FA\" ]}}");
-			//aJsonObject *msg = aJson.parse("{ \"DUEPROXY\": { \"-subaddr\": 1}}");
 			ModuleMgr.processMessage(msg);
-		    //processMessage(msg);
 		    aJson.deleteItem(msg);
 		}
 	}
@@ -137,10 +134,6 @@ uint16_t TCPComm::sendMessage(String message) {
 	Serial.println(msg2Send.msg);
 	Serial.println(static_cast<char*>(static_cast<void*>(&msg2Send)));
 	return TCPclient.print((char *) (&msg2Send)) + MSG_HEADER_LEN;
-}
-
-bool TCPComm::processMessage(aJsonObject* root) {
-	return ModuleMgr.processMessage(root);
 }
 
 TCPComm::~TCPComm() {

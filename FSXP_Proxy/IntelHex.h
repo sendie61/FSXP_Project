@@ -11,9 +11,16 @@
 #include <stdint.h>
 #include <WString.h>
 
+	/**
+	  * @brief IntelHEX recordTypes
+	  * EXE is a new one:
+	  *   Directly execute these values
+	  */
+
 enum recordTypes {
 	DAT = 0, END, EXTSS, STRSA, EXTLA, STRLA, EXE
 };
+
 /**
  * @brief Convert INTELhex string to char array
  * used for parsing json hex arrays
@@ -23,11 +30,35 @@ public:
 	IntelHex();
 	IntelHex(String& aStr);
 	virtual ~IntelHex();
+
+	/**
+	 * @brief Validates and parses INTELhex string
+	 */
 	void setDataArray(String& aStr);
+
+	/**
+	 * @brief returns the 16-byte HEX data
+	 */
 	uint8_t *getDataArray();
+
+	/**
+	 * @brief returns the number of bytes in dataArray
+	 */
 	uint8_t getLength();
+
+	/**
+	 * @brief returns IntelHEX recordType
+	 */
 	recordTypes getType();
+
+	/**
+	 * @brief returns TRUE if validate passed
+	 */
 	bool isValid();
+
+	/**
+	 * @brief returns the start address
+	 */
 	uint16_t getAddress() const;
 
 private:
@@ -38,7 +69,7 @@ private:
 	bool validate(String& aStr);
 
 	/**
-	 * @brief parse INTELhex string
+	 * @brief parses INTELhex string
 	 * converts the ASCII value's to hex array
 	 */
 	void parse(String& aStr);
@@ -49,6 +80,7 @@ private:
 	 * for 1 BYTE
 	 */
 	uint8_t hex2dec(unsigned char c);
+
 	uint8_t dataArray[16];
 	bool valid;
 	recordTypes type;
