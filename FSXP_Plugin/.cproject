@@ -104,7 +104,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension=".xpl" artifactName="win" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832" name="Release" parent="cdt.managedbuild.config.gnu.mingw.so.release">
+				<configuration artifactExtension="xpl" artifactName="win" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832" name="Release" parent="cdt.managedbuild.config.gnu.mingw.so.release">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.so.release.1993633074" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.so.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.so.release.368795986" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.so.release"/>
@@ -166,6 +166,105 @@
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
 								<outputType id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output.355642248" outputPrefix="" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="include|source" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="source"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="PPL;cdt.managedbuild.config.gnu.mingw.exe.release.276175287" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/PPL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/PPL/Release"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="PPL" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+				<externalSettings containerId="XPSDK-2.1.3;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
+		</cconfiguration>
+		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832.1816938119">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832.1816938119" moduleId="org.eclipse.cdt.core.settings" name="Simulate">
+				<externalSettings>
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/FSXP_Plugin"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/FSXP_Plugin/Simulate"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="win" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension=".xpl" artifactName="win" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.sharedLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.sharedLib,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="Simulate the SDK" id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832.1816938119" name="Simulate" parent="cdt.managedbuild.config.gnu.mingw.so.release">
+					<folderInfo id="cdt.managedbuild.config.gnu.mingw.so.release.2040187832.1816938119." name="/" resourcePath="">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.so.release.1759339298" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.so.release">
+							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.so.release.1604147840" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.so.release"/>
+							<builder buildPath="${workspace_loc:/FSXP_Plugin}/Release" id="cdt.managedbuild.tool.gnu.builder.mingw.base.34372175" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.so.release.579572646" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.so.release">
+								<option id="gnu.both.asm.option.include.paths.2019636909" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.214788536" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.1082493042" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.so.release.511234233" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.so.release">
+								<option id="gnu.cpp.compiler.mingw.so.release.option.optimization.level.347223875" name="Optimization Level" superClass="gnu.cpp.compiler.mingw.so.release.option.optimization.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.mingw.so.release.option.debugging.level.1167288970" name="Debug Level" superClass="gnu.cpp.compiler.mingw.so.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1200612175" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="IBM=1"/>
+									<listOptionValue builtIn="false" value="PRIVATENAMESPACE=FSXP"/>
+								</option>
+								<option id="gnu.cpp.compiler.option.include.paths.2142601060" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/XPLM}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Widgets}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1062715433" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.release.2130061808" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.release">
+								<option defaultValue="gnu.c.optimization.level.most" id="gnu.c.compiler.mingw.so.release.option.optimization.level.934231515" name="Optimization Level" superClass="gnu.c.compiler.mingw.so.release.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option id="gnu.c.compiler.mingw.so.release.option.debugging.level.1643105250" name="Debug Level" superClass="gnu.c.compiler.mingw.so.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.none" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.74575417" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="IBM=1"/>
+									<listOptionValue builtIn="false" value="PRIVATENAMESPACE=FSXP"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.215039624" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.323961982" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.so.release.31531980" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.so.release">
+								<option defaultValue="true" id="gnu.c.link.mingw.so.release.option.shared.296719396" name="Shared (-shared)" superClass="gnu.c.link.mingw.so.release.option.shared" valueType="boolean"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.443497968" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release">
+								<option defaultValue="true" id="gnu.cpp.link.mingw.so.release.option.shared.1717188542" name="Shared (-shared)" superClass="gnu.cpp.link.mingw.so.release.option.shared" valueType="boolean"/>
+								<option id="gnu.cpp.link.option.libs.694871527" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="PPL"/>
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPLM_64"/>
+									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPWidgets_64"/>
+								</option>
+								<option id="gnu.cpp.link.option.paths.621875074" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Release}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\win_builds\lib&quot;"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.260192892" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+								<outputType id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output.1283157711" outputPrefix="" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.output"/>
 							</tool>
 						</toolChain>
 					</folderInfo>

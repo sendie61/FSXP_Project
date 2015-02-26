@@ -13,7 +13,7 @@ Constists off:
 - X-Plane 10 FSXP-plugin.
 - X-Plane 10 systems plugins.
 - FSXP Protocol.
-- Arduino (DUE) Universal application.
+- Arduino (DUE) PROXY.
 - Arduino (PRO mini) IO firmware.
 - Other hardware IO extenders.
 
@@ -22,8 +22,9 @@ X-Plane 10 FSXP-plugin:
 - So called 'FAT' plugin.
 - Only Windows 64 bit.
 - Performs like a 'smart' gateway between X-Plane datarefs and a number of Arduino DUE's.
-- All configuration is done by the plugin from a config file.
-- The config file is read at startup of the plugin.
+- All configuration is done by the plugin from a XML config file.
+- The config file is read at startup/enable of the plugin.
+  So the configfile can be edited on the 'fly'.
 - Functions as a TCP/IP server on fixed port
 - Maximum number of TCP/IP clients is 10.
 
