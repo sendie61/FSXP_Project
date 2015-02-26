@@ -25,6 +25,7 @@ private:
 public:
 	MyConnection(boost::shared_ptr<Hive> hive);
 	~MyConnection() {
+
 	}
 	;
 };
