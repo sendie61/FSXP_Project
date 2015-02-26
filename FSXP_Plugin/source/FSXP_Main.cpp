@@ -1,71 +1,66 @@
 // Custom Commands
- //
- // Custom Commands Control Custom DataRef
- //
- // This example program creates a custom integer dataref, BSUB/CounterDataRef, and two custom
- // commands, BSUB/CounterUpCommand and BSUB/CounterDownCommand.  The custom commands
- // are used to increment and decriment the custom dataref.  The custom dataref can be used to drive an
- // generic instrument display, animation, etc.
- //
- // After successfully creating your plugin you will need to use PlaneMaker to create two generic
- // triggers, keyed to your custom commands on your aircraft panel.  You will also need to place a generic
- // counter such as an LED display on your aircraft panel.
- //
- // Content added by BlueSideUpBob.
+//
+// Custom Commands Control Custom DataRef
+//
+// This example program creates a custom integer dataref, BSUB/CounterDataRef, and two custom
+// commands, BSUB/CounterUpCommand and BSUB/CounterDownCommand.  The custom commands
+// are used to increment and decriment the custom dataref.  The custom dataref can be used to drive an
+// generic instrument display, animation, etc.
+//
+// After successfully creating your plugin you will need to use PlaneMaker to create two generic
+// triggers, keyed to your custom commands on your aircraft panel.  You will also need to place a generic
+// counter such as an LED display on your aircraft panel.
+//
+// Content added by BlueSideUpBob.
 
- #define XPLM200 = 1;  // This example requires SDK2.0
-
-
- #include "XPLMPlugin.h"
- #include "XPLMDisplay.h"
- #include "XPLMGraphics.h"
- #include "XPLMProcessing.h"
- #include "XPLMDataAccess.h"
- #include "XPLMMenus.h"
- #include "XPLMUtilities.h"
- #include "XPWidgets.h"
- #include "XPStandardWidgets.h"
- #include "XPLMScenery.h"
- #include <string.h>
- #include <stdio.h>
- #include <stdlib.h>
+#define XPLM200 = 1;  // This example requires SDK2.0
+#include "XPLMPlugin.h"
+#include "XPLMDisplay.h"
+#include "XPLMGraphics.h"
+#include "XPLMProcessing.h"
+#include "XPLMDataAccess.h"
+#include "XPLMMenus.h"
+#include "XPLMUtilities.h"
+#include "XPWidgets.h"
+#include "XPStandardWidgets.h"
+#include "XPLMScenery.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 //#include "dataref.h"
 #include "owneddata.h"
 
 using namespace PPL;
 
- XPLMDataRef gCounterDataRef = NULL;          //  Our custom dataref
+XPLMDataRef gCounterDataRef = NULL;          //  Our custom dataref
 
- int     gCounterValue;                       //  Our custom dataref's value
- int     GetCounterDataRefCB(void* inRefcon);
- void    SetCounterDataRefCB(void* inRefcon, int outValue);
+int gCounterValue;                       //  Our custom dataref's value
+int GetCounterDataRefCB(void* inRefcon);
+void SetCounterDataRefCB(void* inRefcon, int outValue);
 
- XPLMCommandRef CounterUpCommand = NULL;	//  Our two custom commands
- XPLMCommandRef CounterDownCommand = NULL;
+XPLMCommandRef CounterUpCommand = NULL;	//  Our two custom commands
+XPLMCommandRef CounterDownCommand = NULL;
 
- int    CounterUpCommandHandler(XPLMCommandRef       inCommand,          //  Our two custom command handlers
-                                XPLMCommandPhase     inPhase,
-                                void *               inRefcon);
+int CounterUpCommandHandler(XPLMCommandRef inCommand, //  Our two custom command handlers
+		XPLMCommandPhase inPhase, void * inRefcon);
 
- int    CounterDownCommandHandler(XPLMCommandRef     inCommand,
-                                 XPLMCommandPhase    inPhase,
-                                 void *              inRefcon);
+int CounterDownCommandHandler(XPLMCommandRef inCommand,
+		XPLMCommandPhase inPhase, void * inRefcon);
 
- //input data
- DataRef<int> inHasDME("sim/cockpit2/radios/indicators/nav1_has_dme");
- DataRef<float> inDMEDist("sim/cockpit2/radios/indicators/nav1_dme_distance_nm");
+//input data
+DataRef<int> inHasDME("sim/cockpit2/radios/indicators/nav1_has_dme");
+DataRef<float> inDMEDist("sim/cockpit2/radios/indicators/nav1_dme_distance_nm");
 
- //output data
- /////////////////////////////////////////////////////////////////////////////////
- OwnedData<float> DMENeedle("Dozer/AWA-VAN3-DME/needle");
- //float DMENeedle = 0;
- /////////////////////////////////////////////////////////////////////////////////
- //OwnedData compiles with G++ but not MSVC. Replacing OwnedData with Float
- //and leaving the PPL::DataRefs as DataRefs does compile with MSVC.
+//output data
+/////////////////////////////////////////////////////////////////////////////////
+OwnedData<float> DMENeedle("Dozer/AWA-VAN3-DME/needle");
+//float DMENeedle = 0;
+/////////////////////////////////////////////////////////////////////////////////
+//OwnedData compiles with G++ but not MSVC. Replacing OwnedData with Float
+//and leaving the PPL::DataRefs as DataRefs does compile with MSVC.
 
-
- PLUGIN_API int XPluginStart(char * outName, char * outSig, char * outDesc) {
+PLUGIN_API int XPluginStart(char * outName, char * outSig, char * outDesc) {
 
 	// Plugin Info
 	strcpy(outName, "FSXP_Plugin");
@@ -129,42 +124,38 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID inFromWho, long inMessage,
 		void * inParam) {
 }
 
- int     GetCounterDataRefCB(void* inRefcon)
- {
-     return gCounterValue;
- }
+int GetCounterDataRefCB(void* inRefcon) {
+	return gCounterValue;
+}
 
- void	SetCounterDataRefCB(void* inRefcon, int inValue)
- {
-      gCounterValue = inValue;
- }
+void SetCounterDataRefCB(void* inRefcon, int inValue) {
+	gCounterValue = inValue;
+}
 
- int    CounterUpCommandHandler(XPLMCommandRef       inCommand,
-                                XPLMCommandPhase     inPhase,
-                                void *               inRefcon)
- {
- //  If inPhase == 0 the command is executed once on button down.
- if (inPhase == 0)
-     {
-      gCounterValue++;
-      if(gCounterValue > 10) {gCounterValue = 10;}
-     }
- // Return 1 to pass the command to plugin windows and X-Plane.
- // Returning 0 disables further processing by X-Plane.
+int CounterUpCommandHandler(XPLMCommandRef inCommand, XPLMCommandPhase inPhase,
+		void * inRefcon) {
+	//  If inPhase == 0 the command is executed once on button down.
+	if (inPhase == 0) {
+		gCounterValue++;
+		if (gCounterValue > 10) {
+			gCounterValue = 10;
+		}
+	}
+	// Return 1 to pass the command to plugin windows and X-Plane.
+	// Returning 0 disables further processing by X-Plane.
 
- return 0;
- }
+	return 0;
+}
 
- int    CounterDownCommandHandler(XPLMCommandRef       inCommand,
-                         XPLMCommandPhase     inPhase,
-                         void *               inRefcon)
- {
- //  If inPhase == 1 the command is executed continuously.
-      if (inPhase == 1)
-    {
-           gCounterValue--;
-           if(gCounterValue < -10) {gCounterValue = -10;}
-     }
+int CounterDownCommandHandler(XPLMCommandRef inCommand,
+		XPLMCommandPhase inPhase, void * inRefcon) {
+	//  If inPhase == 1 the command is executed continuously.
+	if (inPhase == 1) {
+		gCounterValue--;
+		if (gCounterValue < -10) {
+			gCounterValue = -10;
+		}
+	}
 
- return 0;
- }
+	return 0;
+}
