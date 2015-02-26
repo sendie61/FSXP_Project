@@ -65,79 +65,69 @@ using namespace PPL;
  //and leaving the PPL::DataRefs as DataRefs does compile with MSVC.
 
 
- PLUGIN_API int XPluginStart(
-         char *        outName,
-         char *        outSig,
-         char *        outDesc)
- {
+ PLUGIN_API int XPluginStart(char * outName, char * outSig, char * outDesc) {
 
- // Plugin Info
-     strcpy(outName, "FSXP_Plugin");
-     strcpy(outSig, "BlueSideUpBob.Example.CustomCommandsAndDataRef");
-     strcpy(outDesc, "This is the first try.");
+	// Plugin Info
+	strcpy(outName, "FSXP_Plugin");
+	strcpy(outSig, "BlueSideUpBob.Example.CustomCommandsAndDataRef");
+	strcpy(outDesc, "This is the first try.");
 
- //  Create our custom integer dataref
- gCounterDataRef = XPLMRegisterDataAccessor("BSUB/CounterDataRef",
-                                             xplmType_Int,                                  // The types we support
-                                             1,                                             // Writable
-                                             GetCounterDataRefCB, SetCounterDataRefCB,      // Integer accessors
-                                             NULL, NULL,                                    // Float accessors
-                                             NULL, NULL,                                    // Doubles accessors
-                                             NULL, NULL,                                    // Int array accessors
-                                             NULL, NULL,                                    // Float array accessors
-                                             NULL, NULL,                                    // Raw data accessors
-                                             NULL, NULL);                                   // Refcons not used
+	//  Create our custom integer dataref
+	gCounterDataRef = XPLMRegisterDataAccessor("BSUB/CounterDataRef",
+			xplmType_Int,                                // The types we support
+			1,                                             // Writable
+			GetCounterDataRefCB, SetCounterDataRefCB,      // Integer accessors
+			NULL, NULL,                                    // Float accessors
+			NULL, NULL,                                    // Doubles accessors
+			NULL, NULL,                                   // Int array accessors
+			NULL, NULL,                                 // Float array accessors
+			NULL, NULL,                                    // Raw data accessors
+			NULL, NULL);                                   // Refcons not used
 
- DataRef<float> ap_alt("sim/cockpit/autopilot/altitude", ReadWrite);
- // float ap_alt_meters = ap_alt * 12; // note that DataRef ap_alt is treated as a float !
- ap_alt = 5007*2.5 ; // note that you can write to ap_alt like you can write to float !
+	DataRef<float> ap_alt("sim/cockpit/autopilot/altitude", ReadWrite);
+	// float ap_alt_meters = ap_alt * 12; // note that DataRef ap_alt is treated as a float !
+	ap_alt = 5007 * 2.5; // note that you can write to ap_alt like you can write to float !
 
+	// Find and intialize our Counter dataref
+	gCounterDataRef = XPLMFindDataRef("BSUB/CounterDataRef");
+	XPLMSetDatai(gCounterDataRef, 0);
 
- // Find and intialize our Counter dataref
- gCounterDataRef = XPLMFindDataRef ("BSUB/CounterDataRef");
- XPLMSetDatai(gCounterDataRef, 0);
+	// Create our commands; these will increment and decrement our custom dataref.
+	CounterUpCommand = XPLMCreateCommand("BSUB/CounterUpCommand", "Counter Up");
+	CounterDownCommand = XPLMCreateCommand("BSUB/CounterDownCommand",
+			"Counter Down");
 
+	// Register our custom commands
+	XPLMRegisterCommandHandler(CounterUpCommand,           // in Command name
+			CounterUpCommandHandler,    // in Handler
+			1,                          // Receive input before plugin windows.
+			(void *) 0);                // inRefcon.
 
- // Create our commands; these will increment and decrement our custom dataref.
- CounterUpCommand = XPLMCreateCommand("BSUB/CounterUpCommand", "Counter Up");
- CounterDownCommand = XPLMCreateCommand("BSUB/CounterDownCommand", "Counter Down");
+	XPLMRegisterCommandHandler(CounterDownCommand, CounterDownCommandHandler, 1,
+			(void *) 0);
 
- // Register our custom commands
- XPLMRegisterCommandHandler(CounterUpCommand,           // in Command name
-                            CounterUpCommandHandler,    // in Handler
-                            1,                          // Receive input before plugin windows.
-                            (void *) 0);                // inRefcon.
+	return 1;
+}
 
- XPLMRegisterCommandHandler(CounterDownCommand,
-                            CounterDownCommandHandler,
-                            1,
-                            (void *) 0);
+PLUGIN_API void XPluginStop(void) {
+	XPLMUnregisterDataAccessor(gCounterDataRef);
+	XPLMUnregisterCommandHandler(CounterUpCommand, CounterUpCommandHandler, 0,
+			0);
+	XPLMUnregisterCommandHandler(CounterDownCommand, CounterDownCommandHandler,
+			0, 0);
+}
 
- return 1;
- }
+PLUGIN_API void XPluginDisable(void) {
+}
 
+PLUGIN_API int XPluginEnable(void) {
+//	startAsio();
+	return 1;
+}
 
- PLUGIN_API void     XPluginStop(void)
- {
- XPLMUnregisterDataAccessor(gCounterDataRef);
- XPLMUnregisterCommandHandler(CounterUpCommand, CounterUpCommandHandler, 0, 0);
- XPLMUnregisterCommandHandler(CounterDownCommand, CounterDownCommandHandler, 0, 0);
- }
-
- PLUGIN_API void XPluginDisable(void)
- {
- }
-
- PLUGIN_API int XPluginEnable(void)
- {
-     return 1;
- }
-
- PLUGIN_API void XPluginReceiveMessage(XPLMPluginID    inFromWho,
-                                      long             inMessage,
-                                      void *           inParam)
- {
- }
+PLUGIN_API void XPluginReceiveMessage(XPLMPluginID inFromWho, long inMessage,
+		void * inParam) {
+}
 
  int     GetCounterDataRefCB(void* inRefcon)
  {

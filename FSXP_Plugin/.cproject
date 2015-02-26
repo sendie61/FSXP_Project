@@ -19,6 +19,7 @@
 							<builder buildPath="${workspace_loc:/FSXP_Plugin}/Debug" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1168151166" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.base.1499459503" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.base">
 								<option id="gnu.both.asm.option.include.paths.964342132" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
 								</option>
@@ -27,6 +28,8 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.767802972" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.628431702" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base">
 								<option id="gnu.cpp.compiler.option.include.paths.1316367071" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;D:\boost\include\boost-1_57&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/XPLM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Widgets}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
@@ -38,6 +41,7 @@
 								</option>
 								<option id="gnu.cpp.compiler.option.optimization.level.245575941" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.debugging.level.538327597" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.dialect.std.751188405" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1090057868" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1709360364" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.base">
@@ -55,19 +59,20 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.528939188" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base">
 								<option id="gnu.cpp.link.option.libs.687203133" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="boost_system-mgw48-mt-1_57"/>
+									<listOptionValue builtIn="false" value="boost_atomic-mgw48-mt-1_57"/>
+									<listOptionValue builtIn="false" value="boost_thread-mgw48-mt-1_57"/>
 									<listOptionValue builtIn="false" value="PPL"/>
 									<listOptionValue builtIn="false" value="XPLM_64"/>
 									<listOptionValue builtIn="false" value="XPWidgets_64"/>
+									<listOptionValue builtIn="false" value="ws2_32"/>
+									<listOptionValue builtIn="false" value="wsock32"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.912818548" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Debug/libPPL.a}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_TCPComm/Debug/libFSXP_TCPComm.a}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win/XPLM_64.lib}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win/XPWidgets_64.lib}&quot;"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.912818548" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.paths.1852753141" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;D:\boost\lib&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\win_builds\lib&quot;"/>
 								</option>
 								<option defaultValue="true" id="gnu.cpp.link.option.shared.1973520478" name="Shared (-shared)" superClass="gnu.cpp.link.option.shared" valueType="boolean"/>
@@ -127,11 +132,13 @@
 								</option>
 								<option id="gnu.cpp.compiler.option.include.paths.221060779" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;D:\boost\include\boost-1_57&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/XPLM}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Widgets}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/CHeaders/Wrappers}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/include}&quot;"/>
 								</option>
+								<option id="gnu.cpp.compiler.option.dialect.std.1260990885" superClass="gnu.cpp.compiler.option.dialect.std" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1783271517" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.release.471145907" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.so.release">
@@ -144,6 +151,7 @@
 								<option id="gnu.c.compiler.option.include.paths.812851334" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL}&quot;"/>
 								</option>
+								<option id="gnu.c.compiler.option.dialect.std.2047795915" superClass="gnu.c.compiler.option.dialect.std" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1862131517" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.so.release.642075073" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.so.release">
@@ -152,13 +160,19 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.1943306778" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release">
 								<option defaultValue="true" id="gnu.cpp.link.mingw.so.release.option.shared.1112349982" name="Shared (-shared)" superClass="gnu.cpp.link.mingw.so.release.option.shared" valueType="boolean"/>
 								<option id="gnu.cpp.link.option.libs.460981750" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="PPL"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPLM_64"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPWidgets_64"/>
+									<listOptionValue builtIn="false" value="boost_system-mgw48-mt-1_57"/>
+									<listOptionValue builtIn="false" value="boost_atomic-mgw48-mt-1_57"/>
+									<listOptionValue builtIn="false" value="boost_thread-mgw48-mt-1_57"/>
+									<listOptionValue builtIn="false" value="PPL"/>
+									<listOptionValue builtIn="false" value="XPLM_64"/>
+									<listOptionValue builtIn="false" value="XPWidgets_64"/>
+									<listOptionValue builtIn="false" value="ws2_32"/>
+									<listOptionValue builtIn="false" value="wsock32"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1009432325" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Release}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;D:\boost\lib&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/XPSDK-2.1.3/Libraries/Win}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;C:\win_builds\lib&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.842292590" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
