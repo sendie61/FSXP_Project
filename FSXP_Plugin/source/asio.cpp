@@ -99,7 +99,7 @@ void Asio::start() {
 	acceptor->Accept(connection);
 //		if (connection->HasError()) {
 //			connection.reset(new MyConnection(hive));
-//			acceptor->Accept(connection);
+//			acceptor->Accept(connection);;
 //		}
 
 }
