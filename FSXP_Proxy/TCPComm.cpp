@@ -97,7 +97,7 @@ void TCPComm::checkState() {
 		break;
 
 	case CONNECTED:
-			TCPclient.print(F("Hello\004"));
+			TCPclient.print(F("{\"firstName\":\"John\", \"lastName\":\"Doe\"}"));
 		if (!TCPclient.connected()) {
 			TCPclient.stop();
 			state = CONNECTING;

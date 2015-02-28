@@ -12,7 +12,24 @@
 #include <conio.h>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread.hpp>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+#define XPLM200 = 1;  // This example requires SDK2.0
+#include "XPLMPlugin.h"
+#include "XPLMDisplay.h"
+#include "XPLMGraphics.h"
+#include "XPLMProcessing.h"
+#include "XPLMDataAccess.h"
+#include "XPLMMenus.h"
+#include "XPLMUtilities.h"
+#include "XPWidgets.h"
+#include "XPStandardWidgets.h"
+#include "XPLMScenery.h"
+
+#include "dataref.h"
+#include "owneddata.h"
 
 class MyConnection: public Connection {
 private:
@@ -24,10 +41,7 @@ private:
 	void OnError(const boost::system::error_code & error);
 public:
 	MyConnection(boost::shared_ptr<Hive> hive);
-	~MyConnection() {
-
-	}
-	;
+	~MyConnection() {};
 };
 
 class MyAcceptor: public Acceptor {
@@ -44,18 +58,19 @@ public:
 };
 
 class Asio{
-public:
-	Asio();
-
-	void start();
-	void stop();
-
 private:
 	boost::shared_ptr<Hive> hive;
 	boost::shared_ptr<MyAcceptor> acceptor;
 	boost::shared_ptr<MyConnection> connection;
 	boost::thread_group worker_thread;
 
+public:
+	Asio();
+	~Asio();
+	void init();
+	void start();
+	void stop();
+	void dataRefChanged(int val);
 };
 
 #endif /* ASIO_H_ */

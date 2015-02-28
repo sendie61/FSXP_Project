@@ -55,9 +55,10 @@ void Hive::Reset()
 
 //-----------------------------------------------------------------------------
 
-Acceptor::Acceptor( boost::shared_ptr< Hive > hive )
-: m_hive( hive ), m_acceptor( hive->GetService() ), m_io_strand(  hive->GetService() ), m_timer( hive->GetService() ),  m_timer_interval( 1000 ), m_error_state( 0 )
-{
+Acceptor::Acceptor(boost::shared_ptr<Hive> hive) :
+		m_hive(hive), m_acceptor(hive->GetService()), m_io_strand(
+				hive->GetService()), m_timer(hive->GetService()), m_timer_interval(
+				1000), m_error_state(0) {
 }
 
 Acceptor::~Acceptor()
@@ -293,8 +294,6 @@ void Connection::HandleTimer( const boost::system::error_code & error )
 	{
 		OnTimer( boost::posix_time::microsec_clock::local_time() - m_last_time );
 		StartTimer();
-		std::vector< uint8_t >  buf(4);
-		Send(buf);
 	}
 }
 

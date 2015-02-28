@@ -12,32 +12,19 @@
 // counter such as an LED display on your aircraft panel.
 //
 // Content added by BlueSideUpBob.
-
-#define XPLM200 = 1;  // This example requires SDK2.0
-#include "XPLMPlugin.h"
-#include "XPLMDisplay.h"
-#include "XPLMGraphics.h"
-#include "XPLMProcessing.h"
-#include "XPLMDataAccess.h"
-#include "XPLMMenus.h"
-#include "XPLMUtilities.h"
-#include "XPWidgets.h"
-#include "XPStandardWidgets.h"
-#include "XPLMScenery.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-//#include "dataref.h"
-#include "owneddata.h"
+#include "asio.h"
 
 using namespace PPL;
+
+boost::shared_ptr<Asio> AsioSystem;
 
 XPLMDataRef gCounterDataRef = NULL;          //  Our custom dataref
 
 int gCounterValue;                       //  Our custom dataref's value
 int GetCounterDataRefCB(void* inRefcon);
 void SetCounterDataRefCB(void* inRefcon, int outValue);
+float ConnectionLoopCallback(float inElapsedSinceLastCall,
+		float inElapsedTimeSinceLastFlightLoop, int inCounter, void * inRefcon);
 
 XPLMCommandRef CounterUpCommand = NULL;	//  Our two custom commands
 XPLMCommandRef CounterDownCommand = NULL;
@@ -49,8 +36,7 @@ int CounterDownCommandHandler(XPLMCommandRef inCommand,
 		XPLMCommandPhase inPhase, void * inRefcon);
 
 //input data
-DataRef<int> inHasDME("sim/cockpit2/radios/indicators/nav1_has_dme");
-DataRef<float> inDMEDist("sim/cockpit2/radios/indicators/nav1_dme_distance_nm");
+DataRef<int> audio_selection_com1("sim/cockpit2/radios/actuators/audio_selection_com1");
 
 //output data
 /////////////////////////////////////////////////////////////////////////////////
@@ -62,10 +48,13 @@ OwnedData<float> DMENeedle("Dozer/AWA-VAN3-DME/needle");
 
 PLUGIN_API int XPluginStart(char * outName, char * outSig, char * outDesc) {
 
+	AsioSystem =boost::shared_ptr<Asio>(new Asio);
+	XPLMDebugString("FSXP_Plugin: Started\n");
+
 	// Plugin Info
 	strcpy(outName, "FSXP_Plugin");
-	strcpy(outSig, "BlueSideUpBob.Example.CustomCommandsAndDataRef");
-	strcpy(outDesc, "This is the first try.");
+	strcpy(outSig, "FSXP.Plugin.Modules_communication");
+	strcpy(outDesc, "Arduino DUE-PROY Communication plugin.");
 
 	//  Create our custom integer dataref
 	gCounterDataRef = XPLMRegisterDataAccessor("BSUB/CounterDataRef",
@@ -101,10 +90,15 @@ PLUGIN_API int XPluginStart(char * outName, char * outSig, char * outDesc) {
 	XPLMRegisterCommandHandler(CounterDownCommand, CounterDownCommandHandler, 1,
 			(void *) 0);
 
+	XPLMRegisterFlightLoopCallback(ConnectionLoopCallback, /* Callback */
+	1.0, /* Interval */
+	NULL); /* refcon not used. */
 	return 1;
 }
 
 PLUGIN_API void XPluginStop(void) {
+	XPLMDebugString("FSXP_Plugin: Stopped\n");
+	AsioSystem.reset();
 	XPLMUnregisterDataAccessor(gCounterDataRef);
 	XPLMUnregisterCommandHandler(CounterUpCommand, CounterUpCommandHandler, 0,
 			0);
@@ -113,16 +107,36 @@ PLUGIN_API void XPluginStop(void) {
 }
 
 PLUGIN_API void XPluginDisable(void) {
+	XPLMDebugString("FSXP_Plugin: Disabled\n");
+	AsioSystem->stop();
+//	AsioSystem.reset();
 }
 
 PLUGIN_API int XPluginEnable(void) {
-//	startAsio();
+	XPLMDebugString("FSXP_Plugin: Enabled\n");
+
+	//AsioSystem =boost::shared_ptr<Asio>(new Asio);
+//	AsioSystem.reset(new Asio);
+	AsioSystem->init();
+	AsioSystem->start();
+
 	return 1;
 }
 
 PLUGIN_API void XPluginReceiveMessage(XPLMPluginID inFromWho, long inMessage,
 		void * inParam) {
 }
+
+float ConnectionLoopCallback(float inElapsedSinceLastCall,
+		float inElapsedTimeSinceLastFlightLoop, int inCounter,
+		void * inRefcon) {
+    if (audio_selection_com1.hasChanged()){
+    	audio_selection_com1.save();
+    	AsioSystem->dataRefChanged(audio_selection_com1);
+    }
+	return 1.0;
+}
+
 
 int GetCounterDataRefCB(void* inRefcon) {
 	return gCounterValue;
