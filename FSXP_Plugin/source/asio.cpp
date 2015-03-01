@@ -31,7 +31,7 @@ Asio::Asio()
 
 Asio::~Asio()
 {
-//	worker_thread.join_all();
+//	 worker_thread.join_all();
 }
 
 void Asio::init() {
