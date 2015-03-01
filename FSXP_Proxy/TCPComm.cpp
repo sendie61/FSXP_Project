@@ -87,8 +87,6 @@ void TCPComm::checkState() {
 
 	case CONNECTING:
 		if (TCPclient.connect(settings.server, settings.port) == SUCCESS) {
-			Serial.println(F("connected"));
-			//			TCPclient.println("GET /search?q=arduino HTTP/1.0\r\n");
 			state = CONNECTED;
 		} else {
 			Serial.println(F("connection failed"));
