@@ -131,7 +131,7 @@ float ConnectionLoopCallback(float inElapsedSinceLastCall,
 		float inElapsedTimeSinceLastFlightLoop, int inCounter,
 		void * inRefcon) {
     if (audio_selection_com1.hasChanged()){
-    	audio_selection_com1.save();
+    	audio_selection_com1..save();
     	AsioSystem->dataRefChanged(audio_selection_com1);
     }
 	return 1.0;
