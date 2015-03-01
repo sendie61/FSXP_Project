@@ -11,22 +11,22 @@ using namespace PPL;
 
 //boost::mutex global_stream_lock;
 
-void MyConnection::OnAccept(const std::string & host, uint16_t port) {
+void ModuleConnection::OnAccept(const std::string & host, uint16_t port) {
 
 	// Start the next receive
 	Recv();
 }
 
-void MyConnection::OnConnect(const std::string & host, uint16_t port) {
+void ModuleConnection::OnConnect(const std::string & host, uint16_t port) {
 
 	// Start the next receive
 	Recv();
 }
 
-void MyConnection::OnSend(const std::vector<uint8_t> & buffer) {
+void ModuleConnection::OnSend(const std::vector<uint8_t> & buffer) {
 }
 
-void MyConnection::OnRecv(std::vector<uint8_t> & buffer) {
+void ModuleConnection::OnRecv(std::vector<uint8_t> & buffer) {
 
 	// Start the next receive
 	Recv();
@@ -35,29 +35,29 @@ void MyConnection::OnRecv(std::vector<uint8_t> & buffer) {
 	Send(buffer);
 }
 
-void MyConnection::OnTimer(const boost::posix_time::time_duration & delta) {
+void ModuleConnection::OnTimer(const boost::posix_time::time_duration & delta) {
 }
 
-void MyConnection::OnError(const boost::system::error_code & error) {
+void ModuleConnection::OnError(const boost::system::error_code & error) {
 }
 
-MyConnection::MyConnection(boost::shared_ptr<Hive> hive) :
+ModuleConnection::ModuleConnection(boost::shared_ptr<Hive> hive) :
 		Connection(hive) {
 }
 
-bool MyAcceptor::OnAccept(boost::shared_ptr<Connection> connection,
+bool ModuleAcceptor::OnAccept(boost::shared_ptr<Connection> connection,
 		const std::string & host, uint16_t port) {
 
 	return true;
 }
 
-void MyAcceptor::OnTimer(const boost::posix_time::time_duration & delta) {
+void ModuleAcceptor::OnTimer(const boost::posix_time::time_duration & delta) {
 }
 
-void MyAcceptor::OnError(const boost::system::error_code & error) {
+void ModuleAcceptor::OnError(const boost::system::error_code & error) {
 }
 
-MyAcceptor::MyAcceptor(boost::shared_ptr<Hive> hive) :
+ModuleAcceptor::ModuleAcceptor(boost::shared_ptr<Hive> hive) :
 		Acceptor(hive) {
 
 }
@@ -78,7 +78,7 @@ void WorkerThread(boost::shared_ptr<Hive> hive) {
 }
 
 Asio::Asio()
-		:hive(new Hive()), acceptor(new MyAcceptor(hive)), connection(new MyConnection(hive))
+		:hive(new Hive()), acceptor(new ModuleAcceptor(hive)), connection(new ModuleConnection(hive))
 {
 }
 
@@ -93,13 +93,13 @@ void Asio::init() {
 
 void Asio::start() {
 	hive->Reset();
-	acceptor.reset(new MyAcceptor(hive));
+	acceptor.reset(new ModuleAcceptor(hive));
 	acceptor->Listen("0.0.0.0", 1201);
-	connection.reset(new MyConnection(hive));
+	connection.reset(new ModuleConnection(hive));
 	acceptor->Accept(connection);
 //		if (connection->HasError()) {
-//			connection.reset(new MyConnection(hive));
-//			acceptor->Accept(connection);;
+//			connection.reset(new ModuleConnection(hive));
+//			acceptor->Accept(connection);
 //		}
 
 }

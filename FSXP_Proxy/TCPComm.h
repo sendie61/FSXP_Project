@@ -18,7 +18,7 @@
 #define MSG_SOH	0x01
 #define MSG_HEADER_LEN 	7
 
-#define CHECKSTATEPERIOD 500L	// every 5 seconds a state-check
+#define CHECKSTATEPERIOD 5000L	// every 5 seconds a state-check
 
 const char tcpstate[4][11] PROGMEM
 = { "INIT      ", "CONNECTING", "CONNECTED ", "UNKNOWN   " };
