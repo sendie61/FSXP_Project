@@ -34,11 +34,8 @@ Asio::~Asio()
 //	 worker_thread.join_all();
 }
 
-void Asio::init() {
-	worker_thread.create_thread(boost::bind(&WorkerThread, hive));
-}
-
 void Asio::start() {
+	worker_thread.create_thread(boost::bind(&WorkerThread, hive));
 	hive->Reset();
 	acceptor.reset(new ModuleAcceptor(hive));
 	acceptor->Listen("0.0.0.0", 1201);

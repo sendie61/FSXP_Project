@@ -106,21 +106,15 @@ PLUGIN_API void XPluginStop(void) {
 			0, 0);
 }
 
+PLUGIN_API int XPluginEnable(void) {
+	XPLMDebugString("FSXP_Plugin: Enabled\n");
+	AsioSystem->start();
+	return 1;
+}
+
 PLUGIN_API void XPluginDisable(void) {
 	XPLMDebugString("FSXP_Plugin: Disabled\n");
 	AsioSystem->stop();
-//	AsioSystem.reset();
-}
-
-PLUGIN_API int XPluginEnable(void) {
-	XPLMDebugString("FSXP_Plugin: Enabled\n");
-
-	//AsioSystem =boost::shared_ptr<Asio>(new Asio);
-//	AsioSystem.reset(new Asio);
-	AsioSystem->init();
-	AsioSystem->start();
-
-	return 1;
 }
 
 PLUGIN_API void XPluginReceiveMessage(XPLMPluginID inFromWho, long inMessage,

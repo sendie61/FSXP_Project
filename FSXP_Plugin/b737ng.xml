@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="modules.xslt"?>
+<simulator name="B737NG Project">
+	
+    <!-- the forward OVERHEAD DUE-proxy and its devices -->
+	<dueproxy name="overhead fwd" ip="192.168.2.221">
+		<DUE_RESOURCE>
+			<IHEX>:10000000F0FFFFFF0000000000000000FFFFFFFF07</IHEX>
+			<IHEX>:10001000FFFFFFFFFFFFFFFFFEFFFFFFFFFFFFFFF1</IHEX>
+			<IHEX>:10002000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0</IHEX>
+			<IHEX>:10003000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD0</IHEX>
+			<IHEX>:10004006FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBA</IHEX>
+			<IHEX>:00000001FF</IHEX>			
+			<DUE_IO pin="22" name="AUDIOSELCOM1" description="audio selection com1" dataref="sim/cockpit2/radios/actuators/audio_selection_com1"/>
+		<!-- 
+			<ADC name="WIPESPSW" pin="21" divide="256" offset="0" description="0=off,1=25%speed,2=50%speed,3=100%speed" dataref="sim/cockpit2/switches/wiper_speed" /> 
+			<PWM name="BACKLT" pin="24" description="0=off,100=100%" dataref="sim/cockpit2/panel/flood" /> 
+		-->
+		</DUE_RESOURCE>
+
+		<!-- 
+			bit: 15,14,~~,1,0
+			Bitnumbers 0-7 = GPB0-7, 8-15 = GPA0-7
+			IODIR	I/O Direction register
+			IPOL	input polarity register
+			GPINTEN	interrupt-on-change control register
+			DEFVAL	default compare register (for interrupt-on-change)
+			INTCON	interrupt control register
+			GPPU	pull-up resistor configuration register
+		-->
+		<I2C_IO name="OVH FWD inputs" subaddr="0" >
+			<IHEX>:10000000214601360121470136007EFE09D2190140</IHEX>
+			<IHEX>:100010002146017E17C20001FF5F16002148011928</IHEX>
+			<IHEX>:00000001FF</IHEX>			
+			<IO bit="8" name="LRLANDLTSW" description="Left Retractable landing light switch" dataref="x737/systems/exteriorLights/leftRetrLanLtSwitch"/>
+			<IO bit="9" name="RRLANDLTSW" description="Right Retractable landing light switch" dataref="x737/systems/exteriorLights/rightRetrLanLtSwitch"/>
+			<IO bit="10" name="LFLANDLTSW" description="Left Fixed landing light switch" dataref="x737/systems/exteriorLights/leftFixedLanLtSwitch"/>
+			<IO bit="11" name="RFLANDLTSW" description="Right Fixed landing light switch" dataref="x737/systems/exteriorLights/rightFixedLanLtSwitch"/>
+			<IO bit="12" name="LRWTURNOFFSW" description="Left Runway Turnoff switch" dataref="x737/systems/exteriorLights/leftRunwayTurnoffSwitch"/>
+			<IO bit="13" name="RRWTURNOFFSW" description="Right Runway Turnoff light switch" dataref="x737/systems/exteriorLights/rightRunwayTurnoffSwitch"/>
+			<IO bit="14" name="TAXILIGHTSSW" description="Taxi Lights switch" dataref="x737/systems/exteriorLights/taxiLightsSwitch"/>
+			<IO bit="15" name="APUONSW" description="APU ON switch" dataref="x737/systems/apu/APUswitchState"/>
+		</I2C_IO>
+		<I2C_IO name="OVH FWD inputs" subaddr="1">
+			<IHEX>:10000000214601360121470136007EFE09D2190140</IHEX>
+			<IHEX>:100010002146017E17C20001FF5F16002148011928</IHEX>
+			<IHEX>:00000001FF</IHEX>			
+			<IO bit="8" name="AFT1FUELPMP" description="AFT1 Fuel pump switch" dataref="sim/cockpit2/fuel/fuel_tank_pump_on" dataref_index="0"/>
+			<IO bit="9" name="FWD1FUELPMP" description="FWD1 Fuel pump switch" dataref="sim/cockpit2/fuel/fuel_tank_pump_on" dataref_index="1"/>
+		</I2C_IO>		
+
+		<!--
+		    MAX 8 devices / subaddres
+		    8 DISPLAYS / device
+		    DISPLAY 0-7   8-15   16-23   24-31   32-39   40-47   48-55   56-64
+		    64 bits / device
+		    bit     0-63 64-127 128-191 192-255 256-319 320-383 384-447 448-511
+		-->
+		<SPI_LDISP name="OVH FWD Voltage Panel" subaddr="53" nrdevices="2">
+			<DISPLAY name="DCVOLTS" nr_digits="2" first_digit="0" description="DC voltage indicator" dataref="sim/cockpit2/electrical/dc_voltmeter_value" />
+			<DISPLAY name="DCAMPS" nr_digits="3" first_digit="2" dataref="sim/cockpit2/electrical/dc_ampmeter_value" />
+			<DISPLAY name="ACVOLTS" nr_digits="3" first_digit="5" dataref="sim/cockpit2/electrical/ac_voltmeter_value" />
+			<DISPLAY name="ACAMPS" nr_digits="3" first_digit="8" dataref="sim/cockpit2/electrical/ac_ampmeter_value" />
+			<DISPLAY name="CPSFREQ" nr_digits="3" first_digit="11" dataref="sim/cockpit2/electrical/freqmeter_value" />
+		</SPI_LDISP>
+		<SPI_LDISP name="" subaddr="51" nrdevices="4">
+			<LED name="XFVLVOPEN" description="Crossfeed valve open" bit="8" dataref="sim/cockpit2/annunciators/crossfeed_on" />
+			<LED name="XFVLVMOVE" description="Crossfeed valve moving" bit="9" dataref="sim/cockpit2/annunciators/crossfeed_moving" />
+		</SPI_LDISP>
+	</dueproxy>
+	
+    <!-- the afterward OVERHEAD DUE-proxy and its devices -->
+	<dueproxy name="overhead aft" ip="192.168.2.222">
+		<I2C_IO name="OVH AFT I/O" subaddr="0">
+			<IHEX>:10000000214601360121470136007EFE09D2190140</IHEX>
+			<IHEX>:100010002146017E17C20001FF5F16002148011928</IHEX>
+			<IHEX>:00000001FF</IHEX>			
+			<IO bit="8" name="NAV1PWR" description="NAV1 power switch" dataref="sim/cockpit2/radios/actuators/nav1_power"/>
+			<IO bit="9" name="NAV2PWR" description="NAV2 power switch" dataref="sim/cockpit2/radios/actuators/nav2_power"/>
+		</I2C_IO>
+	</dueproxy>
+ </simulator>

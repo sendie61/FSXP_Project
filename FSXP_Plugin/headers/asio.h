@@ -45,7 +45,6 @@ private:
 public:
 	Asio();
 	~Asio();
-	void init();
 	void start();
 	void stop();
 	void dataRefChanged(int val);

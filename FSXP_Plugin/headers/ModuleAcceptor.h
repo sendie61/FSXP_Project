@@ -9,6 +9,8 @@
 #define MODULEACCEPTOR_H_
 
 #include <network.h>
+#include "pluginpath.h"
+
 
 class ModuleAcceptor: public Acceptor {
 private:
@@ -16,6 +18,7 @@ private:
 			const std::string & host, uint16_t port);
 	void OnTimer(const boost::posix_time::time_duration & delta);
 	void OnError(const boost::system::error_code & error);
+	PPL::PluginPath pluginPath;
 public:
 	ModuleAcceptor(boost::shared_ptr<Hive> hive);
 	~ModuleAcceptor() {
