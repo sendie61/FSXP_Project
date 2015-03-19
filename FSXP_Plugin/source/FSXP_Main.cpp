@@ -35,8 +35,26 @@ int CounterUpCommandHandler(XPLMCommandRef inCommand, //  Our two custom command
 int CounterDownCommandHandler(XPLMCommandRef inCommand,
 		XPLMCommandPhase inPhase, void * inRefcon);
 
-//input data
-DataRef<int> audio_selection_com1("sim/cockpit2/radios/actuators/audio_selection_com1");
+template <typename SimType>
+class FSXPDataRef : public DataRef<SimType>
+{
+	public:
+	FSXPDataRef<SimType>(const std::string& identifier, RWType writeability = ReadOnly, bool share = false, bool publish_in_dre = false)
+	: DataRef<SimType>(identifier, writeability, share, publish_in_dre){};
+	private:
+	void doNotify();
+};
+
+
+
+template<typename SimType>
+void FSXPDataRef<SimType>::doNotify() {
+	 XPLMDebugString("FSXP_Plugin: doNotify\n");
+}
+
+
+//input  data
+FSXPDataRef<int> audio_selection_com1("sim/cockpit2/radios/actuators/audio_selection_com1", ReadOnly, true);
 
 //output data
 /////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +64,7 @@ OwnedData<float> DMENeedle("Dozer/AWA-VAN3-DME/needle");
 //OwnedData compiles with G++ but not MSVC. Replacing OwnedData with Float
 //and leaving the PPL::DataRefs as DataRefs does compile with MSVC.
 
-PLUGIN_API int XPluginStart(char * outName, char * outSig, char * outDesc) {
+PLUGIN_API int XPluginStart(char* outName, char * outSig, char * outDesc) {
 
 	AsioSystem =boost::shared_ptr<Asio>(new Asio);
 	XPLMDebugString("FSXP_Plugin: Started\n");
@@ -130,7 +148,6 @@ float ConnectionLoopCallback(float inElapsedSinceLastCall,
     }
 	return 1.0;
 }
-
 
 int GetCounterDataRefCB(void* inRefcon) {
 	return gCounterValue;
