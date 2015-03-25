@@ -66,9 +66,9 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base.528939188" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.base">
 								<option id="gnu.cpp.link.option.libs.687203133" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="boost_system-mgw48-mt-1_57"/>
-									<listOptionValue builtIn="false" value="boost_atomic-mgw48-mt-1_57"/>
-									<listOptionValue builtIn="false" value="boost_thread-mgw48-mt-1_57"/>
+									<listOptionValue builtIn="false" value="boost_system"/>
+									<listOptionValue builtIn="false" value="boost_atomic"/>
+									<listOptionValue builtIn="false" value="boost_thread"/>
 									<listOptionValue builtIn="false" value="PPL"/>
 									<listOptionValue builtIn="false" value="XPLM_64"/>
 									<listOptionValue builtIn="false" value="XPWidgets_64"/>
@@ -169,9 +169,9 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.1943306778" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release">
 								<option defaultValue="true" id="gnu.cpp.link.mingw.so.release.option.shared.1112349982" name="Shared (-shared)" superClass="gnu.cpp.link.mingw.so.release.option.shared" valueType="boolean"/>
 								<option id="gnu.cpp.link.option.libs.460981750" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="boost_system-mgw48-mt-1_57"/>
-									<listOptionValue builtIn="false" value="boost_atomic-mgw48-mt-1_57"/>
-									<listOptionValue builtIn="false" value="boost_thread-mgw48-mt-1_57"/>
+									<listOptionValue builtIn="false" value="boost_system"/>
+									<listOptionValue builtIn="false" value="boost_atomic"/>
+									<listOptionValue builtIn="false" value="boost_thread"/>
 									<listOptionValue builtIn="false" value="PPL"/>
 									<listOptionValue builtIn="false" value="XPLM_64"/>
 									<listOptionValue builtIn="false" value="XPWidgets_64"/>
@@ -277,9 +277,14 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release.443497968" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.so.release">
 								<option defaultValue="true" id="gnu.cpp.link.mingw.so.release.option.shared.1717188542" name="Shared (-shared)" superClass="gnu.cpp.link.mingw.so.release.option.shared" valueType="boolean"/>
 								<option id="gnu.cpp.link.option.libs.694871527" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="PPL"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPLM_64"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="XPWidgets_64"/>
+									<listOptionValue builtIn="false" value="boost_system"/>
+									<listOptionValue builtIn="false" value="boost_atomic"/>
+									<listOptionValue builtIn="false" value="boost_thread"/>
+									<listOptionValue builtIn="false" value="PPL"/>
+									<listOptionValue builtIn="false" value="XPLM_64"/>
+									<listOptionValue builtIn="false" value="XPWidgets_64"/>
+									<listOptionValue builtIn="false" value="ws2_32"/>
+									<listOptionValue builtIn="false" value="wsock32"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.621875074" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PPL/Release}&quot;"/>
