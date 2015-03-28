@@ -9,7 +9,6 @@
 
 Module::Module() {
 	// TODO Auto-generated constructor stub
-
 }
 
 Module::~Module() {
