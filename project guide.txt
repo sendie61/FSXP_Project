@@ -1,8 +1,20 @@
+Install Eclipse LUNA
+
+//Install Git:
+//	option "Use git and optional Unix tools from windows command prompt"
+
 Install Arduino in:
  	C:\Users\F\Applications\Arduino
 
 install win_builds in:
-	C:\win_builds 
+	C:\Users\F\Applications\win_builds -> use Unix commands option
+	PATH + C:\Users\frits\Applications\win_builds\bin
+
+install make
+	GNU Make version 3.79.1 (3.81 geeft problemen met paths with spaces.
+	C:\Users\frits\Applications\GnuWin32
+	PATH + D:\msysgit\bin
 
 To debug DUE:
+	GNU ARM Eclipse Plug-ins - http://gnuarmeclipse.sourceforge.net/updates
 	use arm-none-eabi-gdb and SEGGER gdb-server

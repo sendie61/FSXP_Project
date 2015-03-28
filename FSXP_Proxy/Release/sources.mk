@@ -34,4 +34,12 @@ arduino/core \
 arduino/core/avr \
 arduino/core/USB \
 . \
+Libraries/aJson-master/utility \
+Libraries/aJson-master \
+Libraries/Timer-master \
+Libraries/SPI \
+Libraries/SD/src/utility \
+Libraries/SD/src \
+Libraries/Ethernet/src/utility \
+Libraries/Ethernet/src \
 
