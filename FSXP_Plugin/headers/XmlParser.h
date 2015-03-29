@@ -17,7 +17,7 @@
 #include <pluginpath.h>
 
 #define ATTR_SET "<xmlattr>"
-#define XMLFILENAME	"FSXPmodule.xml"
+#define XMLFILENAME	"FSXPmodules.xml"
 
 using namespace boost;
 using namespace boost::property_tree;

@@ -51,7 +51,7 @@ public:
 
     /**
       * Set a file to log all outputs to. If a log happens before
-      * this funtion was called (e.g. static initializations), output is logged to stdout
+      * this function was called (e.g. static initializations), output is logged to stdout
       */
     void setLogFile(const std::string& filename);
 

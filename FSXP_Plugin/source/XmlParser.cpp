@@ -5,7 +5,13 @@
  *      Author: F
  */
 
+#include <boost/filesystem.hpp>
 #include "XmlParser.h"
+#include "logwriter.h"
+#include "log.h"
+
+using namespace PPL;
+
 
 const ptree& empty_ptree(){
     static ptree t;
@@ -14,15 +20,17 @@ const ptree& empty_ptree(){
 
 const char* XmlParser::findXmlFile() {
 	std::string path;
-	try{
-		path= PluginPath.prependPlanePath(XMLFILENAME);
-		std::cout << path << std::endl;
-	}catch( ...){
-		try{
-			path= PluginPath.prependPluginResourcesPath(XMLFILENAME);
-			std::cout << path << std::endl;
-		}catch( ...){
-			std::cout << "failed:" << std::endl;
+	Log() << Log::Info << "Looking for " << XMLFILENAME << "..." << Log::endl;
+
+	path = PluginPath.prependPlanePath(XMLFILENAME);
+	if (exists(boost::filesystem::path(path))) {
+		Log() << Log::Info << "Found XML file @ " << path << Log::endl;
+	} else {
+		path = PluginPath.prependPluginPath(XMLFILENAME);
+		if (exists(boost::filesystem::path(path))) {
+			Log() << Log::Info << "Found XML file @ " << path << Log::endl;
+		} else {
+			Log() << Log::Error << XMLFILENAME << " not found." << Log::endl;
 		}
 	}
 	return path.c_str();
@@ -37,6 +45,7 @@ std::vector<std::string> XmlParser::getIpAddresses(std::string XMLFilename) {
 //	read_xml(std::string("C:/Users/F/workspace/boost1/src/FSXPmodules.xml"), tree);
 	read_xml(XMLFilename, tree);
 	const ptree & dueproxies = tree.get_child("simulator", empty_ptree());
+	Log() << Log::Info << "Looking for DUEPROXIES IP addresses..." << Log::endl;
 	BOOST_FOREACH(const ptree::value_type &f, dueproxies) {
 		std::string at = f.first + "." + ATTR_SET;
 		const ptree & attributes = f.second.get_child(ATTR_SET, empty_ptree());
@@ -44,6 +53,7 @@ std::vector<std::string> XmlParser::getIpAddresses(std::string XMLFilename) {
 		BOOST_FOREACH(const ptree::value_type &v, attributes) {
 			std::cout << "First: " << v.first.data() << " Second: "	<< v.second.data() << std::endl;
 			if (v.first.compare("ip")==false) {
+				Log() << Log::Info << "Found DUEPROXY with IP: " << v.second.data() << Log::endl;
 				IPList.push_back(v.second.data());
 			}
 		}

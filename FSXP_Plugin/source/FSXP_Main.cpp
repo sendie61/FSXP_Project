@@ -13,6 +13,10 @@
 //
 // Content added by BlueSideUpBob.
 #include "asio.h"
+#include <logwriter.h>
+#include <log.h>
+#include <pluginpath.h>
+#include "XmlParser.h"
 
 using namespace PPL;
 
@@ -53,6 +57,7 @@ void FSXPDataRef<SimType>::doNotify() {
 }
 
 
+
 //input  data
 FSXPDataRef<int> audio_selection_com1("sim/cockpit2/radios/actuators/audio_selection_com1", ReadOnly, true);
 
@@ -65,14 +70,20 @@ OwnedData<float> DMENeedle("Dozer/AWA-VAN3-DME/needle");
 //and leaving the PPL::DataRefs as DataRefs does compile with MSVC.
 
 PLUGIN_API int XPluginStart(char* outName, char * outSig, char * outDesc) {
+	string LogFile;
+	PluginPath LogFilePath;
+	LogFilePath.prependXPlanePath(LogFile);
+	LogFile += "FSXPLog.txt";
+
+	LogWriter::getLogger().setLogFile(LogFile);
 
 	AsioSystem =boost::shared_ptr<Asio>(new Asio);
 	XPLMDebugString("FSXP_Plugin: Started\n");
-
-	// Plugin Info
+	Log() << Log::Info << "FSXP_Plugin: Started " << Log::endl;
+	// Plugin  Info
 	strcpy(outName, "FSXP_Plugin");
 	strcpy(outSig, "FSXP.Plugin.Modules_communication");
-	strcpy(outDesc, "Arduino DUE-PROY Communication plugin.");
+	strcpy(outDesc, "Arduino DUE-PROXY Communication plugin.");
 
 	//  Create our custom integer dataref
 	gCounterDataRef = XPLMRegisterDataAccessor("BSUB/CounterDataRef",
@@ -111,11 +122,14 @@ PLUGIN_API int XPluginStart(char* outName, char * outSig, char * outDesc) {
 	XPLMRegisterFlightLoopCallback(ConnectionLoopCallback, /* Callback */
 	1.0, /* Interval */
 	NULL); /* refcon not used. */
+
+
 	return 1;
 }
 
 PLUGIN_API void XPluginStop(void) {
 	XPLMDebugString("FSXP_Plugin: Stopped\n");
+	Log() << Log::Info << "FSXP_Plugin: Stopped" << Log::endl;
 	AsioSystem.reset();
 	XPLMUnregisterDataAccessor(gCounterDataRef);
 	XPLMUnregisterCommandHandler(CounterUpCommand, CounterUpCommandHandler, 0,
@@ -126,12 +140,16 @@ PLUGIN_API void XPluginStop(void) {
 
 PLUGIN_API int XPluginEnable(void) {
 	XPLMDebugString("FSXP_Plugin: Enabled\n");
+	Log() << Log::Info << "FSXP_Plugin: Enabled" << Log::endl;
+    XmlParser xmpP;
+    xmpP.getIpAddresses();
 	AsioSystem->start();
 	return 1;
 }
 
 PLUGIN_API void XPluginDisable(void) {
 	XPLMDebugString("FSXP_Plugin: Disabled\n");
+	Log() << Log::Info << "FSXP_Plugin: Disabled" << Log::endl;
 	AsioSystem->stop();
 }
 
