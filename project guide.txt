@@ -9,11 +9,11 @@ Install Arduino in:
 
 install win_builds in:
 	C:\Users\F\Applications\win_builds -> use Unix commands option
-	PATH + C:\Users\frits\Applications\win_builds\bin
+	PATH + C:\Users\F\Applications\win_builds\bin
 
 install make
 	GNU Make version 3.79.1 (3.81 geeft problemen met paths with spaces.
-	C:\Users\frits\Applications\GnuWin32
+	C:\Users\F\Applications\GnuWin32
 	PATH + D:\msysgit\bin
 
 To debug DUE:
