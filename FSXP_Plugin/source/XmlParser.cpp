@@ -22,7 +22,7 @@ const ptree& empty_ptree(){
 const char* XmlParser::findXmlFile() {
 	std::string path;
 	Log() << Log::Info << "Looking for " << XMLFILENAME << "..." << Log::endl;
-
+	PPL::PluginPath PluginPath;
 	path = PluginPath.prependPlanePath(XMLFILENAME);
 	if (exists(boost::filesystem::path(path))) {
 		Log() << Log::Info << "Found XML file @ " << path << Log::endl;

@@ -30,7 +30,7 @@ using namespace boost::property_tree;
 class XmlParser {
 public:
 	/**
-	 * @brief Search fot the XML file
+	 * @brief Search for the XML file
 	 * does own search for xml file if necessary
 	 */
 	const char* findXmlFile();
@@ -47,7 +47,7 @@ public:
 	 */
 	bool getDueProxyByAddress(std::string ip, ptree &dueTree, std::string XMLFilename = "");
 private:
-	PPL::PluginPath PluginPath;
+	
 };
 
 #endif /* XMLPARSER_H_ */
