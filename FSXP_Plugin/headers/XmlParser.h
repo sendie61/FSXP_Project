@@ -20,6 +20,7 @@
 #define XMLFILENAME	"FSXPmodules.xml"
 
 using namespace boost;
+using namespace boost::asio;
 using namespace boost::property_tree;
 
 /**
@@ -38,13 +39,13 @@ public:
 	 * @brief find all DUEPROXY ip addresses
 	 * does own search for xml file if necessary
 	 */
-	std::vector<std::string> getIpAddresses(std::string XMLFilename= "");
+	std::vector<std::string> getIpAddresses(std::string XMLFilename = "");
 
 	/**
 	 * @brief find the DUEPROXY with specific ip addresses
 	 * Necessary when this particular one connects
 	 */
-	boost::property_tree::ptree & getDueProxyByAddress( std::string ip);
+	bool getDueProxyByAddress(std::string ip, ptree &dueTree, std::string XMLFilename = "");
 private:
 	PPL::PluginPath PluginPath;
 };

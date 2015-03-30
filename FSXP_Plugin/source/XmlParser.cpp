@@ -6,6 +6,7 @@
  */
 
 #include <boost/filesystem.hpp>
+#include <boost/asio/ip/address.hpp>
 #include "XmlParser.h"
 #include "logwriter.h"
 #include "log.h"
@@ -42,15 +43,12 @@ std::vector<std::string> XmlParser::getIpAddresses(std::string XMLFilename) {
 	if (XMLFilename.length()==0){
 		XMLFilename= findXmlFile();
 	}
-//	read_xml(std::string("C:/Users/F/workspace/boost1/src/FSXPmodules.xml"), tree);
 	read_xml(XMLFilename, tree);
-	const ptree & dueproxies = tree.get_child("simulator", empty_ptree());
+	const ptree & simulator = tree.get_child("simulator", empty_ptree());
 	Log() << Log::Info << "Looking for DUEPROXIES IP addresses..." << Log::endl;
-	BOOST_FOREACH(const ptree::value_type &f, dueproxies) {
-		std::string at = f.first + "." + ATTR_SET;
-		const ptree & attributes = f.second.get_child(ATTR_SET, empty_ptree());
-		std::cout << "Extracting attributes from " << at << ":" << std::endl;
-		BOOST_FOREACH(const ptree::value_type &v, attributes) {
+	BOOST_FOREACH(const ptree::value_type &f, simulator) {
+		const ptree & dueproxy = f.second.get_child(ATTR_SET, empty_ptree());
+		BOOST_FOREACH(const ptree::value_type &v, dueproxy) {
 			std::cout << "First: " << v.first.data() << " Second: "	<< v.second.data() << std::endl;
 			if (v.first.compare("ip")==false) {
 				Log() << Log::Info << "Found DUEPROXY with IP: " << v.second.data() << Log::endl;
@@ -61,7 +59,30 @@ std::vector<std::string> XmlParser::getIpAddresses(std::string XMLFilename) {
 	return IPList;
 }
 
-boost::property_tree::ptree& XmlParser::getDueProxyByAddress(std::string ip) {
-	boost::property_tree::ptree t=empty_ptree();
-	return t;
+bool XmlParser::getDueProxyByAddress(std::string ip, ptree &dueTree, std::string XMLFilename) {
+	bool rv= false;
+	ptree tree;
+	if (XMLFilename.length()==0){
+		XMLFilename= findXmlFile();
+	}
+	read_xml(XMLFilename, tree);
+	const ptree & simulator = tree.get_child("simulator", empty_ptree());
+	Log() << Log::Info << "Looking for DUEPROXIES IP addresses..." << Log::endl;
+	BOOST_FOREACH(const ptree::value_type &f, simulator) {
+		const ptree & dueproxy = f.second.get_child(ATTR_SET, empty_ptree());
+		BOOST_FOREACH(const ptree::value_type &v, dueproxy) {
+			std::cout << "First: " << v.first.data() << " Second: "	<< v.second.data() << std::endl;
+			if (v.first.compare("ip")==false) {
+				if (v.second.data()==ip){
+					dueTree= dueproxy;
+					rv= true;
+					Log() << Log::Info << "Found DUEPROXY with IP: " << v.second.data() << Log::endl;
+				}
+			}
+		}
+	}
+	if (!rv)
+		Log() << Log::Error << "Did not find DUEPROXY with IP: " << ip << Log::endl;
+	return rv;
 }
+
