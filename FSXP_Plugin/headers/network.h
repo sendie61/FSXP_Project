@@ -210,7 +210,7 @@ public:
 	void Listen( const std::string & host, const uint16_t & port );
 
 	// Posts the connection to the listening interface. The next client that
-	// connections will be given this connection. If multiple calls to Accept
+	// connects will be given this connection. If multiple calls to Accept
 	// are called at a time, then they are accepted in a FIFO order.
 	void Accept( boost::shared_ptr< Connection > connection );
 

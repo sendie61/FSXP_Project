@@ -31,15 +31,4 @@ void ModuleAcceptor::OnError(const boost::system::error_code & error) {
 void ModuleAcceptor::ParseXml(string filename) {
 	using boost::property_tree::ptree;
 	ptree pt;
-
-/*
-	boost::property_tree::xml_parser::read_xml(filename, pt);
-
-	BOOST_FOREACH (ptree::value_type const& vContainer, pt.get_child ("root")) {
-
-		BOOST_FOREACH (ptree::value_type const& vItem, pt.get_child ("root.container")) {
-			std::cout << "\t1---------------------\n";
-		}
-		std::cout << "\t2---------------------\n";
-*/
 }

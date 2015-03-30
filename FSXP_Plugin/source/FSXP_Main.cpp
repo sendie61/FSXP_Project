@@ -74,12 +74,12 @@ PLUGIN_API int XPluginStart(char* outName, char * outSig, char * outDesc) {
 	PluginPath LogFilePath;
 	LogFilePath.prependXPlanePath(LogFile);
 	LogFile += "FSXPLog.txt";
-
 	LogWriter::getLogger().setLogFile(LogFile);
 
 	AsioSystem =boost::shared_ptr<Asio>(new Asio);
 	XPLMDebugString("FSXP_Plugin: Started\n");
 	Log() << Log::Info << "FSXP_Plugin: Started " << Log::endl;
+
 	// Plugin  Info
 	strcpy(outName, "FSXP_Plugin");
 	strcpy(outSig, "FSXP.Plugin.Modules_communication");

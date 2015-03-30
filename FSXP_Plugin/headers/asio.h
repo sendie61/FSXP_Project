@@ -34,6 +34,7 @@
 #include "ModuleAcceptor.h"
 #include "ModuleConnection.h"
 
+#define LISTENPORT	1201
 
 class Asio{
 private:

@@ -31,21 +31,15 @@ Asio::Asio()
 
 Asio::~Asio()
 {
-//	 worker_thread.join_all();
 }
 
 void Asio::start() {
 	worker_thread.create_thread(boost::bind(&WorkerThread, hive));
 	hive->Reset();
 	acceptor.reset(new ModuleAcceptor(hive));
-	acceptor->Listen("0.0.0.0", 1201);
+	acceptor->Listen("0.0.0.0", LISTENPORT);
 	connection.reset(new ModuleConnection(hive));
 	acceptor->Accept(connection);
-//		if (connection->HasError()) {
-//			connection.reset(new ModuleConnection(hive));
-//			acceptor->Accept(connection);
-//		}
-
 }
 
 void Asio::stop() {
