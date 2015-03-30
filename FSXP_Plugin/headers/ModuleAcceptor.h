@@ -17,20 +17,26 @@
 using namespace std;
 
 class ModuleAcceptor: public Acceptor {
-private:
-	bool OnAccept(boost::shared_ptr<Connection> connection,
-			const std::string & host, uint16_t port);
-	void OnTimer(const boost::posix_time::time_duration & delta);
-	void OnError(const boost::system::error_code & error);
-
-	void ParseXml(string filename);
-	PPL::PluginPath pluginPath;
-	vector<string> ModuleIPs;	// list of IP's of Modules from XMLfile
 public:
 	ModuleAcceptor(boost::shared_ptr<Hive> hive);
-	~ModuleAcceptor() {
-	}
-	;
+	~ModuleAcceptor() {};
+private:
+	/**
+	 * @brief some client wants to connect
+	 * Check if port is valid
+	 * Check if we know this IP
+	 * Connect, else Deny
+	 */
+	bool OnAccept(boost::shared_ptr<Connection> connection,
+			const std::string & host, uint16_t port);
+	/**
+	 * @brief timer overflow
+	 */
+	void OnTimer(const boost::posix_time::time_duration & delta);
+	void OnError(const boost::system::error_code & error);
+	void ParseXml(string filename);
+private:
+	vector<string> ModuleIPs;	// list of IP's of Modules from XMLfile
 };
 
 #endif /* MODULEACCEPTOR_H_ */
