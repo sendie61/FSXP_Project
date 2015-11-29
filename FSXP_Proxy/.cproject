@@ -71,7 +71,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/SD/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/aJson-master}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/aJson-master/utility}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/Scoop}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/SPI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/Timer-master}&quot;"/>
 								</option>
@@ -87,7 +86,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/SD/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/aJson-master}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/aJson-master/utility}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/Scoop}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/SPI}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FSXP_Proxy/Libraries/Timer-master}&quot;"/>
 								</option>
@@ -113,5 +111,12 @@
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug_AVaRICE">
+			<resource resourceType="PROJECT" workspacePath="/FSXP_Proxy"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/FSXP_Proxy"/>
+		</configuration>
+	</storageModule>
 </cproject>

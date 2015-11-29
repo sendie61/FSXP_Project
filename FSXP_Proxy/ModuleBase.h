@@ -11,7 +11,7 @@
 #include "JsonParser.h"
 #include "FSXP_constants.h"
 #include "IntelHex.h"
-
+#include "stdio.h"
 /**
  * @brief abstract class ModuleBase
  * all module classes descent from here
