@@ -119,4 +119,5 @@
 			<resource resourceType="PROJECT" workspacePath="/FSXP_Proxy"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
