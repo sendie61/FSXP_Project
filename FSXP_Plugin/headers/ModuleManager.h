@@ -5,22 +5,20 @@
  *      Author: F
  */
 
-#ifndef MODULEACCEPTOR_H_
-#define MODULEACCEPTOR_H_
+#ifndef MODULEMANAGER_H_
+#define MODULEMANAGER_H_
 
-#include <vector>
 #include <network.h>
 #include "pluginpath.h"
 #include <boost/property_tree/xml_parser.hpp>
-#include <boost/foreach.hpp>
 #include "DUEModule.h"
 
 using namespace std;
 
-class ModuleAcceptor: public Acceptor {
+class ModuleManager: public Acceptor {
 public:
-	ModuleAcceptor(boost::shared_ptr<Hive> hive);
-	~ModuleAcceptor() {
+	ModuleManager(boost::shared_ptr<Hive> hive);
+	~ModuleManager() {
 	}
 	;
 private:
@@ -43,4 +41,4 @@ private:
 
 };
 
-#endif /* MODULEACCEPTOR_H_ */
+#endif /* MODULEMANAGER_H_ */

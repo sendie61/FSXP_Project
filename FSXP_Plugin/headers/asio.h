@@ -31,7 +31,7 @@
 #include "dataref.h"
 #include "owneddata.h"
 
-#include "ModuleAcceptor.h"
+#include <ModuleManager.h>
 #include "ModuleConnection.h"
 
 #define LISTENPORT	1201
@@ -39,7 +39,7 @@
 class Asio {
 private:
 	boost::shared_ptr<Hive> hive;
-	boost::shared_ptr<ModuleAcceptor> acceptor;
+	boost::shared_ptr<ModuleManager> acceptor;
 	boost::shared_ptr<ModuleConnection> connection;
 	boost::thread_group worker_thread;
 

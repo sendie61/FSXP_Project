@@ -23,7 +23,7 @@ void WorkerThread(boost::shared_ptr<Hive> hive) {
 }
 
 Asio::Asio() :
-		hive(new Hive()), acceptor(new ModuleAcceptor(hive)), connection(
+		hive(new Hive()), acceptor(new ModuleManager(hive)), connection(
 				new ModuleConnection(hive)) {
 }
 
@@ -33,7 +33,7 @@ Asio::~Asio() {
 void Asio::start() {
 	worker_thread.create_thread(boost::bind(&WorkerThread, hive));
 	hive->Reset();
-	acceptor.reset(new ModuleAcceptor(hive));
+	acceptor.reset(new ModuleManager(hive));
 	acceptor->Listen("0.0.0.0", LISTENPORT);
 	connection.reset(new ModuleConnection(hive));
 	acceptor->Accept(connection);
