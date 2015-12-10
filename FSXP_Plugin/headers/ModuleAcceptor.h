@@ -37,6 +37,7 @@ private:
 	bool AcceptConnection(boost::shared_ptr<Connection> connection);
 
 private:
+
 };
 
 #endif /* MODULEACCEPTOR_H_ */
