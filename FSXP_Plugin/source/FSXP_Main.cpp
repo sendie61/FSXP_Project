@@ -142,9 +142,6 @@ PLUGIN_API int XPluginEnable(void) {
 	XPLMDebugString("FSXP_Plugin: Enabled\n");
 	Log() << Log::Info << "FSXP_Plugin: Enabled" << Log::endl;
 
-    XmlParser xmpP;
-    xmpP.getIpAddresses();
-
 	AsioSystem->start();
 	return 1;
 }

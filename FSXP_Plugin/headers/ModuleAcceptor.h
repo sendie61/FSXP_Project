@@ -34,7 +34,8 @@ private:
 	 */
 	void OnTimer(const boost::posix_time::time_duration & delta);
 	void OnError(const boost::system::error_code & error);
-	void ParseXml(string filename);
+	bool AcceptConnection(boost::shared_ptr<Connection> connection);
+
 private:
 	vector<string> ModuleIPs;	// list of IP's of Modules from XMLfile
 };
