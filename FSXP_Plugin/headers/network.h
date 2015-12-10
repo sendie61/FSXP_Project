@@ -4,6 +4,7 @@
 #define NETWORK_H_
 
 // documented in: http://www.gamedev.net/blog/950/entry-2249317-a-guide-to-getting-started-with-boostasio?pg=1
+// and http://www.gamedev.net/topic/611714-to-those-who-have-read-the-boostasio-getting-started-guide
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

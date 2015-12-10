@@ -79,4 +79,14 @@
 			<IO bit="9" name="NAV2PWR" description="NAV2 power switch" dataref="sim/cockpit2/radios/actuators/nav2_power"/>
 		</I2C_IO>
 	</dueproxy>
+    <!-- the afterward OVERHEAD DUE-proxy and its devices -->
+	<dueproxy name="dummy proxy" ip="127.0.0.1">
+		<I2C_IO name="OVH AFT I/O" subaddr="0">
+			<IHEX>:10000000214601360121470136007EFE09D2190140</IHEX>
+			<IHEX>:100010002146017E17C20001FF5F16002148011928</IHEX>
+			<IHEX>:00000001FF</IHEX>			
+			<IO bit="8" name="NAV1PWR" description="NAV1 power switch" dataref="sim/cockpit2/radios/actuators/nav1_power"/>
+			<IO bit="9" name="NAV2PWR" description="NAV2 power switch" dataref="sim/cockpit2/radios/actuators/nav2_power"/>
+		</I2C_IO>
+	</dueproxy>
  </simulator>

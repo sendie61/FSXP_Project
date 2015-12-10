@@ -10,14 +10,14 @@
 #include <log.h>
 
 void ModuleConnection::OnAccept(const std::string & host, uint16_t port) {
-	PPL::Log() << PPL::Log::Info << "ModuleConnection::OnAccept: Connection with "<< host << " on port:" << port << " Accepted." << PPL::Log::endl;
+	PPL::Log() << PPL::Log::Info << "[ModuleConnection::" << __FUNCTION__ << "] " << "Connection with "<< host << " on port:" << port << " Accepted." << PPL::Log::endl;
 
 	// Start the next receive
 	Recv();
 }
 
 void ModuleConnection::OnConnect(const std::string & host, uint16_t port) {
-	PPL::Log() << PPL::Log::Info << "ModuleConnection::OnConnect: Connected with "<< host << " on port:" << port << PPL::Log::endl;
+	PPL::Log() << PPL::Log::Info << "[ModuleConnection::" << __FUNCTION__ << "] " << "Connected with "<< host << " on port:" << port << PPL::Log::endl;
 
 	// Start the next receive
 	Recv();
@@ -39,7 +39,7 @@ void ModuleConnection::OnTimer(const boost::posix_time::time_duration & delta) {
 }
 
 void ModuleConnection::OnError(const boost::system::error_code & error) {
-	PPL::Log() << PPL::Log::Info << "ModuleConnection::OnError: " << error.message() << PPL::Log::endl;}
+	PPL::Log() << PPL::Log::Info << "[ModuleConnection::" << __FUNCTION__ << "] " << error.message() << PPL::Log::endl;}
 
 ModuleConnection::ModuleConnection(boost::shared_ptr<Hive> hive) :
 		Connection(hive) {

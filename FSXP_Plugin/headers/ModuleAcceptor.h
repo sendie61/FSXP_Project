@@ -37,7 +37,6 @@ private:
 	bool AcceptConnection(boost::shared_ptr<Connection> connection);
 
 private:
-	vector<string> ModuleIPs;	// list of IP's of Modules from XMLfile
 };
 
 #endif /* MODULEACCEPTOR_H_ */
