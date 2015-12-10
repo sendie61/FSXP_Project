@@ -14,13 +14,13 @@ using namespace PPL;
 void WorkerThread(boost::shared_ptr<Hive> hive) {
 
 //	while (true) {
-		XPLMDebugString("FSXP_WorkerTread started.\n");
+		XPLMDebugString("FSXP_Plugin started.\n");
 		try {
 			hive->Run();
 		} catch (std::exception & ex) {
-			XPLMDebugString("FSXP_WorkerTread: Exception occurred!\n");
+			XPLMDebugString("FSXP_Plugin: Exception occurred!\n");
 		}
-		XPLMDebugString("FSXP_WorkerTread stopped.\n");
+		XPLMDebugString("FSXP_Plugin stopped.\n");
 //	}
 }
 

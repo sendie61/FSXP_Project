@@ -3,6 +3,9 @@
 #ifndef NETWORK_H_
 #define NETWORK_H_
 
+// documented in: http://www.gamedev.net/blog/950/entry-2249317-a-guide-to-getting-started-with-boostasio?pg=1
+//-----------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------
 
 #include <boost/asio.hpp>
