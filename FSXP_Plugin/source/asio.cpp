@@ -9,28 +9,25 @@
 
 using namespace PPL;
 
-
-
 void WorkerThread(boost::shared_ptr<Hive> hive) {
 
 //	while (true) {
-		XPLMDebugString("FSXP_Plugin started.\n");
-		try {
-			hive->Run();
-		} catch (std::exception & ex) {
-			XPLMDebugString("FSXP_Plugin: Exception occurred!\n");
-		}
-		XPLMDebugString("FSXP_Plugin stopped.\n");
+	XPLMDebugString("FSXP_Plugin started.\n");
+	try {
+		hive->Run();
+	} catch (std::exception & ex) {
+		XPLMDebugString("FSXP_Plugin: Exception occurred!\n");
+	}
+	XPLMDebugString("FSXP_Plugin stopped.\n");
 //	}
 }
 
-Asio::Asio()
-		:hive(new Hive()), acceptor(new ModuleAcceptor(hive)), connection(new ModuleConnection(hive))
-{
+Asio::Asio() :
+		hive(new Hive()), acceptor(new ModuleAcceptor(hive)), connection(
+				new ModuleConnection(hive)) {
 }
 
-Asio::~Asio()
-{
+Asio::~Asio() {
 }
 
 void Asio::start() {

@@ -11,7 +11,7 @@
 class Module {
 public:
 	Module();
-	virtual ~Module() ;
+	virtual ~Module();
 };
 
 #endif /* MODULE_H_ */

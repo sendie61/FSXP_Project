@@ -36,12 +36,11 @@
 
 #define LISTENPORT	1201
 
-class Asio{
+class Asio {
 private:
 	boost::shared_ptr<Hive> hive;
 	boost::shared_ptr<ModuleAcceptor> acceptor;
 	boost::shared_ptr<ModuleConnection> connection;
-	boost::shared_ptr<ModuleConnection> connection2;
 	boost::thread_group worker_thread;
 
 public:

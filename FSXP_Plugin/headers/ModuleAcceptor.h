@@ -13,13 +13,16 @@
 #include "pluginpath.h"
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
+#include "DUEModule.h"
 
 using namespace std;
 
 class ModuleAcceptor: public Acceptor {
 public:
 	ModuleAcceptor(boost::shared_ptr<Hive> hive);
-	~ModuleAcceptor() {};
+	~ModuleAcceptor() {
+	}
+	;
 private:
 	/**
 	 * @brief some client wants to connect

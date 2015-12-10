@@ -14,28 +14,26 @@ boost::shared_ptr<Asio> AsioSystem;
 float ConnectionLoopCallback(float inElapsedSinceLastCall,
 		float inElapsedTimeSinceLastFlightLoop, int inCounter, void * inRefcon);
 
-
-template <typename SimType>
-class FSXPDataRef : public DataRef<SimType>
-{
-	public:
-	FSXPDataRef<SimType>(const std::string& identifier, RWType writeability = ReadOnly, bool share = false, bool publish_in_dre = false)
-	: DataRef<SimType>(identifier, writeability, share, publish_in_dre){};
-	private:
+template<typename SimType>
+class FSXPDataRef: public DataRef<SimType> {
+public:
+	FSXPDataRef<SimType>(const std::string& identifier, RWType writeability =
+			ReadOnly, bool share = false, bool publish_in_dre = false) :
+			DataRef<SimType>(identifier, writeability, share, publish_in_dre) {
+	}
+	;
+private:
 	void doNotify();
 };
 
-
-
 template<typename SimType>
 void FSXPDataRef<SimType>::doNotify() {
-	 XPLMDebugString("FSXP_Plugin: doNotify\n");
+	XPLMDebugString("FSXP_Plugin: doNotify\n");
 }
 
-
-
 //input  data
-FSXPDataRef<int> audio_selection_com1("sim/cockpit2/radios/actuators/audio_selection_com1", ReadOnly, true);
+FSXPDataRef<int> audio_selection_com1(
+		"sim/cockpit2/radios/actuators/audio_selection_com1", ReadOnly, true);
 
 //output data
 /////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +49,7 @@ PLUGIN_API int XPluginStart(char* outName, char * outSig, char * outDesc) {
 	LogFile += "FSXPLog.txt";
 	LogWriter::getLogger().setLogFile(LogFile);
 
-	AsioSystem =boost::shared_ptr<Asio>(new Asio);
+	AsioSystem = boost::shared_ptr<Asio>(new Asio);
 	XPLMDebugString("FSXP_Plugin: Started\n");
 	Log() << Log::Info << "FSXP_Plugin: Started " << Log::endl;
 
@@ -60,11 +58,9 @@ PLUGIN_API int XPluginStart(char* outName, char * outSig, char * outDesc) {
 	strcpy(outSig, "FSXP.Plugin.Modules_communication");
 	strcpy(outDesc, "Arduino DUE-PROXY Communication plugin.");
 
-
 	XPLMRegisterFlightLoopCallback(ConnectionLoopCallback, /* Callback */
 	1.0, /* Interval */
 	NULL); /* refcon not used. */
-
 
 	return 1;
 }
@@ -97,10 +93,10 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID inFromWho, long inMessage,
 float ConnectionLoopCallback(float inElapsedSinceLastCall,
 		float inElapsedTimeSinceLastFlightLoop, int inCounter,
 		void * inRefcon) {
-    if (audio_selection_com1.hasChanged()){
-    	audio_selection_com1.save();
-    	AsioSystem->dataRefChanged(audio_selection_com1);
-    }
+	if (audio_selection_com1.hasChanged()) {
+		audio_selection_com1.save();
+		AsioSystem->dataRefChanged(audio_selection_com1);
+	}
 	return 1.0;
 }
 

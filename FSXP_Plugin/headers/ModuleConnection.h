@@ -20,8 +20,9 @@ private:
 	void OnError(const boost::system::error_code & error);
 public:
 	ModuleConnection(boost::shared_ptr<Hive> hive);
-	~ModuleConnection() {};
+	~ModuleConnection() {
+	}
+	;
 };
-
 
 #endif /* MODULECONNECTION_H_ */

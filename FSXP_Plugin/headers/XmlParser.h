@@ -19,7 +19,6 @@
 #define ATTR_SET "<xmlattr>"
 #define XMLFILENAME	"FSXPmodules.xml"
 
-
 /**
  * @brief Helper class
  * parse the XML file
@@ -42,9 +41,10 @@ public:
 	 * @brief find the DUEPROXY with specific ip addresses
 	 * Necessary when this particular one connects
 	 */
-	bool getDueProxyByAddress(std::string ip, boost::property_tree::ptree &dueTree, std::string XMLFilename = "");
+	bool getDueProxyByAddress(std::string ip,
+			boost::property_tree::ptree &dueTree, std::string XMLFilename = "");
 private:
-	
+
 };
 
 #endif /* XMLPARSER_H_ */
